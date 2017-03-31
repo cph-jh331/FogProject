@@ -19,7 +19,16 @@ public class Part implements PartInterface {
     private String unitName;
     private String desc;
     private int partId;
-    
+
+    public Part(String type, Integer length, int packetSize, String unitName, String desc, int partId)
+    {
+        this.type = type;
+        this.length = length;
+        this.packetSize = packetSize;
+        this.unitName = unitName;
+        this.desc = desc;
+        this.partId = partId;
+    }
 
     @Override
     public String getType()
