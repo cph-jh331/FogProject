@@ -1,7 +1,9 @@
 package fogInterfaces;
 
+import entities.Part;
+
 public interface PartMapperInterface {
     
-    public void addPart(String uniqueId);
+    public void addPart(Part part);
 
 }
