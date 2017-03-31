@@ -1,7 +1,5 @@
 package fogInterfaces;
 
-public interface CategoryInterface {
-
-    
+public interface CategoryInterface {    
     
 }

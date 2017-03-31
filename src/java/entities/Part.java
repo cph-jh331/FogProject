@@ -18,6 +18,8 @@ public class Part implements PartInterface {
     private int packetSize;
     private String unitName;
     private String desc;
+    private int partId;
+    
 
     @Override
     public String getType()
@@ -47,6 +49,12 @@ public class Part implements PartInterface {
     public String getDescription()
     {
         return this.desc;
+    }
+
+    @Override
+    public int getPartId()
+    {
+        return this.partId;
     }
 
 }
