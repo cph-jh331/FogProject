@@ -66,4 +66,26 @@ public class Part implements PartInterface {
         return this.partId;
     }
 
+    /**
+     * @param length the length to set
+     */
+    public void setLength(Integer length)
+    {
+        this.length = length;
+    }
+
+    /**
+     * @param packetSize the packetSize to set
+     */
+    public void setPacketSize(int packetSize)
+    {
+        this.packetSize = packetSize;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Part{" + "type=" + type + ", length=" + length + ", packetSize=" + packetSize + ", unitName=" + unitName + ", desc=" + desc + ", partId=" + partId + '}';
+    }
+
 }
