@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Pva
+ * @author Pvafdfd
  */
 public class PartCalculatorTest {
     
