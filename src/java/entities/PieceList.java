@@ -41,8 +41,9 @@ public class PieceList implements PieceListInterface {
     public void updateParts(int length, int width, int height)
     {
         PartCalculator calc = new PartCalculator();
-        
-        
+        //another way of doing it:
+        //pieceMap.get(0).setLength(calc.lengthOfPole(height));
+        //pieceMap.get(0).setPacketSize(length);
 
         Part part = pieceMap.get(0);
         part.setLength(calc.lengthOfPole(height));
@@ -76,7 +77,7 @@ public class PieceList implements PieceListInterface {
     }
 
     @Override
-    public Map<Integer, Part> getPieceList()
+    public Map<Integer, Part> getPieceMap()
     {
         return pieceMap;
     }
