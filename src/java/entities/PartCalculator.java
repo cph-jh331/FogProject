@@ -4,6 +4,9 @@ import fogInterfaces.PartCalculatorInterface;
 
 public class PartCalculator implements PartCalculatorInterface {
 
+    //alle "specielle" tal, som ikke kommer ind 
+    //gennem et parameter burde nok være en
+    //attribut i klassen?
     //With help of modolus we make sure that the number of poles are even.
     @Override
     public int numbPoles(int lengthOfCarport)
@@ -55,41 +58,6 @@ public class PartCalculator implements PartCalculatorInterface {
     {
         int numbLeftMounts = numbRafters * 2;
         return numbLeftMounts;
-    }
-
-    //skal laves om og flyttes til et andet sted, så vi kan få de rigtige
-    // tage ud.
-    public int numbTrapezRoof(int lengthOfCarport, int widthOfCarport)
-    {
-        int roofSize = lengthOfCarport * widthOfCarport;
-        int numbOfRoofs = widthOfCarport / 100;
-
-        if (numbOfRoofs % 2 != 0)
-        {
-            numbOfRoofs++;
-        }
-
-        lengthOfCarport += 30;
-
-        if (lengthOfCarport > 300 && (lengthOfCarport - 30) < 570)
-        {
-
-        }
-        if (lengthOfCarport > 570 && (lengthOfCarport - 30) < 690)
-        {
-
-        }
-        if (lengthOfCarport > 690 && (lengthOfCarport - 30) < 930)
-        {
-
-        }
-        if (lengthOfCarport > 930 && (lengthOfCarport - 30) < 1170)
-        {
-
-        }
-
-        //Skal lave den til selve listen, så det er muligt, at vælge forskellige tage.
-        return 0;
     }
 
     @Override

@@ -36,6 +36,52 @@ public class PieceList implements PieceListInterface {
         pieceMap.put(part.getPartId(), part);
         part = new Part("Vandbræt B", 0, 0, "stk", "Vandbræt bredde", 11);
         pieceMap.put(part.getPartId(), part);
+        part = new Part("Trapez360", 360, 0, "stk", "Trapeztag på 360cm i længden", 12);
+        pieceMap.put(part.getPartId(), part);
+        part = new Part("Trapez600", 600, 0, "stk", "Trapeztag på 600cm i længden", 13);
+        pieceMap.put(part.getPartId(), part);
+
+    }
+
+    private void trapezRoof(int length, int width)
+    {
+        int roofSize = length * width;
+        //tag antal
+        int roofsForWidth = width / 100;
+
+        length += 30;
+        int numberOfRoofs = 0;
+
+        if (length >= 300 && (length - 30) < 570)
+        {
+            //roof på 600 meter
+            numberOfRoofs = roofsForWidth * 1;
+            pieceMap.get(13).setPacketSize(numberOfRoofs);
+
+        }
+        if (length >= 570 && (length - 30) < 690)
+        {
+            //roof 2 på 360.
+            numberOfRoofs = roofsForWidth * 2;
+            pieceMap.get(12).setPacketSize(numberOfRoofs);
+        }
+        
+        if (length >= 690 && (length - 30) < 930)
+        {
+            //roof på 1 på 600, 1 på 360
+            numberOfRoofs = roofsForWidth *1;
+            pieceMap.get(12).setPacketSize(numberOfRoofs);
+            pieceMap.get(13).setPacketSize(numberOfRoofs);
+
+        }
+        if (length >= 930 && (length - 30) < 1170)
+        {
+            //roof 2 på 600 cm.
+            numberOfRoofs = roofsForWidth * 2;
+            pieceMap.get(13).setPacketSize(numberOfRoofs);
+        }
+
+        //Skal lave den til selve listen, så det er muligt, at vælge forskellige tage.
     }
 
     public void updateParts(int length, int width, int height)
@@ -59,8 +105,12 @@ public class PieceList implements PieceListInterface {
         part.setLength(calc.lengthOfRafter(width));
         part.setPacketSize(calc.numbRafters(length));
         pieceMap.put(part.getPartId(), part);
+        
+        trapezRoof(length, width);
+        
     }
 
+    //er der kun til at teste i main. Skal ændres eller fjernes helt senere.
     public void getMap()
     {
         for (int i = 0; i < pieceMap.size(); i++)
