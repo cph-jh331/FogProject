@@ -14,4 +14,8 @@ public interface PartInterface {
 
     public int getPartId();
 
+    public void setLength(Integer length);
+
+    public void setPacketSize(int packetSize);
+
 }

@@ -69,6 +69,7 @@ public class Part implements PartInterface {
     /**
      * @param length the length to set
      */
+    @Override
     public void setLength(Integer length)
     {
         this.length = length;
@@ -77,6 +78,7 @@ public class Part implements PartInterface {
     /**
      * @param packetSize the packetSize to set
      */
+    @Override
     public void setPacketSize(int packetSize)
     {
         this.packetSize = packetSize;

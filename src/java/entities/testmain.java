@@ -19,7 +19,7 @@ public class testmain {
 //        double numberSke = Math.sqrt(5*5);
 //        System.out.println(numberSke);
         PieceList pl = new PieceList();
-        pl.updateParts(600, 500, 300);
+        pl.updateParts(500, 500, 300);
         pl.getMap();
         
     }
