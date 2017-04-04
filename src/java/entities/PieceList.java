@@ -1,8 +1,10 @@
 package entities;
 
+import fogInterfaces.PieceListInterface;
 import java.util.HashMap;
+import java.util.Map;
 
-public class PieceList {
+public class PieceList implements PieceListInterface {
 
     private HashMap<Integer, Part> pieceMap;
 
@@ -40,28 +42,42 @@ public class PieceList {
     {
         PartCalculator calc = new PartCalculator();
         
+        
+
         Part part = pieceMap.get(0);
         part.setLength(calc.lengthOfPole(height));
         part.setPacketSize(calc.numbPoles(length));
         pieceMap.put(part.getPartId(), part);
-        
-        
+
         part = pieceMap.get(1);
         part.setLength(calc.lengthOfSideRafter(length));
         part.setPacketSize(calc.numbSideRafter(length));
         pieceMap.put(part.getPartId(), part);
-        
+
         part = pieceMap.get(2);
         part.setLength(calc.lengthOfRafter(width));
         part.setPacketSize(calc.numbRafters(length));
         pieceMap.put(part.getPartId(), part);
-        
+
     }
-public void getMap (){
-    for (int i = 0; i < pieceMap.size(); i++)
+
+    public void getMap()
     {
-        System.out.println(pieceMap.get(i));
+        for (int i = 0; i < pieceMap.size(); i++)
+        {
+            System.out.println(pieceMap.get(i));
+        }
     }
-    
-}
+
+    @Override
+    public void generatePieceList(int length, int width, int height)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Map<Integer, Part> getPieceList()
+    {
+        return pieceMap;
+    }
 }
