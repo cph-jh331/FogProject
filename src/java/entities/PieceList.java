@@ -43,7 +43,7 @@ public class PieceList implements PieceListInterface {
         PartCalculator calc = new PartCalculator();
         //another way of doing it:
         //pieceMap.get(0).setLength(calc.lengthOfPole(height));
-        //pieceMap.get(0).setPacketSize(length);
+        //pieceMap.get(0).setPacketSize(calc.numbPoles(length));
 
         Part part = pieceMap.get(0);
         part.setLength(calc.lengthOfPole(height));
