@@ -59,7 +59,6 @@ public class PieceList implements PieceListInterface {
         part.setLength(calc.lengthOfRafter(width));
         part.setPacketSize(calc.numbRafters(length));
         pieceMap.put(part.getPartId(), part);
-
     }
 
     public void getMap()
