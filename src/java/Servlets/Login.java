@@ -5,8 +5,12 @@
  */
 package Servlets;
 
+import entities.LoginService;
+import entities.SimpleLoginService;
+import entities.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,7 +32,28 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        LoginService ls = new SimpleLoginService();
         response.setContentType("text/html;charset=UTF-8");
+        String action = request.getParameter("action");
+        RequestDispatcher rd = null;
+        if("login".equals(action)){
+            String email = request.getParameter("email");
+            String userName = request.getParameter("userName");
+            User user = ls.login(userName, email);
+            if(user == null){
+                //Login failed
+                rd = request.getRequestDispatcher("failed.jsp");
+                        rd.forward(request, response);
+                        return;
+            }else {
+                
+            request.getSession().setAttribute("user", user);
+            rd.forward(request, response);
+            return;
+                
+            }
+            
+        }
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -81,5 +106,25 @@ public class Login extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void sendLoginForm(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Login</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Hej med dig" + "</h1>");
+            
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
+
+    private void sendIndex(HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }
