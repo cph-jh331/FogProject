@@ -84,6 +84,12 @@ public class Part implements PartInterface {
         this.packetSize = packetSize;
     }
 
+    public void setLengthAndPacketSize(Integer length, int packetSize)
+    {
+        this.length = length;
+        this.packetSize = packetSize;
+    }
+
     @Override
     public String toString()
     {
