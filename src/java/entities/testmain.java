@@ -20,7 +20,7 @@ public class testmain {
 //        System.out.println(numberSke);
         PieceList pl = new PieceList();
         pl.updateParts(500, 500, 300);
-        pl.getMap();
+        //pl.getMap();
         
     }
     
