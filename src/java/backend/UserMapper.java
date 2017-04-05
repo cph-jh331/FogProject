@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  *
  * @author bloch
  */
-public class DataAccessObject {
+public class UserMapper {
 
     private DBConnector dbc = new DBConnector();
     private Connection conn = dbc.connectDB();
@@ -40,7 +40,7 @@ public class DataAccessObject {
                 return new User(id, email, name);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DataAccessObject.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
