@@ -5,12 +5,44 @@
  */
 package backend;
 
+import entities.User;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
- * @author bloch    
+ * @author bloch
  */
 public class DataAccessObject {
-    
-    
-    
+
+    private DBConnector dbc = new DBConnector();
+    private Connection conn = dbc.connectDB();
+
+    public User validateUser(String email, String pass) {
+        String sql = "select * from user where email = ? && password = ?;";
+
+        try {
+            PreparedStatement preStmt = conn.prepareStatement(sql);
+            preStmt.setString(1, email);
+            preStmt.setString(2, pass);
+            ResultSet rs = preStmt.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("userID");
+                String mail = rs.getString("email");
+                String name = rs.getString("userName");
+                
+                
+
+                return new User(id, email, name);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DataAccessObject.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
 }

@@ -20,10 +20,6 @@ public class User {
         this.email = email;
         this.userName = userName;
     }
-    public User(String email, String userName){
-        this.userName = userName;
-        this.email = email;
-    }
 
     public int getUserId() {
         return userId;
