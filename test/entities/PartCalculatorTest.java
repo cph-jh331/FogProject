@@ -6,13 +6,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-<<<<<<< HEAD
 /**
  *
- * @author Pvafdfd
+ * @author Pva
  */
-=======
->>>>>>> b6d4b1ef2cf48a640a65c4f6e7c0aae5617a4f29
+
+
 public class PartCalculatorTest {
     
     public PartCalculatorTest()
