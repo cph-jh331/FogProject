@@ -6,11 +6,20 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Welcome to Johannes Fog</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>TODO write content..</div>
+        <form action="controllerServlet" method="post">
+            <div class="form-group">
+                <input type="hidden" name="action" value="go"/>
+                <input type="text" name="email" value=""  required/>
+                <input type="password" name="password" value=""  required>
+                <input class="btn btn-danger" type="submit" name="Login" value="Enter">
+            </div>
+
+        </form>
+
     </body>
 </html>
