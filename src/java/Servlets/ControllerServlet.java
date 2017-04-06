@@ -10,8 +10,6 @@ import entities.Part;
 import entities.PieceList;
 import entities.User;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.JDBCType;
 import java.util.HashMap;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
