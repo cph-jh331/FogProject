@@ -19,8 +19,9 @@ public class Part implements PartInterface {
     private String unitName;
     private String desc;
     private int partId;
+    private String category;
 
-    public Part(String type, Integer length, int packetSize, String unitName, String desc, int partId)
+    public Part(String type, Integer length, int packetSize, String unitName, String desc, int partId, String category)
     {
         this.type = type;
         this.length = length;
@@ -28,6 +29,7 @@ public class Part implements PartInterface {
         this.unitName = unitName;
         this.desc = desc;
         this.partId = partId;
+        this.category = category;
     }
 
     @Override
@@ -94,6 +96,14 @@ public class Part implements PartInterface {
     public String toString()
     {
         return "Part{" + "type=" + type + ", length=" + length + ", packetSize=" + packetSize + ", unitName=" + unitName + ", desc=" + desc + ", partId=" + partId + '}';
+    }
+
+    /**
+     * @return the category
+     */
+    public String getCategory()
+    {
+        return category;
     }
 
 }

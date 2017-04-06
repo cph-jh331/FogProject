@@ -27,29 +27,29 @@ public class PieceList implements PieceListInterface {
         {
             //roof på 600 meter
             numberOfRoofs = roofsForWidth * 1;
-            getRoofMap().get(15).setPacketSize(numberOfRoofs);
+            roofMap.get(15).setPacketSize(numberOfRoofs);
 
         }
         if (length >= 570 && (length - 30) < 690)
         {
             //roof 2 på 360.
             numberOfRoofs = roofsForWidth * 2;
-            getRoofMap().get(16).setPacketSize(numberOfRoofs);
+            roofMap.get(16).setPacketSize(numberOfRoofs);
         }
 
         if (length >= 690 && (length - 30) < 930)
         {
             //roof på 1 på 600, 1 på 360
             numberOfRoofs = roofsForWidth * 1;
-            getRoofMap().get(15).setPacketSize(numberOfRoofs);
-            getRoofMap().get(16).setPacketSize(numberOfRoofs);
+            roofMap.get(15).setPacketSize(numberOfRoofs);
+            roofMap.get(16).setPacketSize(numberOfRoofs);
 
         }
         if (length >= 930 && (length - 30) < 1170)
         {
             //roof 2 på 600 cm.
             numberOfRoofs = roofsForWidth * 2;
-            getRoofMap().get(15).setPacketSize(numberOfRoofs);
+            roofMap.get(15).setPacketSize(numberOfRoofs);
         }
     }
 
@@ -60,39 +60,24 @@ public class PieceList implements PieceListInterface {
         woodMap = partMapper.getWoodParts();
         roofMap = partMapper.getRoofParts();
         miscMap = partMapper.getMiscParts();
-        getWoodMap().get(11).setLengthAndPacketSize(calc.lengthOfPole(height), calc.numbPoles(length));
-        getWoodMap().get(8).setLengthAndPacketSize(calc.lengthOfSideRafter(length), calc.numbSideRafter(length));
-        getWoodMap().get(10).setLengthAndPacketSize(calc.lengthOfRafter(width), calc.numbRafters(length));
+        woodMap.get(11).setLengthAndPacketSize(calc.lengthOfPole(height), calc.numbPoles(length));
+        woodMap.get(8).setLengthAndPacketSize(calc.lengthOfSideRafter(length), calc.numbSideRafter(length));
+        woodMap.get(10).setLengthAndPacketSize(calc.lengthOfRafter(width), calc.numbRafters(length));
         trapezRoof(length, width);
 
+//        int længdeAfStolpe = calc.lengthOfPole(height);
+//        int antalAfStolpe = calc.numbPoles(length);
+//        Part stolpe = woodMap.get(11);
+//        stolpe.setLength(længdeAfStolpe);
+//        stolpe.setPacketSize(antalAfStolpe);   
     }
 
-    //er der kun til at teste i main. Skal ændres eller fjernes helt senere.
-//    public void getMap()
-//    {
-//        for (int i = 0; i < pieceMap.size(); i++)
-//        {
-//            System.out.println(pieceMap.get(i));
-//        }
-//    }
     @Override
     public void generatePieceList(int length, int width, int height)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-//    public String printMap()
-//    {
-//        String str = "";
-//        for (Map.Entry<Integer, Part> entry : pieceMap.entrySet())
-//        {
-//            if (entry.getValue().getPacketSize() != 0)
-//            {
-//                str += entry.getValue() + "\n";
-//            }
-//        }
-//        return str;
-//    }
     @Override
     public Map<Integer, Part> getPieceMap()
     {
