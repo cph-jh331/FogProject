@@ -28,6 +28,7 @@ public class PartMapper {
             String unitName;
             String desc;
             int partId;
+            String category;
             preStmt.setString(1, "træ");
 
             ResultSet rs = preStmt.executeQuery();
@@ -39,7 +40,8 @@ public class PartMapper {
                 unitName = rs.getString("unitname");
                 desc = rs.getString("desc");
                 partId = rs.getInt("partId");
-                partMap.put(partId, new Part(type, length, 0, unitName, desc, partId));
+                category = rs.getString("category");
+                partMap.put(partId, new Part(type, length, 0, unitName, desc, partId, category));
             }
         } catch (SQLException ex)
         {
@@ -62,6 +64,7 @@ public class PartMapper {
             String unitName;
             String desc;
             int partId;
+            String category;
             preStmt.setString(1, "tag");
 
             ResultSet rs = preStmt.executeQuery();
@@ -73,7 +76,8 @@ public class PartMapper {
                 unitName = rs.getString("unitname");
                 desc = rs.getString("desc");
                 partId = rs.getInt("partId");
-                partMap.put(partId, new Part(type, length, 0, unitName, desc, partId));
+                category = rs.getString("category");
+                partMap.put(partId, new Part(type, length, 0, unitName, desc, partId, category));
             }
         } catch (SQLException ex)
         {
@@ -97,6 +101,7 @@ public class PartMapper {
             String unitName;
             String desc;
             int partId;
+            String category;
             preStmt.setString(1, "løsdele");
 
             ResultSet rs = preStmt.executeQuery();
@@ -108,7 +113,8 @@ public class PartMapper {
                 unitName = rs.getString("unitname");
                 desc = rs.getString("desc");
                 partId = rs.getInt("partId");
-                partMap.put(partId, new Part(type, length, 0, unitName, desc, partId));
+                category = rs.getString("category");
+                partMap.put(partId, new Part(type, length, 0, unitName, desc, partId, category));
             }
         } catch (SQLException ex)
         {

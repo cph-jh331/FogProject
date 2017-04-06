@@ -11,19 +11,23 @@
     <% User user = (User) session.getAttribute("user");%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css"> 
         <title>Welcome to Fog  </title>
     </head>
 
 
     <body>
-        <h1>Hello World!<%= user.getUserName()%> </h1>
+        <div class="container">
+            <h1>Hello World!<%= user.getUserName()%> </h1>
 
-        <form action="controllerServlet" method="post">
-            <input type="hidden" name="seelist" value="seelist">
-            <input type="number" name="length" value="" required />
-            <input type="number" name="width" value="" required />
-            <input type="number" name="height" value="" required/>
-            <input type="submit" value="trykher">
-        </form>
+            <form action="controllerServlet" method="post">
+                <input type="hidden" name="seelist" value="seelist">
+                <input type="number" name="length" value="" placeholder="Længde" required  />
+                <input type="number" name="width" value="" placeholder="Bredde" required />
+                <input type="number" name="height" value="" placeholder="Højde" required/>
+                <input type="submit" value="trykher">
+            </form>
+        </div>
     </body>
 </html>

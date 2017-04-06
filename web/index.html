@@ -9,17 +9,21 @@ and open the template in the editor.
         <title>Welcome to Johannes Fog</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css"> 
     </head>
     <body>
-        <form action="controllerServlet" method="post">
-            <div class="form-group">
-                <input type="hidden" name="action" value="go"/>
-                <input type="text" name="email" value=""  required/>
-                <input type="password" name="password" value=""  required>
-                <input class="btn btn-danger" type="submit" name="Login" value="Enter">
-            </div>
+        <div class="container">
+            <form action="controllerServlet" method="post">
+                <div class="form-group">
+                    <input type="hidden" name="action" value="go"/>
+                    <input type="text" name="email" value="" placeholder="username" required/>
+                    <input type="password" name="password" value="" placeholder="password"  required>
+                    <input class="btn btn-danger" type="submit" name="Login" value="Enter">
+                </div>
 
-        </form>
+            </form>
+        </div>
 
     </body>
 </html>
