@@ -13,13 +13,13 @@ public class testmain {
     
     public static void main(String[] args)
     {
-        PartCalculator calc = new PartCalculator();
-        //System.out.println(calc.numbPoles(600));      
-//        
-//        double numberSke = Math.sqrt(5*5);
-//        System.out.println(numberSke);
-        PieceList pl = new PieceList();
-        pl.updateParts(500, 500, 300);
+//        PartCalculator calc = new PartCalculator();
+//        //System.out.println(calc.numbPoles(600));      
+////        
+////        double numberSke = Math.sqrt(5*5);
+////        System.out.println(numberSke);
+//        PieceList pl = new PieceList();
+//        pl.updateParts(500, 500, 300);
         //pl.getMap();
         
     }

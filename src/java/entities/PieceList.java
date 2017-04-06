@@ -55,7 +55,7 @@ public class PieceList implements PieceListInterface {
 
     public void updateParts(int length, int width, int height)
     {
-        PartCalculator calc = new PartCalculator();
+        PartCalculator calc = new PartCalculator();        
         PartMapper partMapper = new PartMapper();
         woodMap = partMapper.getWoodParts();
         roofMap = partMapper.getRoofParts();
