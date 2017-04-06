@@ -37,7 +37,7 @@
                             <%=entry.getValue().getType()%>  
                         </td>                    
                         <td>
-                            SKAL LIGE SÆTTES IND I PART.
+                            <%=entry.getValue().getCategory()%>
                         </td>
                         <td>
                             <%=entry.getValue().getLength()%>
@@ -77,7 +77,7 @@
                         <%=entry.getValue().getType()%>  
                     </td>                    
                     <td>
-                        SKAL LIGE SÆTTES IND I PART.
+                        <%=entry.getValue().getCategory()%>
                     </td>
                     <td>
                         <%=entry.getValue().getLength()%>
@@ -118,7 +118,7 @@
                         <%=entry.getValue().getType()%>  
                     </td>                    
                     <td>
-                        SKAL LIGE SÆTTES IND I PART.
+                        <%=entry.getValue().getCategory()%>
                     </td>
                     <td>
                         <%=entry.getValue().getLength()%>
