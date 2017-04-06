@@ -60,9 +60,16 @@ public class PieceList implements PieceListInterface {
         woodMap = partMapper.getWoodParts();
         roofMap = partMapper.getRoofParts();
         miscMap = partMapper.getMiscParts();
-        woodMap.get(11).setLengthAndPacketSize(calc.lengthOfPole(height), calc.numbPoles(length));
+        woodMap.get(1).setLengthAndPacketSize(calc.lengthUnderStern(length), calc.numbOfLengthUnderStern(length));
+        woodMap.get(2).setLengthAndPacketSize(calc.widthUnderStern(width), calc.numbOfWidthUnderStern(width));
+       woodMap.get(3).setLengthAndPacketSize(calc.lengthOverStern(length), calc.numbOfLengthOverStern(length));
+       woodMap.get(4).setLengthAndPacketSize(calc.widthOverStern(width), calc.numbOfWidthOverStern(width));
         woodMap.get(8).setLengthAndPacketSize(calc.lengthOfSideRafter(length), calc.numbSideRafter(length));
         woodMap.get(10).setLengthAndPacketSize(calc.lengthOfRafter(width), calc.numbRafters(length));
+        woodMap.get(11).setLengthAndPacketSize(calc.lengthOfPole(height), calc.numbPoles(length));
+        woodMap.get(13).setLengthAndPacketSize(calc.lengthWaterBoard(length), calc.numbLengthWaterBoard(length));
+        woodMap.get(14).setLengthAndPacketSize(calc.widthWaterBoard(width), calc.numbWidthWaterBoard(width));
+        miscMap.get(18).setPacketSize(calc.numbOfMetalTapes(length, width));
         trapezRoof(length, width);
 
 //        int længdeAfStolpe = calc.lengthOfPole(height);
