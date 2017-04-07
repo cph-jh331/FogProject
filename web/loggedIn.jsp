@@ -1,17 +1,30 @@
 <%-- 
-    Document   : loggedIn
-    Created on : 04-04-2017, 11:56:36
-    Author     : Lasse Andersen
+    Document   : login
+    Created on : 31-03-2017, 10:17:34
+    Author     : Pva
 --%>
 
+<%@page import="entities.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <% User user = (User) session.getAttribute("user");%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Hello User</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css"> 
+        <title>Welcome to Fog  </title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <div class="container">
+            <h1>Hello World!<%= user.getUserName()%> </h1>
+            <form action="controllerServlet" method="post">
+                <input type="hidden" name="action" value="seelist">
+                <input type="number" name="length" value="" placeholder="Længde" required  />
+                <input type="number" name="width" value="" placeholder="Bredde" required />
+                <input type="number" name="height" value="" placeholder="Højde" required/>
+                <input type="submit" value="trykher">
+            </form>
+        </div>
     </body>
 </html>
