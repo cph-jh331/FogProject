@@ -120,7 +120,7 @@ public class PieceList implements PieceListInterface {
         }
         return partList;
     }
-
+    //returns a list with the misc.
     public List<Part> getMiscList()
     {
         List<Part> partList = new ArrayList<>();
