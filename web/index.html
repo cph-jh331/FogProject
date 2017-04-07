@@ -14,16 +14,20 @@ and open the template in the editor.
     </head>
     <body>
         <div class="container">
-            <form action="controllerServlet" method="post">
+            <h1>Hello </h1>
+            <form id="myForm" action="controllerServlet" method="post">
                 <div class="form-group">
-                    <input type="hidden" name="action" value="go"/>
-                    <input type="text" name="email" value="" placeholder="username" required/>
-                    <input type="password" name="password" value="" placeholder="password"  required>
+                    <input type="hidden" name="action" value=""/>
                     <input class="btn btn-danger" type="submit" name="Login" value="Enter">
                 </div>
-
             </form>
         </div>
+        <script type="text/javascript">
+            window.onload = function () {
+                document.forms['myForm'].submit();
+            };
+        </script>
+
 
     </body>
 </html>

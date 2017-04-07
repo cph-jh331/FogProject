@@ -1,4 +1,5 @@
 
+<%@page import="java.util.List"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="entities.Part"%>
@@ -11,9 +12,9 @@
         <link rel="stylesheet" href="css/bootstrap-theme.min.css"> 
         <title>Stykliste</title>
     </head>
-    <%HashMap<Integer, Part> woodMap = (HashMap<Integer, Part>) request.getSession().getAttribute("woodMap");%>
-    <%HashMap<Integer, Part> roofMap = (HashMap<Integer, Part>) request.getSession().getAttribute("roofMap");%>
-    <%HashMap<Integer, Part> miscMap = (HashMap<Integer, Part>) request.getSession().getAttribute("miscMap");%>
+    <%List<Part> woodList = (List<Part>) request.getSession().getAttribute("woodMap");%>
+    <%List<Part> roofList = (List<Part>) request.getSession().getAttribute("roofMap");%>
+    <%List<Part> miscList = (List<Part>) request.getSession().getAttribute("miscMap");%>
     <body>
         <div class="container">
             <table class="table table-bordered">
@@ -29,31 +30,27 @@
                 </thead>
                 <tbody>
                     <%
-                        for (Map.Entry<Integer, Part> entry : woodMap.entrySet())
+                        for (Part part : woodList)
                         {
                     %>
                     <tr>
                         <td>
-                            <%=entry.getValue().getType()%>  
+                            <%=part.getType()%>  
                         </td>                    
                         <td>
-                            <%=entry.getValue().getCategory()%>
+                            <%=part.getCategory()%>
                         </td>
                         <td>
-                            <%=entry.getValue().getLength()%>
+                            <%=part.getLength()%>
                         </td>
                         <td>
-
-                            <%=entry.getValue().getPacketSize()%>
-
+                            <%=part.getPacketSize()%>
                         </td>
                         <td>
-                            <%=entry.getValue().getUnitName()%>
-
+                            <%=part.getUnitName()%>
                         </td>
                         <td>
-                            <%=entry.getValue().getDescription()%>
-
+                            <%=part.getDescription()%>
                         </td>
                     </tr>
                     <%
@@ -68,37 +65,33 @@
                 <th>Beskrivelse</th>
                 </thead>
 
-                <%
-                    for (Map.Entry<Integer, Part> entry : roofMap.entrySet())
-                    {
-                %>
-                <tr>
-                    <td>
-                        <%=entry.getValue().getType()%>  
-                    </td>                    
-                    <td>
-                        <%=entry.getValue().getCategory()%>
-                    </td>
-                    <td>
-                        <%=entry.getValue().getLength()%>
-                    </td>
-                    <td>
-
-                        <%=entry.getValue().getPacketSize()%>
-
-                    </td>
-                    <td>
-                        <%=entry.getValue().getUnitName()%>
-
-                    </td>
-                    <td>
-                        <%=entry.getValue().getDescription()%>
-
-                    </td>
-                </tr>
-                <%
-                    }
-                %>
+                      <%
+                        for (Part part : roofList)
+                        {
+                    %>
+                    <tr>
+                        <td>
+                            <%=part.getType()%>  
+                        </td>                    
+                        <td>
+                            <%=part.getCategory()%>
+                        </td>
+                        <td>
+                            <%=part.getLength()%>
+                        </td>
+                        <td>
+                            <%=part.getPacketSize()%>
+                        </td>
+                        <td>
+                            <%=part.getUnitName()%>
+                        </td>
+                        <td>
+                            <%=part.getDescription()%>
+                        </td>
+                    </tr>
+                    <%
+                        }
+                    %>
 
                 <thead>
                 <th>Type</th>
@@ -109,37 +102,33 @@
                 <th>Beskrivelse</th>
                 </thead>
 
-                <%
-                    for (Map.Entry<Integer, Part> entry : miscMap.entrySet())
-                    {
-                %>
-                <tr>
-                    <td>
-                        <%=entry.getValue().getType()%>  
-                    </td>                    
-                    <td>
-                        <%=entry.getValue().getCategory()%>
-                    </td>
-                    <td>
-                        <%=entry.getValue().getLength()%>
-                    </td>
-                    <td>
-
-                        <%=entry.getValue().getPacketSize()%>
-
-                    </td>
-                    <td>
-                        <%=entry.getValue().getUnitName()%>
-
-                    </td>
-                    <td>
-                        <%=entry.getValue().getDescription()%>
-
-                    </td>
-                </tr>
-                <%
-                    }
-                %>
+                      <%
+                        for (Part part : miscList)
+                        {
+                    %>
+                    <tr>
+                        <td>
+                            <%=part.getType()%>  
+                        </td>                    
+                        <td>
+                            <%=part.getCategory()%>
+                        </td>
+                        <td>
+                            <%=part.getLength()%>
+                        </td>
+                        <td>
+                            <%=part.getPacketSize()%>
+                        </td>
+                        <td>
+                            <%=part.getUnitName()%>
+                        </td>
+                        <td>
+                            <%=part.getDescription()%>
+                        </td>
+                    </tr>
+                    <%
+                        }
+                    %>
 
                 </tbody>
             </table>
