@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class Login {
+    //checks if the user is there.
 
         public void checkLogin(HttpServletRequest request, HttpServletResponse response, User user, HttpSession session)
             throws ServletException, IOException
