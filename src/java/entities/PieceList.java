@@ -72,8 +72,13 @@ public class PieceList implements PieceListInterface {
         woodMap.get(13).setLengthAndPacketSize(calc.lengthWaterBoard(length), calc.numbLengthWaterBoard(length));
         woodMap.get(14).setLengthAndPacketSize(calc.widthWaterBoard(width), calc.numbWidthWaterBoard(width));
         miscMap.get(19).setPacketSize(calc.numbRightMounts(woodMap.get(10).getPacketSize()));
-        miscMap.get(20).setPacketSize(calc.numbLeftMounts(woodMap.get(10).getPacketSize()));
         miscMap.get(18).setPacketSize(calc.numbOfMetalTapes(length, width));
+        miscMap.get(20).setPacketSize(calc.numbLeftMounts(woodMap.get(10).getPacketSize()));
+        miscMap.get(21).setPacketSize(calc.numbOfOverUnderScrews(length, width));
+        miscMap.get(22).setPacketSize(calc.numbOfMountsScrews(miscMap.get(19).getPacketSize(), woodMap.get(10).getPacketSize()));
+        miscMap.get(23).setPacketSize(calc.numbOfRafterBolts(woodMap.get(11).getPacketSize()));
+        miscMap.get(24).setPacketSize(calc.rafterBoltsExtra(woodMap.get(11).getPacketSize()));
+        
         trapezRoof(length, width);
 
 //        int længdeAfStolpe = calc.lengthOfPole(height);
@@ -120,7 +125,7 @@ public class PieceList implements PieceListInterface {
         }
         return partList;
     }
-
+    //returns a list with the misc.
     public List<Part> getMiscList()
     {
         List<Part> partList = new ArrayList<>();

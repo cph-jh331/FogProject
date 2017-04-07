@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 public class PartList {
 
+    //prints out a list
     public void seeList(HttpServletRequest request, HttpServletResponse response, HttpSession session)
             throws ServletException, IOException
     {
