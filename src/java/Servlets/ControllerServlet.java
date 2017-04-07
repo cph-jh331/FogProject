@@ -5,12 +5,8 @@
  */
 package Servlets;
 
-import backend.UserMapper;
-import entities.Part;
-import entities.PieceList;
 import entities.User;
 import java.io.IOException;
-import java.util.HashMap;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,9 +20,6 @@ import javax.servlet.http.HttpSession;
     "/controllerServlet"
 })
 public class ControllerServlet extends HttpServlet {
-
-    UserMapper dao = new UserMapper();
-    PieceList pl = new PieceList();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,48 +35,35 @@ public class ControllerServlet extends HttpServlet {
     {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        String seelist = request.getParameter("seelist");
-        HashMap<Integer, Part> woodMap = (HashMap<Integer, Part>) session.getAttribute("woodMap");
-        HashMap<Integer, Part> roofMap = (HashMap<Integer, Part>) session.getAttribute("roofMap");
-        HashMap<Integer, Part> miscMap = (HashMap<Integer, Part>) session.getAttribute("miscMap");
         String action = request.getParameter("action");
         User user = (User) session.getAttribute("user");
 
-        if (action != null)
+        if (action.equals("login"))
         {
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-            user = dao.validateUser(email, password);
-            if (user == null)
-            {
-                RequestDispatcher rd = request.getRequestDispatcher("failed.jsp");
-                rd.forward(request, response);
-            } else
-            {
-                request.getSession().setAttribute("user", user);
-                RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-                rd.forward(request, response);
-
-            }
+            Login login = new Login();
+            login.checkLogin(request, response, user, session);
+            return;
         }
-
-        if (seelist != null)
+        
+        if (user != null && action.equals(""))
         {
-            if (seelist.equals("seelist"))
-            {
-                int length = Integer.parseInt(request.getParameter("length"));
-                int width = Integer.parseInt(request.getParameter("width"));
-                int height = Integer.parseInt(request.getParameter("height"));
-                pl.updateParts(length, width, height);
-                woodMap = pl.getWoodMap();
-                roofMap = pl.getRoofMap();
-                miscMap = pl.getMiscMap();
-                session.setAttribute("woodMap", woodMap);
-                session.setAttribute("roofMap", roofMap);
-                session.setAttribute("miscMap", miscMap);
-                RequestDispatcher rd = request.getRequestDispatcher("seelist.jsp");
-                rd.forward(request, response);
-            }
+            RequestDispatcher rd = request.getRequestDispatcher("loggedIn.jsp");
+            rd.forward(request, response);
+            return;
+        }
+        
+        if (user == null)
+        {
+            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+            rd.forward(request, response);
+            return;
+        }
+        
+        if (action.equals("seelist"))
+        {
+           PartList partList = new PartList();
+            partList.seeList(request, response, session);
+            return;
         }
 
     }

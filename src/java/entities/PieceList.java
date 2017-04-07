@@ -2,7 +2,9 @@ package entities;
 
 import backend.PartMapper;
 import fogInterfaces.PieceListInterface;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class PieceList implements PieceListInterface {
@@ -62,13 +64,15 @@ public class PieceList implements PieceListInterface {
         miscMap = partMapper.getMiscParts();
         woodMap.get(1).setLengthAndPacketSize(calc.lengthUnderStern(length), calc.numbOfLengthUnderStern(length));
         woodMap.get(2).setLengthAndPacketSize(calc.widthUnderStern(width), calc.numbOfWidthUnderStern(width));
-       woodMap.get(3).setLengthAndPacketSize(calc.lengthOverStern(length), calc.numbOfLengthOverStern(length));
-       woodMap.get(4).setLengthAndPacketSize(calc.widthOverStern(width), calc.numbOfWidthOverStern(width));
+        woodMap.get(3).setLengthAndPacketSize(calc.lengthOverStern(length), calc.numbOfLengthOverStern(length));
+        woodMap.get(4).setLengthAndPacketSize(calc.widthOverStern(width), calc.numbOfWidthOverStern(width));
         woodMap.get(8).setLengthAndPacketSize(calc.lengthOfSideRafter(length), calc.numbSideRafter(length));
         woodMap.get(10).setLengthAndPacketSize(calc.lengthOfRafter(width), calc.numbRafters(length));
         woodMap.get(11).setLengthAndPacketSize(calc.lengthOfPole(height), calc.numbPoles(length));
         woodMap.get(13).setLengthAndPacketSize(calc.lengthWaterBoard(length), calc.numbLengthWaterBoard(length));
         woodMap.get(14).setLengthAndPacketSize(calc.widthWaterBoard(width), calc.numbWidthWaterBoard(width));
+        miscMap.get(19).setPacketSize(calc.numbRightMounts(woodMap.get(10).getPacketSize()));
+        miscMap.get(20).setPacketSize(calc.numbLeftMounts(woodMap.get(10).getPacketSize()));
         miscMap.get(18).setPacketSize(calc.numbOfMetalTapes(length, width));
         trapezRoof(length, width);
 
@@ -89,6 +93,46 @@ public class PieceList implements PieceListInterface {
     public Map<Integer, Part> getPieceMap()
     {
         return null;
+    }
+    
+    public List<Part> getWoodList()
+    {
+        List<Part> partList = new ArrayList<>();
+        for (Map.Entry<Integer, Part> entry : woodMap.entrySet())
+        {
+            if (entry.getValue().getPacketSize() != 0)
+            {
+                partList.add(entry.getValue());
+            }
+        }
+        return partList;
+    }
+
+    public List<Part> getRoofList()
+    {
+        List<Part> partList = new ArrayList<>();
+        for (Map.Entry<Integer, Part> entry : roofMap.entrySet())
+        {
+            if (entry.getValue().getPacketSize() != 0)
+            {
+                partList.add(entry.getValue());
+            }
+        }
+        return partList;
+    }
+
+    public List<Part> getMiscList()
+    {
+        List<Part> partList = new ArrayList<>();
+        for (Map.Entry<Integer, Part> entry : miscMap.entrySet())
+        {
+
+            if (entry.getValue().getPacketSize() != 0)
+            {
+                partList.add(entry.getValue());
+            }
+        }
+        return partList;
     }
 
     /**
