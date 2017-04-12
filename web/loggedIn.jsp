@@ -13,7 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap-theme.min.css"> 
-        <title>Welcome to Fog  </title>
+        <title>Welcome to Fog</title>
     </head>
     <body>
         <div class="container">

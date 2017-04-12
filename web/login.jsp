@@ -12,7 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap-theme.min.css"> 
-        <title>JSP Page</title>
+        <title>Login Page</title>
     </head>
     <body>
         <% User user = (User) session.getAttribute("user");%>
