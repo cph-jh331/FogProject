@@ -16,6 +16,11 @@ import static org.junit.Assert.*;
  *
  * @author Pva
  */
+//<<<<<<< HEAD
+//
+//
+//=======
+//>>>>>>> 9001bb447595d9fa0c674ff01d73591f8a56a8a9
 public class PartCalculatorTest {
     
      public PartCalculatorTest()
