@@ -5,8 +5,11 @@
  */
 package Servlets;
 
+import backend.PartMapper;
+import entities.Part;
 import entities.User;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,9 +37,16 @@ public class ControllerServlet extends HttpServlet {
             throws ServletException, IOException
     {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        
         HttpSession session = request.getSession();
         String action = request.getParameter("action");
         User user = (User) session.getAttribute("user");
+        Part part = (Part) session.getAttribute("part");
+        PartMapper pm = new PartMapper();
+        List<Part> typeCat;
+        String type = "" ;
+        //typeCat = pm.getTypeCategory(type);
 
         if (action.equals("login"))
         {
@@ -44,25 +54,36 @@ public class ControllerServlet extends HttpServlet {
             login.checkLogin(request, response, user, session);
             return;
         }
-        
+
         if (user != null && action.equals(""))
         {
             RequestDispatcher rd = request.getRequestDispatcher("loggedIn.jsp");
             rd.forward(request, response);
             return;
         }
-        
+
         if (user == null)
         {
             RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
             rd.forward(request, response);
             return;
         }
-        
+
         if (action.equals("seelist"))
         {
-           PartList partList = new PartList();
+            PartList partList = new PartList();
             partList.seeList(request, response, session);
+            return;
+        }
+        if(action.equals("seeTypeCategory")){
+            typeCat tcat = new typeCat();
+            tcat.typeCate(request, response, session);
+            return;
+           
+        }
+        if(action.equals("addToDatabase")){
+            AddToDatabase adb = new AddToDatabase();
+            adb.addTo(request, response, session);
             return;
         }
 

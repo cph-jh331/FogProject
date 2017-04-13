@@ -20,8 +20,19 @@ public class Part implements PartInterface {
     private String desc;
     private int partId;
     private String category;
+    private String typeCategory;
 
-    public Part(String type, Integer length, int packetSize, String unitName, String desc, int partId, String category)
+    public Part(String type, String unitName, String desc, String category, String typeCategory) {
+        this.type = type;
+        this.unitName = unitName;
+        this.desc = desc;
+        this.category = category;
+        this.typeCategory = typeCategory;
+    }
+    
+    
+
+    public Part(String type, Integer length, int packetSize, String unitName, String desc, int partId, String category, String typeCategory)
     {
         this.type = type;
         this.length = length;
@@ -30,6 +41,12 @@ public class Part implements PartInterface {
         this.desc = desc;
         this.partId = partId;
         this.category = category;
+        this.typeCategory = typeCategory;
+    }
+
+    public String getTypeCategory()
+    {
+        return typeCategory;
     }
 
     @Override
