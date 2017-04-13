@@ -7,11 +7,22 @@ and open the template in the editor.
     Created on : 12-04-2017, 12:11:13
     Author     : Pva
 */
+.html { 
+    background: url('../img/fogbackground.png') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.body { background-color: transparent; }
+
+
 #navbar-color.navbar-default { /* #003399 - #0033cc */
     font-size: 14px;
     background-color: rgba(0, 70, 135, 1);
-    background: -webkit-linear-gradient(top, rgba(51, 51, 204, 1) 0%, rgba(51, 51, 153, 1) 100%);
-    background: linear-gradient(to bottom, rgba(51, 51, 204, 1) 0%, rgba(51, 51, 153, 1) 100%);
+    background: -webkit-linear-gradient(top, rgba(0, 70, 135, 1) 0%, rgba(0, 70, 135, 1) 100%);
+    background: linear-gradient(to bottom, rgba(0, 70, 135, 1) 0%, rgba(0, 70, 135, 1) 100%);
     border: 0px;
     border-radius: 0;
 }
