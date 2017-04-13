@@ -7,15 +7,32 @@ and open the template in the editor.
     Created on : 12-04-2017, 12:11:13
     Author     : Pva
 */
-.html { 
-    background: url('../img/fogbackground.png') no-repeat center center fixed; 
+body {
+    background: url('../img/fogbackground.png') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    
 }
 
-.body { background-color: transparent; }
+h1 {
+    color: black;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bolder;
+    
+    
+}
+h2 {
+    color: grey;
+    font-family: 'Droid Serif', serif;
+}
+
+#test {
+    
+    background-color: darkblue;
+}
+
 
 
 #navbar-color.navbar-default { /* #003399 - #0033cc */
