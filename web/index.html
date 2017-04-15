@@ -12,48 +12,103 @@ and open the template in the editor.
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap-theme.min.css"> 
         <link rel="stylesheet" href="css/standardcss.css">
+        <link href="https://fonts.googleapis.com/css?family=Droid+Serif|Roboto" rel="stylesheet">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
+        <!-- Beginning of navbar setup. using default to customize color in css with #id    -->
         <nav id="navbar-color" class="navbar navbar-default">
             <div class="container-fluid">
+                <!--Nav bar logo with link to picture. -->
                 <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavBar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
                     <a class="navbar-left" href="#">
-                        <img src="img/foglogo.png" alt="FogHouse">
+                        <img src="img/foglogo2.png" alt="FogHouse" width="110" height="50">
                     </a>
                 </div>
-                <ul class="nav navbar-nav">
-                    <li class="active"> <a href="index.html">Home</a></li>
-                    <li><a href="#">Page 1</a></li>
-                    <li><a href="#">Page 2</a></li>
-                    <li><a href="#">Page 3</a></li>
-                    <li><a href="#">Page 4</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-login"></span> Login</a></li>
-                </ul>
-            </div>
-
-        </nav>
-
-
-
-
-
-     <!--   <div class="container">
-            <h1>Hello </h1>
-            <form id="myForm" action="controllerServlet" method="post">
-                <div class="form-group">
-                    <input type="hidden" name="action" value=""/>
-                    <input class="btn btn-danger" type="submit" name="Login" value="Enter">
+                <!-- Menu Items -- Different boxes in nav-bar. Active beeing the page we are on atm.  No href yet missing pages -->
+                <div class="collapse navbar-collapse" id="mainNavBar">
+                    <ul class="nav navbar-nav">
+                        <li class="active"> <a href="index.html">Home</a></li>
+                        <li><a href="#">Page 1</a></li>
+                        <li><a href="#">Page 2</a></li>
+                        <li><a href="#">Page 3</a></li>
+                        <li><a href="#">Page 4</a></li>
+                    </ul>
+                    <!-- Setup of the right side of nav-bar 2 different links for now. No href yet missing pages -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-login"></span>Login</a></li>
+                    </ul>
                 </div>
-            </form>
+            </div>
+        </nav>
+        <!-- Start og webpage. Only a few headers. Missing more text maybe other pics and Fog info. ! ? -->
+        <div class="bg">
+
+            <div id="test" class="container">
+                <h1 class="text-center">Welcome to Fog ByggeShop</h1>
+            </div>
+            <br>
+
+
+            <h2 class="text-center">Stedet hvor du kan bygge den vilde Carport</h2>
+
+
+
+            <br>
+
+            <h2 class="text-center">Er du ikke bruger, click på signup og kom i gang med at bygger efter kun få clicks</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
-        <script type="text/javascript">
-            window.onload = function () {
-                document.forms['myForm'].submit();
-            };
-        </script> --> 
+
+
+
+
+
+        <!--   <div class="container">
+               <h1>Hello </h1>
+               <form id="myForm" action="controllerServlet" method="post">
+                   <div class="form-group">
+                       <input type="hidden" name="action" value=""/>
+                       <input class="btn btn-danger" type="submit" name="Login" value="Enter">
+                   </div>
+               </form>
+           </div>
+           <script type="text/javascript">
+               window.onload = function () {
+                   document.forms['myForm'].submit();
+               };
+           </script> --> 
 
 
     </body>
