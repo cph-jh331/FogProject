@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="da"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PieceList.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;FogProject&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">entities</a> &gt; <span class="el_source">PieceList.java</span></div><h1>PieceList.java</h1><pre class="source lang-java linenums">package entities;
+
+import backend.PartMapper;
+import fogInterfaces.PieceListInterface;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class PieceList implements PieceListInterface {
+
+    private HashMap&lt;Integer, Part&gt; woodMap;
+    private HashMap&lt;Integer, Part&gt; roofMap;
+    private HashMap&lt;Integer, Part&gt; miscMap;
+
+    public PieceList()
+<span class="nc" id="L17">    {</span>
+<span class="nc" id="L18">    }</span>
+
+    private void trapezRoof(int length, int width)
+    {
+        //tag antal
+<span class="nc" id="L23">        int roofsForWidth = width / 100;</span>
+
+<span class="nc" id="L25">        length += 30;</span>
+        int numberOfRoofs;
+
+<span class="nc bnc" id="L28" title="All 4 branches missed.">        if (length &gt;= 300 &amp;&amp; (length - 30) &lt; 570)</span>
+        {
+            //roof på 600 meter
+<span class="nc" id="L31">            numberOfRoofs = roofsForWidth * 1;</span>
+<span class="nc" id="L32">            roofMap.get(15).setPacketSize(numberOfRoofs);</span>
+
+        }
+<span class="nc bnc" id="L35" title="All 4 branches missed.">        if (length &gt;= 570 &amp;&amp; (length - 30) &lt; 690)</span>
+        {
+            //roof 2 på 360.
+<span class="nc" id="L38">            numberOfRoofs = roofsForWidth * 2;</span>
+<span class="nc" id="L39">            roofMap.get(16).setPacketSize(numberOfRoofs);</span>
+        }
+
+<span class="nc bnc" id="L42" title="All 4 branches missed.">        if (length &gt;= 690 &amp;&amp; (length - 30) &lt; 930)</span>
+        {
+            //roof på 1 på 600, 1 på 360
+<span class="nc" id="L45">            numberOfRoofs = roofsForWidth * 1;</span>
+<span class="nc" id="L46">            roofMap.get(15).setPacketSize(numberOfRoofs);</span>
+<span class="nc" id="L47">            roofMap.get(16).setPacketSize(numberOfRoofs);</span>
+
+        }
+<span class="nc bnc" id="L50" title="All 4 branches missed.">        if (length &gt;= 930 &amp;&amp; (length - 30) &lt; 1170)</span>
+        {
+            //roof 2 på 600 cm.
+<span class="nc" id="L53">            numberOfRoofs = roofsForWidth * 2;</span>
+<span class="nc" id="L54">            roofMap.get(15).setPacketSize(numberOfRoofs);</span>
+        }
+<span class="nc" id="L56">    }</span>
+
+    public void updateParts(int length, int width, int height)
+    {
+<span class="nc" id="L60">        PartCalculator calc = new PartCalculator();</span>
+<span class="nc" id="L61">        PartMapper partMapper = new PartMapper();</span>
+<span class="nc" id="L62">        woodMap = partMapper.getWoodParts();</span>
+<span class="nc" id="L63">        roofMap = partMapper.getRoofParts();</span>
+<span class="nc" id="L64">        miscMap = partMapper.getMiscParts();</span>
+<span class="nc" id="L65">        woodMap.get(1).setLengthAndPacketSize(calc.lengthUnderStern(length), calc.numbOfLengthUnderStern(length));</span>
+<span class="nc" id="L66">        woodMap.get(2).setLengthAndPacketSize(calc.widthUnderStern(width), calc.numbOfWidthUnderStern(width));</span>
+<span class="nc" id="L67">        woodMap.get(3).setLengthAndPacketSize(calc.lengthOverStern(length), calc.numbOfLengthOverStern(length));</span>
+<span class="nc" id="L68">        woodMap.get(4).setLengthAndPacketSize(calc.widthOverStern(width), calc.numbOfWidthOverStern(width));</span>
+<span class="nc" id="L69">        woodMap.get(8).setLengthAndPacketSize(calc.lengthOfSideRafter(length), calc.numbSideRafter(length));</span>
+<span class="nc" id="L70">        woodMap.get(10).setLengthAndPacketSize(calc.lengthOfRafter(width), calc.numbRafters(length));</span>
+<span class="nc" id="L71">        woodMap.get(11).setLengthAndPacketSize(calc.lengthOfPole(height), calc.numbPoles(length));</span>
+<span class="nc" id="L72">        woodMap.get(13).setLengthAndPacketSize(calc.lengthWaterBoard(length), calc.numbLengthWaterBoard(length));</span>
+<span class="nc" id="L73">        woodMap.get(14).setLengthAndPacketSize(calc.widthWaterBoard(width), calc.numbWidthWaterBoard(width));</span>
+<span class="nc" id="L74">        miscMap.get(19).setPacketSize(calc.numbRightMounts(woodMap.get(10).getPacketSize()));</span>
+<span class="nc" id="L75">        miscMap.get(18).setPacketSize(calc.numbOfMetalTapes(length, width));</span>
+<span class="nc" id="L76">        miscMap.get(20).setPacketSize(calc.numbLeftMounts(woodMap.get(10).getPacketSize()));</span>
+<span class="nc" id="L77">        miscMap.get(21).setPacketSize(calc.numbOfOverUnderScrews(length, width));</span>
+<span class="nc" id="L78">        miscMap.get(22).setPacketSize(calc.numbOfMountsScrews(miscMap.get(19).getPacketSize(), woodMap.get(10).getPacketSize()));</span>
+<span class="nc" id="L79">        miscMap.get(23).setPacketSize(calc.numbOfRafterBolts(woodMap.get(11).getPacketSize()));</span>
+<span class="nc" id="L80">        miscMap.get(24).setPacketSize(calc.rafterBoltsExtra(woodMap.get(11).getPacketSize()));</span>
+        
+<span class="nc" id="L82">        trapezRoof(length, width);</span>
+
+//        int længdeAfStolpe = calc.lengthOfPole(height);
+//        int antalAfStolpe = calc.numbPoles(length);
+//        Part stolpe = woodMap.get(11);
+//        stolpe.setLength(længdeAfStolpe);
+//        stolpe.setPacketSize(antalAfStolpe);   
+<span class="nc" id="L89">    }</span>
+
+    @Override
+    public void generatePieceList(int length, int width, int height)
+    {
+<span class="nc" id="L94">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+    }
+
+    @Override
+    public Map&lt;Integer, Part&gt; getPieceMap()
+    {
+<span class="nc" id="L100">        return null;</span>
+    }
+    
+    public List&lt;Part&gt; getWoodList()
+    {
+<span class="nc" id="L105">        List&lt;Part&gt; partList = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">        for (Map.Entry&lt;Integer, Part&gt; entry : woodMap.entrySet())</span>
+        {
+<span class="nc bnc" id="L108" title="All 2 branches missed.">            if (entry.getValue().getPacketSize() != 0)</span>
+            {
+<span class="nc" id="L110">                partList.add(entry.getValue());</span>
+            }
+<span class="nc" id="L112">        }</span>
+<span class="nc" id="L113">        return partList;</span>
+    }
+
+    public List&lt;Part&gt; getRoofList()
+    {
+<span class="nc" id="L118">        List&lt;Part&gt; partList = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L119" title="All 2 branches missed.">        for (Map.Entry&lt;Integer, Part&gt; entry : roofMap.entrySet())</span>
+        {
+<span class="nc bnc" id="L121" title="All 2 branches missed.">            if (entry.getValue().getPacketSize() != 0)</span>
+            {
+<span class="nc" id="L123">                partList.add(entry.getValue());</span>
+            }
+<span class="nc" id="L125">        }</span>
+<span class="nc" id="L126">        return partList;</span>
+    }
+    //returns a list with the misc.
+    public List&lt;Part&gt; getMiscList()
+    {
+<span class="nc" id="L131">        List&lt;Part&gt; partList = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L132" title="All 2 branches missed.">        for (Map.Entry&lt;Integer, Part&gt; entry : miscMap.entrySet())</span>
+        {
+
+<span class="nc bnc" id="L135" title="All 2 branches missed.">            if (entry.getValue().getPacketSize() != 0)</span>
+            {
+<span class="nc" id="L137">                partList.add(entry.getValue());</span>
+            }
+<span class="nc" id="L139">        }</span>
+<span class="nc" id="L140">        return partList;</span>
+    }
+
+    /**
+     * @return the woodMap
+     */
+    public HashMap&lt;Integer, Part&gt; getWoodMap()
+    {
+<span class="nc" id="L148">        return woodMap;</span>
+    }
+
+    /**
+     * @return the roofMap
+     */
+    public HashMap&lt;Integer, Part&gt; getRoofMap()
+    {
+<span class="nc" id="L156">        return roofMap;</span>
+    }
+
+    /**
+     * @return the miscMap
+     */
+    public HashMap&lt;Integer, Part&gt; getMiscMap()
+    {
+<span class="nc" id="L164">        return miscMap;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

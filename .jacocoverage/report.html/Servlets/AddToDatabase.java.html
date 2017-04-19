@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="da"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AddToDatabase.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;FogProject&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Servlets</a> &gt; <span class="el_source">AddToDatabase.java</span></div><h1>AddToDatabase.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Servlets;
+
+import backend.PartMapper;
+import entities.Part;
+import java.io.IOException;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+/**
+ *
+ * @author Lasse Andersen
+ */
+<span class="nc" id="L22">public class AddToDatabase {</span>
+    public void addTo(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+            throws ServletException, IOException {
+<span class="nc" id="L25">        String type = request.getParameter(&quot;Type&quot;);</span>
+<span class="nc" id="L26">        String category = request.getParameter(&quot;Kategori&quot;);</span>
+<span class="nc" id="L27">        String unitname = request.getParameter(&quot;Pakketype&quot;);</span>
+<span class="nc" id="L28">        String decs = request.getParameter(&quot;Beskrivelse&quot;);</span>
+<span class="nc" id="L29">        List&lt;Part&gt; catList = (List&lt;Part&gt;) session.getAttribute(&quot;catList&quot;);</span>
+<span class="nc" id="L30">        String typCat = catList.get(0).getTypeCategory();</span>
+        
+<span class="nc" id="L32">        Part part = new Part(type, unitname, decs, category, typCat);</span>
+<span class="nc" id="L33">        PartMapper pm = new PartMapper();</span>
+<span class="nc" id="L34">        catList.add(part);</span>
+<span class="nc" id="L35">        session.setAttribute(&quot;catList&quot;, catList);</span>
+<span class="nc" id="L36">        pm.addPart(part);</span>
+<span class="nc" id="L37">        RequestDispatcher rd = request.getRequestDispatcher(&quot;typeCat.jsp&quot;);</span>
+<span class="nc" id="L38">        rd.forward(request, response);</span>
+        
+
+<span class="nc" id="L41">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

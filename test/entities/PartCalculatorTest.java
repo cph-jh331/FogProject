@@ -101,7 +101,7 @@ public class PartCalculatorTest {
         System.out.println("numbRightMounts");
         int numbRafters = 10;
         PartCalculator instance = new PartCalculator();
-        int expResult = 20;
+        int expResult = 10;
         int result = instance.numbRightMounts(numbRafters);
         assertEquals(expResult, result);
     }
@@ -115,7 +115,7 @@ public class PartCalculatorTest {
         System.out.println("numbLeftMounts");
         int numbRafters = 10;
         PartCalculator instance = new PartCalculator();
-        int expResult = 20;
+        int expResult = 10;
         int result = instance.numbLeftMounts(numbRafters);
         assertEquals(expResult, result);
     }
