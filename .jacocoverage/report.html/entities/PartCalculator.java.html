@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="da"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PartCalculator.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;FogProject&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">entities</a> &gt; <span class="el_source">PartCalculator.java</span></div><h1>PartCalculator.java</h1><pre class="source lang-java linenums">package entities;
+
+import fogInterfaces.PartCalculatorInterface;
+
+<span class="fc" id="L5">public class PartCalculator implements PartCalculatorInterface {</span>
+
+    //alle &quot;specielle&quot; tal, som ikke kommer ind 
+    //gennem et parameter burde nok være en
+    //attribut i klassen?
+    //With help of modolus we make sure that the number of poles are even.
+    @Override
+    public int numbPoles(int lengthOfCarport) {
+<span class="fc" id="L13">        double numbPoles = ((double) lengthOfCarport / 230) * 2;</span>
+
+<span class="pc bpc" id="L15" title="1 of 2 branches missed.">        if (numbPoles &lt; 4) {</span>
+<span class="nc" id="L16">            return 4;</span>
+        } else {
+<span class="pc bpc" id="L18" title="1 of 2 branches missed.">            if ((int) numbPoles % 2 != 0) {</span>
+<span class="nc" id="L19">                numbPoles++;</span>
+            }
+<span class="fc" id="L21">            return (int) numbPoles;</span>
+        }
+    }
+
+    //SKAL RETTES TIL:
+    @Override
+    public int numbSideRafter(int lengthOfCarport) {
+<span class="fc" id="L28">        return 2;</span>
+    }
+
+    @Override
+    public int lengthOfSideRafter(int lengthOfCarport) {
+<span class="fc" id="L33">        return lengthOfCarport;</span>
+    }
+
+    @Override
+    public int numbRafters(int lengthOfCarport) {
+<span class="fc" id="L38">        int numbRafters = 1 + (lengthOfCarport / 55);</span>
+<span class="fc" id="L39">        return numbRafters;</span>
+    }
+
+    @Override
+    public int numbRightMounts(int numbRafters) {
+<span class="fc" id="L44">        int numbRightMounts = numbRafters;</span>
+<span class="fc" id="L45">        return numbRightMounts;</span>
+    }
+
+    @Override
+    public int numbLeftMounts(int numbRafters) {
+<span class="fc" id="L50">        int numbLeftMounts = numbRafters;</span>
+<span class="fc" id="L51">        return numbLeftMounts;</span>
+    }
+
+    @Override
+    public int lengthOfPole(int heightOfCarport) {
+<span class="fc" id="L56">        int poleLength = heightOfCarport + 90;</span>
+<span class="fc" id="L57">        return poleLength;</span>
+    }
+
+    @Override
+    public int lengthOfRafter(int widthOfCarport) {
+<span class="fc" id="L62">        return widthOfCarport;</span>
+    }
+
+    @Override
+    public int numbOfMetalTapes(int lengthOfCarport, int widthOfCarport) {
+<span class="fc" id="L67">        double hul = Math.sqrt((Math.pow(lengthOfCarport - 55, 2)) + (Math.pow(widthOfCarport, 2)));</span>
+<span class="fc" id="L68">        double lengthOfTape = hul * 2;</span>
+
+        //920 is length minus 20 * 4 for backup in corners.
+<span class="pc bpc" id="L71" title="1 of 2 branches missed.">        if (lengthOfTape &lt; 920) {</span>
+<span class="nc" id="L72">            return 1;</span>
+<span class="pc bpc" id="L73" title="2 of 4 branches missed.">        } else if (lengthOfTape &gt;= 920 &amp;&amp; lengthOfTape &lt; 1920) {</span>
+<span class="fc" id="L74">            return 2;</span>
+        }
+<span class="nc" id="L76">        return 0;</span>
+    }
+
+    @Override
+    public int lengthUnderStern(int lengthOfCarport) {
+<span class="fc" id="L81">        return lengthOfCarport;</span>
+    }
+
+    @Override
+    public int numbOfLengthUnderStern(int lengthUnderStern) {
+<span class="fc" id="L86">        return 2;</span>
+    }
+
+    @Override
+    public int widthUnderStern(int widthOfCarport) {
+<span class="fc" id="L91">        return widthOfCarport;</span>
+    }
+
+    @Override
+    public int numbOfWidthUnderStern(int widthUnderStern) {
+<span class="fc" id="L96">        return 2;</span>
+    }
+
+    @Override
+    public int lengthOverStern(int lengthOfCarport) {
+<span class="fc" id="L101">        return lengthOfCarport;</span>
+    }
+
+    @Override
+    public int numbOfLengthOverStern(int lengthOverStern) {
+<span class="fc" id="L106">        return 2;</span>
+    }
+
+    @Override
+    public int widthOverStern(int widthOfCarport) {
+<span class="fc" id="L111">        return widthOfCarport;</span>
+    }
+
+    @Override
+    public int numbOfWidthOverStern(int widthOverStern) {
+<span class="fc" id="L116">        return 2;</span>
+    }
+
+    @Override
+    public int widthWaterBoard(int widthOfCarport) {
+<span class="fc" id="L121">        return widthOfCarport;</span>
+    }
+
+    @Override
+    public int numbWidthWaterBoard(int widthWaterBoard) {
+<span class="fc" id="L126">        return 1;</span>
+    }
+
+    @Override
+    public int lengthWaterBoard(int lengthOfCarport) {
+<span class="fc" id="L131">        return lengthOfCarport;</span>
+    }
+
+    @Override
+    public int numbLengthWaterBoard(int lengthWaterBoard) {
+<span class="fc" id="L136">        return 2;</span>
+    }
+
+    public int numbOfTrapezScrews(int lengthOfCarport, int widthOfCarport) {
+
+<span class="nc" id="L141">        int numbScrews = ((lengthOfCarport * widthOfCarport) / 100) * 12;</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">        if (numbScrews &lt; 200) {</span>
+<span class="nc" id="L143">            return 1;</span>
+<span class="nc bnc" id="L144" title="All 4 branches missed.">        } else if (numbScrews &gt;= 200 || numbScrews &lt; 400) {</span>
+
+<span class="nc" id="L146">            return 2;</span>
+        }
+<span class="nc" id="L148">        return 0;</span>
+    }
+
+    public int numbOfOverUnderScrews(int lengthOfCarport, int widthOfCarport) {
+<span class="nc" id="L152">        int numbScrews = ((lengthOfCarport * widthOfCarport) / 100);</span>
+<span class="nc bnc" id="L153" title="All 2 branches missed.">        if (numbScrews &lt; 40) {</span>
+<span class="nc" id="L154">            return 1;</span>
+        } else {
+<span class="nc" id="L156">            return 2;</span>
+        }
+    }
+
+    public int numbOfMountsScrews(int numbLeftMounts, int numbRafters) {
+<span class="nc" id="L161">        int numbMountScrews = (numbLeftMounts * 2 * numbRafters) * 9 + 100;</span>
+<span class="nc bnc" id="L162" title="All 2 branches missed.">        if (numbMountScrews &lt; 250) {</span>
+<span class="nc" id="L163">            return 1;</span>
+<span class="nc bnc" id="L164" title="All 4 branches missed.">        } else if (numbMountScrews &gt;= 250 || numbMountScrews &lt; 500) {</span>
+<span class="nc" id="L165">            return 2;</span>
+        } else {
+<span class="nc" id="L167">            return 3;</span>
+        }
+
+    }
+
+    public int numbOfRafterBolts(int numbPoles) {
+
+<span class="nc" id="L174">        return numbPoles;</span>
+    }
+
+    public int rafterBoltsExtra(int numbPoles) {
+<span class="nc" id="L178">        return numbPoles;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

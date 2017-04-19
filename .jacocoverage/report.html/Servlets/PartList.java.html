@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="da"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PartList.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;FogProject&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Servlets</a> &gt; <span class="el_source">PartList.java</span></div><h1>PartList.java</h1><pre class="source lang-java linenums">package Servlets;
+
+import entities.Part;
+import entities.PieceList;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+<span class="nc" id="L14">public class PartList {</span>
+
+    //prints out a list
+    public void seeList(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+            throws ServletException, IOException
+    {
+//        PieceList pl = new PieceList();
+//        HashMap&lt;Integer, Part&gt; woodMap;
+//        HashMap&lt;Integer, Part&gt; roofMap;
+//        HashMap&lt;Integer, Part&gt; miscMap;
+//
+//        int length = Integer.parseInt(request.getParameter(&quot;length&quot;));
+//        int width = Integer.parseInt(request.getParameter(&quot;width&quot;));
+//        int height = Integer.parseInt(request.getParameter(&quot;height&quot;));
+//        pl.updateParts(length, width, height);
+//        woodMap = pl.getWoodMap();
+//        roofMap = pl.getRoofMap();
+//        miscMap = pl.getMiscMap();
+//        session.setAttribute(&quot;woodMap&quot;, woodMap);
+//        session.setAttribute(&quot;roofMap&quot;, roofMap);
+//        session.setAttribute(&quot;miscMap&quot;, miscMap);
+//        RequestDispatcher rd = request.getRequestDispatcher(&quot;seelist.jsp&quot;);
+//        rd.forward(request, response);
+        
+<span class="nc" id="L38">        PieceList pl = new PieceList();</span>
+        List&lt;Part&gt; woodList;
+        List&lt;Part&gt; roofList;
+        List&lt;Part&gt; miscList;
+
+<span class="nc" id="L43">        int length = Integer.parseInt(request.getParameter(&quot;length&quot;));</span>
+<span class="nc" id="L44">        int width = Integer.parseInt(request.getParameter(&quot;width&quot;));</span>
+<span class="nc" id="L45">        int height = Integer.parseInt(request.getParameter(&quot;height&quot;));</span>
+<span class="nc" id="L46">        pl.updateParts(length, width, height);</span>
+<span class="nc" id="L47">        woodList = pl.getWoodList();</span>
+<span class="nc" id="L48">        roofList = pl.getRoofList();</span>
+<span class="nc" id="L49">        miscList = pl.getMiscList();</span>
+<span class="nc" id="L50">        session.setAttribute(&quot;woodMap&quot;, woodList);</span>
+<span class="nc" id="L51">        session.setAttribute(&quot;roofMap&quot;, roofList);</span>
+<span class="nc" id="L52">        session.setAttribute(&quot;miscMap&quot;, miscList);</span>
+<span class="nc" id="L53">        RequestDispatcher rd = request.getRequestDispatcher(&quot;seelist.jsp&quot;);</span>
+<span class="nc" id="L54">        rd.forward(request, response);</span>
+
+<span class="nc" id="L56">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>
