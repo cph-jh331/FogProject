@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="da"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PartMapper.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;FogProject&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">backend</a> &gt; <span class="el_source">PartMapper.java</span></div><h1>PartMapper.java</h1><pre class="source lang-java linenums">package backend;
+
+import entities.Part;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+<span class="nc" id="L14">public class PartMapper {</span>
+
+<span class="nc" id="L16">    private DBConnector dbc = new DBConnector();</span>
+<span class="nc" id="L17">    private Connection conn = dbc.connectDB();</span>
+
+    public void addPart(Part part)
+    {
+<span class="nc" id="L21">        String sql = &quot;insert into part (type, category, unitname, descript, typeCategory) values (?,?,?,?,?);&quot;;</span>
+
+        try
+        {
+<span class="nc" id="L25">            PreparedStatement preStmt = conn.prepareStatement(sql);</span>
+<span class="nc" id="L26">            preStmt.setString(1, part.getType());</span>
+<span class="nc" id="L27">            preStmt.setString(2, part.getCategory());</span>
+<span class="nc" id="L28">            preStmt.setString(3, part.getUnitName());</span>
+<span class="nc" id="L29">            preStmt.setString(4, part.getDescription());</span>
+<span class="nc" id="L30">            preStmt.setString(5, part.getTypeCategory());</span>
+<span class="nc" id="L31">            preStmt.executeUpdate();</span>
+
+<span class="nc" id="L33">        } catch (SQLException ex)</span>
+        {
+<span class="nc" id="L35">            Logger.getLogger(PartMapper.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L36">        }</span>
+<span class="nc" id="L37">    }</span>
+
+    public void removePart(Part part)
+    {
+<span class="nc" id="L41">        String sql = &quot;delete from part where partId = ?;&quot;;</span>
+
+        try
+        {
+<span class="nc" id="L45">            PreparedStatement preStmt = conn.prepareStatement(sql);</span>
+<span class="nc" id="L46">            preStmt.setInt(1, part.getPartId());</span>
+<span class="nc" id="L47">            preStmt.executeUpdate();</span>
+
+<span class="nc" id="L49">        } catch (SQLException ex)</span>
+        {
+<span class="nc" id="L51">            Logger.getLogger(PartMapper.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L52">        }</span>
+
+<span class="nc" id="L54">    }</span>
+    
+    public List&lt;Part&gt; getTypeCategory(String typeCategory)
+    {
+<span class="nc" id="L58">        List&lt;Part&gt; typeCatMap = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L59">        String sql = &quot;select * from part where typeCategory = ?;&quot;;</span>
+
+        try
+        {
+<span class="nc" id="L63">            PreparedStatement preStmt = conn.prepareStatement(sql);</span>
+            String type;
+            Integer length;
+            int packetSize;
+            String unitName;
+            String desc;
+            int partId;
+            String category;
+            String typeCat;
+<span class="nc" id="L72">            preStmt.setString(1, typeCategory);</span>
+
+<span class="nc" id="L74">            ResultSet rs = preStmt.executeQuery();</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">            while (rs.next())</span>
+            {
+<span class="nc" id="L77">                type = rs.getString(&quot;type&quot;);</span>
+<span class="nc" id="L78">                length = rs.getInt(&quot;length&quot;);</span>
+<span class="nc" id="L79">                packetSize = 0; //skal være 0 og ikke null i databasen.</span>
+<span class="nc" id="L80">                unitName = rs.getString(&quot;unitname&quot;);</span>
+<span class="nc" id="L81">                desc = rs.getString(&quot;descript&quot;);</span>
+<span class="nc" id="L82">                partId = rs.getInt(&quot;partId&quot;);</span>
+<span class="nc" id="L83">                category = rs.getString(&quot;category&quot;);</span>
+<span class="nc" id="L84">                typeCat = rs.getString(&quot;typeCategory&quot;);</span>
+<span class="nc" id="L85">                typeCatMap.add(new Part(type, length, 0, unitName, desc, partId, category, typeCat));</span>
+            }
+<span class="nc" id="L87">        } catch (SQLException ex)</span>
+        {
+<span class="nc" id="L89">            Logger.getLogger(PartMapper.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L90">        }</span>
+<span class="nc" id="L91">        return typeCatMap;</span>
+    }
+
+    public HashMap&lt;Integer, Part&gt; getWoodParts()
+    {
+<span class="nc" id="L96">        HashMap&lt;Integer, Part&gt; partMap = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L97">        String sql = &quot;select * from part where category = ?;&quot;;</span>
+
+        try
+        {
+<span class="nc" id="L101">            PreparedStatement preStmt = conn.prepareStatement(sql);</span>
+            String type;
+            Integer length;
+            int packetSize;
+            String unitName;
+            String desc;
+            int partId;
+            String category;
+            String typeCat;
+<span class="nc" id="L110">            preStmt.setString(1, &quot;træ&quot;);</span>
+
+<span class="nc" id="L112">            ResultSet rs = preStmt.executeQuery();</span>
+<span class="nc bnc" id="L113" title="All 2 branches missed.">            while (rs.next())</span>
+            {
+<span class="nc" id="L115">                type = rs.getString(&quot;type&quot;);</span>
+<span class="nc" id="L116">                length = rs.getInt(&quot;length&quot;);</span>
+<span class="nc" id="L117">                packetSize = 0; //skal være 0 og ikke null i databasen.</span>
+<span class="nc" id="L118">                unitName = rs.getString(&quot;unitname&quot;);</span>
+<span class="nc" id="L119">                desc = rs.getString(&quot;descript&quot;);</span>
+<span class="nc" id="L120">                partId = rs.getInt(&quot;partId&quot;);</span>
+<span class="nc" id="L121">                category = rs.getString(&quot;category&quot;);</span>
+<span class="nc" id="L122">                 typeCat = rs.getString(&quot;typeCategory&quot;);</span>
+<span class="nc" id="L123">                partMap.put(partId, new Part(type, length, 0, unitName, desc, partId, category, typeCat));</span>
+            }
+<span class="nc" id="L125">        } catch (SQLException ex)</span>
+        {
+<span class="nc" id="L127">            Logger.getLogger(PartMapper.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L128">        }</span>
+<span class="nc" id="L129">        return partMap;</span>
+    }
+
+    public HashMap&lt;Integer, Part&gt; getRoofParts()
+    {
+<span class="nc" id="L134">        HashMap&lt;Integer, Part&gt; partMap = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L135">        String sql = &quot;select * from part where category = ?;&quot;;</span>
+
+        try
+        {
+<span class="nc" id="L139">            PreparedStatement preStmt = conn.prepareStatement(sql);</span>
+            String type;
+            Integer length;
+            int packetSize;
+            String unitName;
+            String desc;
+            int partId;
+            String category;
+            String typeCat;
+<span class="nc" id="L148">            preStmt.setString(1, &quot;tag&quot;);</span>
+
+<span class="nc" id="L150">            ResultSet rs = preStmt.executeQuery();</span>
+<span class="nc bnc" id="L151" title="All 2 branches missed.">            while (rs.next())</span>
+            {
+<span class="nc" id="L153">                type = rs.getString(&quot;type&quot;);</span>
+<span class="nc" id="L154">                length = rs.getInt(&quot;length&quot;);</span>
+<span class="nc" id="L155">                packetSize = 0; //skal være 0 og ikke null i databasen.</span>
+<span class="nc" id="L156">                unitName = rs.getString(&quot;unitname&quot;);</span>
+<span class="nc" id="L157">                desc = rs.getString(&quot;descript&quot;);</span>
+<span class="nc" id="L158">                partId = rs.getInt(&quot;partId&quot;);</span>
+<span class="nc" id="L159">                category = rs.getString(&quot;category&quot;);</span>
+<span class="nc" id="L160">                typeCat = rs.getString(&quot;typeCategory&quot;);</span>
+<span class="nc" id="L161">                partMap.put(partId, new Part(type, length, 0, unitName, desc, partId, category, typeCat));</span>
+            }
+<span class="nc" id="L163">        } catch (SQLException ex)</span>
+        {
+<span class="nc" id="L165">            Logger.getLogger(PartMapper.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L166">        }</span>
+<span class="nc" id="L167">        return partMap;</span>
+
+    }
+
+    public HashMap&lt;Integer, Part&gt; getMiscParts()
+    {
+<span class="nc" id="L173">        HashMap&lt;Integer, Part&gt; partMap = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L174">        String sql = &quot;select * from part where category = ?;&quot;;</span>
+
+        try
+        {
+<span class="nc" id="L178">            PreparedStatement preStmt = conn.prepareStatement(sql);</span>
+            String type;
+            Integer length;
+            int packetSize;
+            String unitName;
+            String desc;
+            int partId;
+            String category;
+            String typeCat;
+<span class="nc" id="L187">            preStmt.setString(1, &quot;løsdele&quot;);</span>
+
+<span class="nc" id="L189">            ResultSet rs = preStmt.executeQuery();</span>
+<span class="nc bnc" id="L190" title="All 2 branches missed.">            while (rs.next())</span>
+            {
+<span class="nc" id="L192">                type = rs.getString(&quot;type&quot;);</span>
+<span class="nc" id="L193">                length = rs.getInt(&quot;length&quot;);</span>
+<span class="nc" id="L194">                packetSize = 0; //skal være 0 og ikke null i databasen.</span>
+<span class="nc" id="L195">                unitName = rs.getString(&quot;unitname&quot;);</span>
+<span class="nc" id="L196">                desc = rs.getString(&quot;descript&quot;);</span>
+<span class="nc" id="L197">                partId = rs.getInt(&quot;partId&quot;);</span>
+<span class="nc" id="L198">                category = rs.getString(&quot;category&quot;);</span>
+<span class="nc" id="L199">                typeCat = rs.getString(&quot;typeCategory&quot;);</span>
+<span class="nc" id="L200">                partMap.put(partId, new Part(type, length, 0, unitName, desc, partId, category, typeCat));</span>
+            }
+<span class="nc" id="L202">        } catch (SQLException ex)</span>
+        {
+<span class="nc" id="L204">            Logger.getLogger(PartMapper.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L205">        }</span>
+<span class="nc" id="L206">        return partMap;</span>
+
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>
