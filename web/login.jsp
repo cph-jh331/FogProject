@@ -18,7 +18,7 @@
         <% User user = (User) session.getAttribute("user");%>
         <div class="container">
             <div class="form-group">
-                <form action="controllerServlet" method="post">
+                <form action="ControllerServlet" method="post">
                     <input type="hidden" name="action" value="login"/>
                     <input type="text" name="email" value="" placeholder="username" required/>
                     <input type="password" name="password" value="" placeholder="password"  required>
