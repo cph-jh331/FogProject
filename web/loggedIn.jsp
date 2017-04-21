@@ -70,18 +70,17 @@
                     <h2> Tilføj og fjern materialer:</h2>
                     <select class="btn btn-danger dropdown-toggle, col-lg-10" name="TypeCategory">
                         <li class="dropdown-header">Type</li>
-                        <li><option class="form-control" value="Tag">Tag</option></li>
-                        <option class="form-control" value="Understern">Understern</option>                    
-                        <option class="form-control" value="Overstern">Overstern</option>                    
-                        <option class="form-control"  value="Skur">Skur</option>                    
                         <option class="form-control" value="Bolt/møtrik">Bolt/Møtrik</option>                    
-                        <option class="form-control" value="Skruer">Skruer</option>                    
-                        <option class="form-control" value="Hulbånd">Hulbånd</option>                    
-                        <option class="form-control" value="Vandbræt">Vandbræt</option>                    
+                        <option class="form-control" value="Hulbånd">Hulbånd</option>
+                        <option class="form-control" value="Overstern">Overstern</option>                    
+                        <option class="form-control" value="Rem">Rem</option>                    
+                        <option class="form-control"  value="Skur">Skur</option>                    
+                        <option class="form-control" value="Skruer">Skruer</option>                                            
                         <option class="form-control" value="Stolpe">Stolpe</option>                    
                         <option class="form-control" value="Spær">Spær</option>                    
-                        <option class="form-control" value="Rem">Rem</option>                    
-                        <option class="form-control" value="Hulbånd">Hulbånd</option>
+                        <option class="form-control" value="Tag">Tag</option>
+                        <option class="form-control" value="Understern">Understern</option>                    
+                        <option class="form-control" value="Vandbræt">Vandbræt</option>                    
                         </ul>                    
                     </select>
                     <input class="btn btn-group-lg" type="submit" value="vælg">
