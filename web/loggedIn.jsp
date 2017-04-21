@@ -67,11 +67,11 @@
 
                     <input type="hidden" name="action" value="seeTypeCategory"/>
 
-                    <h2 id="sortTing"> Tilføj og fjern materialer:</h2>
-                    <select class="btn btn-danger dropdown-toggle" name="TypeCategory">
+                    <h2> Tilføj og fjern materialer:</h2>
+                    <select class="btn btn-danger dropdown-toggle, col-lg-10" name="TypeCategory">
                         <li class="dropdown-header">Type</li>
                         <li><option class="form-control" value="Tag">Tag</option></li>
-                        <option class="dropdown-item" type="button" value="Understern">Understern</option>                    
+                        <option class="form-control" value="Understern">Understern</option>                    
                         <option class="form-control" value="Overstern">Overstern</option>                    
                         <option class="form-control"  value="Skur">Skur</option>                    
                         <option class="form-control" value="Bolt/møtrik">Bolt/Møtrik</option>                    
@@ -84,7 +84,7 @@
                         <option class="form-control" value="Hulbånd">Hulbånd</option>
                         </ul>                    
                     </select>
-                    <input type="submit" value="vælg">
+                    <input class="btn btn-group-lg" type="submit" value="vælg">
 
 
                 </form>
