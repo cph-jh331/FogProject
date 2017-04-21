@@ -22,20 +22,19 @@ import javax.servlet.http.HttpSession;
 public class AddToDatabase {
     public void addTo(HttpServletRequest request, HttpServletResponse response, HttpSession session)
             throws ServletException, IOException {
-        String type = request.getParameter("Type");
-        String category = request.getParameter("Kategori");
-        String unitname = request.getParameter("Pakketype");
-        String decs = request.getParameter("Beskrivelse");
-        List<Part> catList = (List<Part>) session.getAttribute("catList");
-        String typCat = catList.get(0).getTypeCategory();
-        
-        Part part = new Part(type, unitname, decs, category, typCat);
-        PartMapper pm = new PartMapper();
-        catList.add(part);
-        session.setAttribute("catList", catList);
-        pm.addPart(part);
-        RequestDispatcher rd = request.getRequestDispatcher("typeCat.jsp");
-        rd.forward(request, response);
+        String type = request.getParameter("Type"); //er navnet
+        String category = (String) session.getAttribute("category"); //er kategorien, fx træ
+        String unitname = request.getParameter("Pakketype"); // er pakketypen, fx stk
+        String decs = request.getParameter("Beskrivelse"); // er beskrivelse
+        List<Part> catList = (List<Part>) session.getAttribute("catList"); //vi henter listen
+        String typCat = catList.get(0).getTypeCategory(); //vi tager typekategorien, fx skruer.
+        Part part = new Part(type, unitname, decs, category, typCat); //vi laver en ny part
+        PartMapper pm = new PartMapper(); // vi laver en instans af partmapper.
+        pm.addPart(part); // vi adder part til databasen.
+        catList = pm.getTypeCategory(typCat); // vi henter listen fra databasen med typekategorien..
+        session.setAttribute("catList", catList); // vi sætter listen på sessionen.
+        RequestDispatcher rd = request.getRequestDispatcher("typeCat.jsp"); // vi gør klar til at sende personen videre til typeCat.jsp.
+        rd.forward(request, response); // vi sender personen videre til typeCat.jsp.
         
 
     }

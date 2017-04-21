@@ -9,8 +9,8 @@ and open the template in the editor.
 */
 
 
-  
-    
+
+
 /* Full-width input fields */
 input[type=text], input[type=password] {
     width: 100%;
@@ -95,7 +95,7 @@ button {
 /* Change styles for cancel button and signup button on extra small screens */
 @media screen and (max-width: 300px) {
     .cancelbtn, .signupbtn {
-       width: 100%;
+        width: 100%;
     }
 }
 
@@ -108,23 +108,44 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    
+
 }
 
 h1 {
     color: white;
     font-family: 'Roboto', sans-serif;
     font-weight: bolder;
-    
-    
+    text-shadow: 2px 2px 1px #000000;     
 }
 h2 {
     color: white;
-    font-family: 'Droid Serif', serif;
+    font-family: 'Droid Serif', serif;    
+}
+
+#makeLink{
+    background: rgba(0, 70,135,1);
+    border: 0px;
+}
+
+#makeLink:hover{
+    color: white;
+    background: white;
+}
+
+
+#makeLink2{
+
+    background: rgba(0, 70,135,1);   
+
+}
+
+#undertitle{
+    color: white;
+    text-shadow: 2px 2px 1px #000000;
 }
 
 #test {
-    
+
     background-color: darkblue;
 }
 
@@ -169,4 +190,13 @@ h2 {
 #navbar-color.navbar-default .navbar-toggle:hover .icon-bar,
 #navbar-color.navbar-default .navbar-toggle:focus .icon-bar {
     background-color: #ffffff; 
+}
+
+.jumbotron{
+    background: rgba(0, 70, 135, 1);
+}
+
+
+#loginbox {
+    background: transparent;
 }

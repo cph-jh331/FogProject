@@ -15,18 +15,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class typeCat {
+/**
+ *
+ * @author bloch
+ */
+public class RemoveFromDatabase {
 
-    public void typeCate(HttpServletRequest request, HttpServletResponse response, HttpSession session)
-            throws ServletException, IOException
+    public void removePart(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException
     {
-        String type = request.getParameter("TypeCategory");
+        int removeId = Integer.parseInt(request.getParameter("removeItem"));
+        String type = (String) session.getAttribute("type");
         session.setAttribute("type", type);
-        List<Part> typeCategory;
         PartMapper pm = new PartMapper();
-        typeCategory = pm.getTypeCategory(type);
-        String category = typeCategory.get(0).getCategory();
-        session.setAttribute("category", category);
+        pm.removePart(removeId);
+        List<Part> typeCategory = pm.getTypeCategory(type);
         session.setAttribute("catList", typeCategory);
         RequestDispatcher rd = request.getRequestDispatcher("typeCat.jsp");
         rd.forward(request, response);

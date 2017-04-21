@@ -39,51 +39,54 @@ public class ControllerServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         
-        HttpSession session = request.getSession();
+         HttpSession session = request.getSession();
         String action = request.getParameter("action");
         User user = (User) session.getAttribute("user");
-        Part part = (Part) session.getAttribute("part");
-        PartMapper pm = new PartMapper();
-        List<Part> typeCat;
-        String type = "" ;
-        //typeCat = pm.getTypeCategory(type);
-
+        
+        
         if (action.equals("login"))
         {
             Login login = new Login();
             login.checkLogin(request, response, user, session);
             return;
         }
-
+        
         if (user != null && action.equals(""))
         {
             RequestDispatcher rd = request.getRequestDispatcher("loggedIn.jsp");
             rd.forward(request, response);
             return;
         }
-
+        
         if (user == null)
         {
             RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
             rd.forward(request, response);
             return;
         }
-
+        
         if (action.equals("seelist"))
         {
             PartList partList = new PartList();
             partList.seeList(request, response, session);
             return;
         }
-        if(action.equals("seeTypeCategory")){
+        if (action.equals("seeTypeCategory"))
+        {
             typeCat tcat = new typeCat();
             tcat.typeCate(request, response, session);
             return;
-           
         }
-        if(action.equals("addToDatabase")){
+        if (action.equals("addToDatabase"))
+        {
             AddToDatabase adb = new AddToDatabase();
             adb.addTo(request, response, session);
+            return;
+        }
+        if (action.equals("removeFromDatabase"))
+        {
+            RemoveFromDatabase rfd = new RemoveFromDatabase();
+            rfd.removePart(request, response, session);
             return;
         }
 
