@@ -43,7 +43,15 @@ and open the template in the editor.
                     <!-- Setup of the right side of nav-bar 2 different links for now. No href yet missing pages -->
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="SignUp.jsp"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
-                        <li><a href="login.jsp"><span class="glyphicon glyphicon-login"></span>Login</a></li>
+                        <li id="makeLink" class="list-group-item">
+                            <div id="makeLink2" class="input-group">
+                                <form action="controllerServlet" method="post">
+                                    <input type="hidden" name="action" value=""/>
+                                    <input class="btn btn-danger" type="submit" name="Login" value="Login"/>
+                                </form>
+                            </div>
+                        </li>
+                        <!--<li><a href="login.jsp"><span class="glyphicon glyphicon-login"></span>Login</a></li>-->
                     </ul>
                 </div>
             </div>
@@ -70,11 +78,16 @@ and open the template in the editor.
             <br>
             <br>
             <br>
+            <br>
+            <br>
 
 
-            <h2 class="text-center">Her kan du bygge din egen carport, som du vil have den</h2>
+            <h2 id="undertitle" class="text-center">Her kan du bygge din egen carport, som du vil have den
+                <br>
+                Er du ikke bruger, så klik på signup og kom i gang med at bygge efter kun få kliks
+            </h2>
 
-            <h2 class="text-center">Er du ikke bruger, så klik på signup og kom i gang med at bygge efter kun få kliks</h2>
+            
 
 
 

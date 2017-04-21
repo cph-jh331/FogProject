@@ -15,6 +15,21 @@ public class PartMapper {
 
     private DBConnector dbc = new DBConnector();
     private Connection conn = dbc.connectDB();
+    
+        public void removePart(int PartId)
+    {
+        String sql = "delete from part where partId = ?;";
+        try
+        {
+            PreparedStatement preStmt = conn.prepareStatement(sql);
+            preStmt.setInt(1, PartId);
+            preStmt.executeUpdate();
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(PartMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 
     public void addPart(Part part)
     {

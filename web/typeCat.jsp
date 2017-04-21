@@ -16,9 +16,11 @@
         <title>Stykliste</title>
     </head>
     <body>
+        <%String type = (String) session.getAttribute("type");%>
+        <%String category = (String) session.getAttribute("category");%>
         <div class="container">
             <table class="table table-bordered">
-                <h1>Det her er type category siden!</h1>
+                <h1>Det her er <%=type%>!</h1>
                 <thead>
                 <th>Type</th>
                 <th>Kategori</th>
@@ -27,9 +29,9 @@
                 <th>Pakke Type</th>
                 <th>Beskrivelse</th>
                 </thead>
-                <%String type = (String) session.getAttribute("type");%>
                 <% List<Part> catList = (List<Part>) session.getAttribute("catList");%>
-                <% for (Part part : catList) {
+                <% for (Part part : catList)
+                    {
                 %>
                 <tr>
                     <td>
@@ -50,6 +52,15 @@
                     <td>
                         <%=part.getDescription()%>
                     </td>
+                    <td>
+
+                        <form action="controllerServlet" method="post">
+                            <input type="hidden" name="action" value="removeFromDatabase"/>
+                            <input type="hidden" name="removeItem" value="<%=part.getPartId()%>"/>
+                            <input class="btn btn-danger" type="submit" value="Fjern"/>
+                        </form>
+
+                    </td>
                 </tr>
                 <%
                     }
@@ -58,10 +69,10 @@
                     <input type="hidden" name="action" value="addToDatabase" />
                     <tr>
                         <td>
-                            <input class="form-control" type="text" name="Type"  placeholder="Type"/>
+                            <input class="form-control" type="text" name="Type"  placeholder="Type" required/>
                         </td>
                         <td>
-                            <input class="form-control" type="text" name="Kategori" value="<%=type%>" placeholder="Kategori" disabled/>
+                            <input class="form-control" type="text" name="Kategori" value="<%=category%>" placeholder="Kategori" disabled/>
                         </td>
                         <td>
                             <input class="form-control" type="text" name="Længde" placeholder="Længde" disabled/>
@@ -70,24 +81,18 @@
                             <input class="form-control" type="text" name="Antal" placeholder="Antal" disabled/>
                         </td>
                         <td>
-                            <input class="form-control" type="text" name="Pakketype" placeholder="Pakke Type" />
+                            <input class="form-control" type="text" name="Pakketype" placeholder="Pakke Type" required/>
                         </td>
                         <td>
-                            <input class="form-control" type="text" name="Beskrivelse" placeholder="Beskrivelse"/>
+                            <input class="form-control" type="text" name="Beskrivelse" placeholder="Beskrivelse" required/>
                         </td>
-
+                        <td>
+                            <input type="submit" value="Tilføj" class="btn btn-success"/>                            
+                        </td>
                     </tr>
-
                     </tbody>
             </table>
-            <input type="submit" value="Tilføj" class="btn btn-success"/>
-
-
         </form>
     </div>
-
-    <p id="demo">JavaScript can change HTML content.</p>
-
-    <button type="button" onclick='document.getElementById("demo").innerHTML = "Hello JavaScript!"'>Click Me!</button>
 </body>
 </html>
