@@ -46,8 +46,8 @@
                     <!-- Setup of the right side of nav-bar 2 different links for now. No href yet missing pages -->
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#"><span class="glyphicon glyphicon-user"></span><%= user.getUserName()%></a></li>
-                        
-                            
+
+
                         </li>
                         <!--<li><a href="login.jsp"><span class="glyphicon glyphicon-login"></span>Login</a></li>-->
                     </ul>
@@ -90,7 +90,7 @@
                 </form>
             </div>
             <div class="jumbotron">
-                <h2> Lav en stykliste med standard part</h2>
+                <h2> Lav en stykliste til en carport med mål</h2>
                 <form action="controllerServlet" method="post">
                     <input type="hidden" name="action" value="seelist">
                     <input type="number" name="length" value="" placeholder="Længde" required  />
