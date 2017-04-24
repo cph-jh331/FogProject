@@ -11,6 +11,16 @@ package logic;
  */
 public class LogicCtrl {
 
+    public boolean canParseString(String string)
+    {
+        try
+        {
+            Integer.parseInt(string);
+        } catch (Exception illegalFormatException)
+        {
+            return false;
+        }
+        return true;
+    }
+
 }
-
-
