@@ -22,6 +22,12 @@ public class testmain {
 //        pl.updateParts(500, 500, 300);
         //pl.getMap();
         
+        LogicCtrl ctrl = new LogicCtrl();
+        
+        Integer.parseInt("skdljf");
+        
+        System.out.println(ctrl.canParseString("kjshdf"));
+        
     }
     
 }

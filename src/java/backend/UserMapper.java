@@ -33,11 +33,9 @@ public class UserMapper {
             if (rs.next()) {
                 int id = rs.getInt("userID");
                 String mail = rs.getString("email");
-                String name = rs.getString("userName");
-                
-                
+                String name = rs.getString("userName");         
 
-                return new User(id, email, name);
+                return new User(id, mail, name);
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserMapper.class.getName()).log(Level.SEVERE, null, ex);
