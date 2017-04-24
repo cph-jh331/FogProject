@@ -1,6 +1,6 @@
 package backend;
 
-import entities.Part;
+import logic.Part;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

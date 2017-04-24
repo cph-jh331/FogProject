@@ -4,7 +4,7 @@
     Author     : Pva
 --%>
 
-<%@page import="entities.User"%>
+<%@page import="logic.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -60,9 +60,6 @@
             <h1>Hello World!<%= user.getUserName()%> </h1>
 
             <div class="jumbotron">
-
-
-
                 <form action="controllerServlet" method="post">
 
                     <input type="hidden" name="action" value="seeTypeCategory"/>

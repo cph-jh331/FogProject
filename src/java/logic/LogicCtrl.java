@@ -7,8 +7,10 @@ package logic;
 
 /**
  *
- * @author Pva
+ * @author bloch
  */
-public class Admin {
-    
+public class LogicCtrl {
+
 }
+
+

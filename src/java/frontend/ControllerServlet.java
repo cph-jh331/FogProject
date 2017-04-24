@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servlets;
+package frontend;
 
+import backend.DataCtrl;
 import backend.PartMapper;
-import entities.Part;
-import entities.User;
+import logic.Part;
+import logic.User;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -38,55 +39,100 @@ public class ControllerServlet extends HttpServlet {
     {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        
-         HttpSession session = request.getSession();
+
+        HttpSession session = request.getSession();
         String action = request.getParameter("action");
         User user = (User) session.getAttribute("user");
-        
-        
+        DataCtrl dataCtrl = new DataCtrl();
+
         if (action.equals("login"))
         {
             Login login = new Login();
-            login.checkLogin(request, response, user, session);
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+            user = login.checkLogin(email, password, dataCtrl);
+            if (user == null)
+            {
+                session.invalidate();
+                RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+                rd.forward(request, response);
+            } else
+            {
+                session.setAttribute("user", user);
+                RequestDispatcher rd = request.getRequestDispatcher("loggedIn.jsp");
+                rd.forward(request, response);
+            }
             return;
         }
-        
+
         if (user != null && action.equals(""))
         {
             RequestDispatcher rd = request.getRequestDispatcher("loggedIn.jsp");
             rd.forward(request, response);
             return;
         }
-        
+
         if (user == null)
         {
             RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
             rd.forward(request, response);
             return;
         }
-        
+
         if (action.equals("seelist"))
         {
             PartList partList = new PartList();
-            partList.seeList(request, response, session);
+            String length = request.getParameter("length");
+            String width = request.getParameter("width");
+            String height = request.getParameter("height");
+            partList.parseMeasure(length, width, height);
+            partList.updateParts();
+            session.setAttribute("woodMap", partList.getWoodList());
+            session.setAttribute("roofMap", partList.getRoofList());
+            session.setAttribute("miscMap", partList.getMiscList());
+            RequestDispatcher rd = request.getRequestDispatcher("seelist.jsp");
+            rd.forward(request, response);
             return;
         }
         if (action.equals("seeTypeCategory"))
         {
             typeCat tcat = new typeCat();
-            tcat.typeCate(request, response, session);
+            String type = request.getParameter("TypeCategory");
+            session.setAttribute("type", type);
+            List<Part> typeCategory = tcat.typeCat(type, dataCtrl);
+            String category = typeCategory.get(0).getCategory();
+            session.setAttribute("category", category);
+            session.setAttribute("catList", typeCategory);
+            RequestDispatcher rd = request.getRequestDispatcher("typeCat.jsp");
+            rd.forward(request, response);
             return;
         }
         if (action.equals("addToDatabase"))
         {
             AddToDatabase adb = new AddToDatabase();
-            adb.addTo(request, response, session);
+            String type = request.getParameter("Type");
+            String category = (String) session.getAttribute("category");
+            String unitType = request.getParameter("Pakketype");
+            String desc = request.getParameter("Beskrivelse");
+            List<Part> catList = (List<Part>) session.getAttribute("catList");
+            catList = adb.addTo(type, category, unitType, desc, catList, dataCtrl);
+            session.setAttribute("catList", catList);
+            RequestDispatcher rd = request.getRequestDispatcher("typeCat.jsp");
+            rd.forward(request, response);
             return;
         }
         if (action.equals("removeFromDatabase"))
         {
             RemoveFromDatabase rfd = new RemoveFromDatabase();
-            rfd.removePart(request, response, session);
+            String removeId = request.getParameter("removeItem");
+            String type = (String) session.getAttribute("type");
+            session.setAttribute("type", type);
+            rfd.parseId(removeId);
+            List<Part> typeCategory = rfd.removePart(type, dataCtrl);
+            session.setAttribute("catList", typeCategory);
+            RequestDispatcher rd = request.getRequestDispatcher("typeCat.jsp");
+            rd.forward(request, response);
+
             return;
         }
 

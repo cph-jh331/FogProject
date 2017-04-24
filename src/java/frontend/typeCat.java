@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servlets;
+package frontend;
 
-import backend.PartMapper;
-import entities.Part;
+import backend.DataCtrl;
+import logic.Part;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -17,20 +17,24 @@ import javax.servlet.http.HttpSession;
 
 public class typeCat {
 
-    public void typeCate(HttpServletRequest request, HttpServletResponse response, HttpSession session)
-            throws ServletException, IOException
-    {
-        String type = request.getParameter("TypeCategory");
-        session.setAttribute("type", type);
-        List<Part> typeCategory;
-        PartMapper pm = new PartMapper();
-        typeCategory = pm.getTypeCategory(type);
-        String category = typeCategory.get(0).getCategory();
-        session.setAttribute("category", category);
-        session.setAttribute("catList", typeCategory);
-        RequestDispatcher rd = request.getRequestDispatcher("typeCat.jsp");
-        rd.forward(request, response);
-
+//    public void typeCate(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+//            throws ServletException, IOException
+//    {
+//        String type = request.getParameter("TypeCategory");
+//        session.setAttribute("type", type);
+//        List<Part> typeCategory;
+//        DataCtrl dataCtrl = new DataCtrl();
+//        typeCategory = dataCtrl.getTypeCategory(type);
+//        String category = typeCategory.get(0).getCategory();
+//        session.setAttribute("category", category);
+//        session.setAttribute("catList", typeCategory);
+//        RequestDispatcher rd = request.getRequestDispatcher("typeCat.jsp");
+//        rd.forward(request, response);
+//    }
+    
+    public List<Part> typeCat(String typecategory, DataCtrl dataCtrl){
+        List<Part> typeCategory = dataCtrl.getTypeCategory(typecategory);
+        return typeCategory;
     }
 
 }

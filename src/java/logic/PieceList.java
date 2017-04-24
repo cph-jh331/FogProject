@@ -1,5 +1,6 @@
-package entities;
+package logic;
 
+import backend.DataCtrl;
 import backend.PartMapper;
 import fogInterfaces.PieceListInterface;
 import java.util.ArrayList;
@@ -58,10 +59,10 @@ public class PieceList implements PieceListInterface {
     public void updateParts(int length, int width, int height)
     {
         PartCalculator calc = new PartCalculator();
-        PartMapper partMapper = new PartMapper();
-        woodMap = partMapper.getWoodParts();
-        roofMap = partMapper.getRoofParts();
-        miscMap = partMapper.getMiscParts();
+        DataCtrl dataCtrl = new DataCtrl();
+        woodMap = dataCtrl.getWoodMap();
+        roofMap = dataCtrl.getRoofMap();
+        miscMap = dataCtrl.getMiscMap();
         woodMap.get(1).setLengthAndPacketSize(calc.lengthUnderStern(length), calc.numbOfLengthUnderStern(length));
         woodMap.get(2).setLengthAndPacketSize(calc.widthUnderStern(width), calc.numbOfWidthUnderStern(width));
         woodMap.get(3).setLengthAndPacketSize(calc.lengthOverStern(length), calc.numbOfLengthOverStern(length));
@@ -77,8 +78,7 @@ public class PieceList implements PieceListInterface {
         miscMap.get(21).setPacketSize(calc.numbOfOverUnderScrews(length, width));
         miscMap.get(22).setPacketSize(calc.numbOfMountsScrews(miscMap.get(19).getPacketSize(), woodMap.get(10).getPacketSize()));
         miscMap.get(23).setPacketSize(calc.numbOfRafterBolts(woodMap.get(11).getPacketSize()));
-        miscMap.get(24).setPacketSize(calc.rafterBoltsExtra(woodMap.get(11).getPacketSize()));
-        
+        miscMap.get(24).setPacketSize(calc.rafterBoltsExtra(woodMap.get(11).getPacketSize()));        
         trapezRoof(length, width);
 
 //        int længdeAfStolpe = calc.lengthOfPole(height);
