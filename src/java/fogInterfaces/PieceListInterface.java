@@ -1,6 +1,6 @@
 package fogInterfaces;
 
-import entities.Part;
+import logic.Part;
 import java.util.Map;
 
 public interface PieceListInterface {

@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities;
+package logic;
 
 /**
  *
- * @author Pva
+ * @author bloch
  */
-public class Admin {
-    
+public class LogicCtrl {
+
 }
+
+

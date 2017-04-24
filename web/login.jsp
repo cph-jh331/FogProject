@@ -4,7 +4,7 @@
     Author     : Lasse, Per, Marco, John
 --%>
 
-<%@page import="entities.User"%>
+<%@page import="logic.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
