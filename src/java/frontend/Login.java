@@ -3,7 +3,9 @@ package frontend;
 import backend.DataCtrl;
 import backend.UserMapper;
 import logic.User;
+
 import java.io.IOException;
+import java.util.Hashtable;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -35,30 +37,18 @@ public class Login {
 //
 //    }
     
-    public void checkSignUp(HttpServletRequest request, HttpServletResponse response, Register r, HttpSession session)
-            throws ServletException, IOException {
-        UserMapper map = new UserMapper();
-        String firstname = request.getParameter("firstname");
-        String lastname = request.getParameter("lastname");
-        String adress = request.getParameter("adress");
-        String zip = request.getParameter("zip");
-        String city = request.getParameter("city");
-        String phone = request.getParameter("phone");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password1");
-        Hashtable>String = request.getParameterMap("errors");
-         
-        r = map.validate(firstname, lastname, adress, zip, city, phone, email, password, errors);
-        if(r==null){
-            session.invalidate();
-            RequestDispatcher rd = request.getRequestDispatcher("SignUp.jsp");
-            } else {
-                session.setAttribute("register", r);
-                RequestDispatcher rd = request.getRequestDispatcher("signedin.jsp");
-                rd.forward(request, response);
+    public boolean checkSignup(String firstname, String lastname, String adress, String zip, String city, String phone, String email, String password1, String password2, Hashtable errors, DataCtrl dataCtrl){
+        
+        boolean reg = dataCtrl.validate(firstname, lastname, adress, zip, city, phone, email, password1, password2, errors);
+        return reg;
+        
+       
             }
-                        
-    }
+         
+        
+        
+        
+            
     public User checkLogin(String email, String password, DataCtrl dataCtrl)
     {
         User user = dataCtrl.validateUser(email, password);

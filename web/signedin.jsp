@@ -4,7 +4,7 @@
     Author     : marcofrydshou1
 --%>
 
-<%@page import="entities.Register"%>
+<%@page import="logic.Register"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

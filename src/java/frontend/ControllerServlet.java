@@ -7,8 +7,10 @@ package frontend;
 
 import backend.DataCtrl;
 import backend.PartMapper;
+import backend.UserMapper;
 import logic.Part;
 import logic.User;
+import logic.Register;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -34,6 +36,48 @@ public class ControllerServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    public void checkSignUp(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        
+        UserMapper map = new UserMapper();
+
+        HttpSession ses = request.getSession();
+        String action2 = request.getParameter("action2");
+        Register r = (Register) ses.getAttribute("r");
+        DataCtrl dataCtrl = new DataCtrl();
+        
+        if(action2.equals("")){
+            
+          Login login = new Login();  
+        String firstname = request.getParameter("firstname");
+        String lastname = request.getParameter("lastname");
+        String adress = request.getParameter("adress");
+        String zip = request.getParameter("zip");
+        String city = request.getParameter("city");
+        String phone = request.getParameter("phone");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password1");
+        Hashtable>String = request.getParameterMap("errors");
+        r = login.checkSignup(firstname, lastname, adress, zip, city, phone, email, password, errors, dataCtrl);
+            
+        }
+       
+         
+        r = map.validate(firstname, lastname, adress, zip, city, phone, email, password, errors);
+        if(r==null){
+            ses.invalidate();
+            RequestDispatcher rd = request.getRequestDispatcher("SignUp.jsp");
+            } else {
+                ses.setAttribute("register", r);
+                RequestDispatcher rd = request.getRequestDispatcher("signedin.jsp");
+                rd.forward(request, response);
+            }
+                        
+    }
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {

@@ -1,9 +1,11 @@
 package backend;
 
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import logic.Part;
 import logic.User;
+import logic.Register;
 
 /**
  *
@@ -53,7 +55,10 @@ public class DataCtrl {
     {
         return userMap.validateUser(email, password);
     }
-
+     public boolean validate(String firstname, String lastname, String adress, String zip, String city, String phone, String email, String password1, String password2, Hashtable errors){
+         return userMap.validate(firstname, lastname, adress, zip, city, phone, email, password1, password2, errors);
+     }
+    
     public void addPart(Part part)
     {
         partMap.addPart(part);
