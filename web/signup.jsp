@@ -45,12 +45,16 @@
   <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
   <form class="modal-content animate" action="/action_page.php">
     <div class="container">
-      <label><b>Navn</b></label>
-      <input type="text" placeholder="Indtast Navn" name="Navn" required>
+      <label><b>Fornavn</b></label>
+      <input type="text" placeholder="Indtast Navn" name="Fornavn" required>
+      <label><b>Efternavn</b></label>
+      <input type="text" placeholder="Indtast Efternavn" name="Efternavn" required>
       <label><b>Adresse</b></label>
       <input type="text" placeholder="Indtast Adresse" name="Adresse" required>
-      <label><b>Postnummer og By</b></label>
-      <input type="text" placeholder="Indtast Postnummer og by" name="postnummer" required>
+      <label><b>Postnummer</b></label>
+      <input type="text" placeholder="Indtast Postnummer" name="Postnummer" required>
+      <label><b>By</b></label>
+      <input type="text" placeholder="Indtast By" name="By" required>
       <label><b>Tlf</b></label>
       <input type="text" placeholder="Indtast telefon" name="telefon" required>
         
