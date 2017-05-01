@@ -47,29 +47,29 @@ public class UserMapper {
         }
         return null;
     }
-    public boolean validate(String firstname, String lastname, String adress, String zip, String city, String phone, String email, String password1, String password2, Hashtable errors) {
-        boolean bool = true;
+    public Register validate(String firstname, String lastname, String adress, String zip, String city, String phone, String email, String password1, String password2, Hashtable errors) {
+       // boolean bool = true;
 
         if (firstname.equals("")) {
             errors.put("firstname", "indtast venligst fornavn");
 
             firstname = "";
-            bool = false;
+            //bool = false;
         }
         if (lastname.equals("")) {
             errors.put("lastname", "indtast venligst efternavn");
             lastname = "";
-            bool = false;
+           // bool = false;
         }
         if (adress.equals("")) {
             errors.put("adress", "indtast venligts adresse");
             adress = "";
-            bool = false;
+           // bool = false;
         }
         if (zip.equals("") || zip.length() != 4) {
             errors.put("zip", "indtast venligt postnummer");
             zip = "";
-            bool = false;
+           // bool = false;
         } else {
             
             try {
@@ -77,7 +77,7 @@ public class UserMapper {
             } catch (NumberFormatException e) {
                 errors.put("zip", "indtast venligst postnummer");
                 zip = "";
-                bool = false;
+              //  bool = false;
 
             }
         }
@@ -85,31 +85,31 @@ public class UserMapper {
         if (city.equals("")) {
             errors.put("city", "indtast venligst by");
             city = "";
-            bool = false;
+           // bool = false;
         }
         if (phone.equals("") || phone.length() != 8) {
             errors.put("phone", "indtast venligst tlfnummer");
             phone = "";
-            bool = false;
+           // bool = false;
 
         }
         if (email.equals("") || email.indexOf('@') == -1) {
             errors.put("email", "indtast venligst email");
             email = "";
-            bool = false;
+           // bool = false;
         }
         if (password1.equals("")) {
             errors.put("password1", "indtast venligst password");
             password1 = "";
-            bool = false;
+          //  bool = false;
         }
         if (!password1.equals("") && (password2.equals("") || !password1.equals(password2))) {
             errors.put("password2", "bekræft venligst password");
             password2 = "";
-            bool = false;
+          //  bool = false;
 
         }
-        return bool;
+        return null;
 
     }
 
@@ -133,6 +133,7 @@ public class UserMapper {
         conn = (Connection) DriverManager.getConnection("207.154.197.253");
 
         st = (Statement) conn.createStatement();
+        
         String table = "create table if not exists Registration (first_Name varchar(20), last_name varchar(20), adress varchar(20), "
                 + " zip_Code varchar(20), city varchar (20), phone varchar(20), email_Adress varchar(20), password  varchar(20)) ";
 
@@ -145,6 +146,7 @@ public class UserMapper {
         phone = r.getPhone();
         email = r.getEmail();
         password1 = r.getPassword1();
+        
         st.executeUpdate("insert into Registration(first_name, last_name, email, city, zip, password) values ('" + firstname + "','" + lastname + "', '" + adress + "','" + zip + "', '" + city + "', '" + phone + "', " + email + "', '" + password1 + "') ");
 
         System.out.println("Store into the database");

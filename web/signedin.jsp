@@ -9,7 +9,9 @@
 <!DOCTYPE html>
 <html>
     <% Register r = (Register) session.getAttribute("r");%>
+    
     <head>
+        
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -20,8 +22,10 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        
     </head>
     <body>
+        
         <h1>Signed in</h1>
     </body>
 </html>

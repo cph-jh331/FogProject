@@ -3,7 +3,8 @@
     Created on : 20-Apr-2017, 11:34:33
     Author     : marcofrydshou1
 --%>
-
+<%@page import="frontend.Login"%>
+<%@page import="logic.Register"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -43,8 +44,12 @@
 
 <div id="id01" class="modal">
   <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
-  <form class="modal-content animate" action="/action_page.php">
+  <form class="modal-content " action="/action_page.php">
+       
+      <% Register r = (Register) session.getAttribute("register");%>
     <div class="container">
+        <form action="controllerServlet" method="post">
+            
       <label><b>Fornavn</b></label>
       <input type="text" placeholder="Indtast Navn" name="Fornavn" required>
       <label><b>Efternavn</b></label>

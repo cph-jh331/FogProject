@@ -1,10 +1,6 @@
 package logic;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Hashtable;
-import org.jboss.logging.Logger;
 
+import java.util.Hashtable;
 public class Register {
 
     private String firstname, lastname, adress, zip, city, phone, email, password1, password2;
