@@ -18,7 +18,7 @@ public class PartMapper {
     
         public void removePart(int PartId)
     {
-        String sql = "delete from part where partId = ?;";
+        String sql = "delete from Part where partId = ?;";
         try
         {
             PreparedStatement preStmt = conn.prepareStatement(sql);
@@ -33,7 +33,7 @@ public class PartMapper {
 
     public void addPart(Part part)
     {
-        String sql = "insert into part (type, category, unitname, descript, typeCategory) values (?,?,?,?,?);";
+        String sql = "insert into Part (type, category, unitname, descript, typeCategory) values (?,?,?,?,?);";
 
         try
         {
@@ -53,7 +53,7 @@ public class PartMapper {
 
     public void removePart(Part part)
     {
-        String sql = "delete from part where partId = ?;";
+        String sql = "delete from Part where partId = ?;";
 
         try
         {
@@ -71,7 +71,7 @@ public class PartMapper {
     public List<Part> getTypeCategory(String typeCategory)
     {
         List<Part> typeCatMap = new ArrayList<>();
-        String sql = "select * from part where typeCategory = ?;";
+        String sql = "select * from Part where typeCategory = ?;";
 
         try
         {
@@ -89,13 +89,13 @@ public class PartMapper {
             ResultSet rs = preStmt.executeQuery();
             while (rs.next())
             {
+                partId = rs.getInt("partId");
                 type = rs.getString("type");
+                category = rs.getString("category");
                 length = rs.getInt("length");
                 packetSize = 0; //skal være 0 og ikke null i databasen.
-                unitName = rs.getString("unitname");
-                desc = rs.getString("descript");
-                partId = rs.getInt("partId");
-                category = rs.getString("category");
+                unitName = rs.getString("unitName");
+                desc = rs.getString("desc");
                 typeCat = rs.getString("typeCategory");
                 typeCatMap.add(new Part(type, length, 0, unitName, desc, partId, category, typeCat));
             }
@@ -109,7 +109,7 @@ public class PartMapper {
     public HashMap<Integer, Part> getWoodParts()
     {
         HashMap<Integer, Part> partMap = new HashMap<>();
-        String sql = "select * from part where category = ?;";
+        String sql = "select * from Part where category = ?;";
 
         try
         {
@@ -122,18 +122,18 @@ public class PartMapper {
             int partId;
             String category;
             String typeCat;
-            preStmt.setString(1, "træ");
+            preStmt.setString(1, "Træ");
 
             ResultSet rs = preStmt.executeQuery();
             while (rs.next())
             {
+                partId = rs.getInt("partId");
                 type = rs.getString("type");
+                category = rs.getString("category");
                 length = rs.getInt("length");
                 packetSize = 0; //skal være 0 og ikke null i databasen.
-                unitName = rs.getString("unitname");
-                desc = rs.getString("descript");
-                partId = rs.getInt("partId");
-                category = rs.getString("category");
+                unitName = rs.getString("unitName");
+                desc = rs.getString("desc");
                  typeCat = rs.getString("typeCategory");
                 partMap.put(partId, new Part(type, length, 0, unitName, desc, partId, category, typeCat));
             }
@@ -147,7 +147,7 @@ public class PartMapper {
     public HashMap<Integer, Part> getRoofParts()
     {
         HashMap<Integer, Part> partMap = new HashMap<>();
-        String sql = "select * from part where category = ?;";
+        String sql = "select * from Part where category = ?;";
 
         try
         {
@@ -165,13 +165,13 @@ public class PartMapper {
             ResultSet rs = preStmt.executeQuery();
             while (rs.next())
             {
+                partId = rs.getInt("partId");
                 type = rs.getString("type");
+                category = rs.getString("category");
                 length = rs.getInt("length");
                 packetSize = 0; //skal være 0 og ikke null i databasen.
-                unitName = rs.getString("unitname");
-                desc = rs.getString("descript");
-                partId = rs.getInt("partId");
-                category = rs.getString("category");
+                unitName = rs.getString("unitName");
+                desc = rs.getString("desc");
                 typeCat = rs.getString("typeCategory");
                 partMap.put(partId, new Part(type, length, 0, unitName, desc, partId, category, typeCat));
             }
@@ -186,7 +186,7 @@ public class PartMapper {
     public HashMap<Integer, Part> getMiscParts()
     {
         HashMap<Integer, Part> partMap = new HashMap<>();
-        String sql = "select * from part where category = ?;";
+        String sql = "select * from Part where category = ?;";
 
         try
         {
@@ -204,13 +204,13 @@ public class PartMapper {
             ResultSet rs = preStmt.executeQuery();
             while (rs.next())
             {
+                partId = rs.getInt("partId");
                 type = rs.getString("type");
+                category = rs.getString("category");
                 length = rs.getInt("length");
                 packetSize = 0; //skal være 0 og ikke null i databasen.
-                unitName = rs.getString("unitname");
-                desc = rs.getString("descript");
-                partId = rs.getInt("partId");
-                category = rs.getString("category");
+                unitName = rs.getString("unitName");
+                desc = rs.getString("desc");
                 typeCat = rs.getString("typeCategory");
                 partMap.put(partId, new Part(type, length, 0, unitName, desc, partId, category, typeCat));
             }

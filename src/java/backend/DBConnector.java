@@ -14,11 +14,11 @@ import java.sql.SQLException;
  * @author Lasse Andersen
  */
 public class DBConnector {
-    private final String ip = "207.154.197.253";
+    private final String ip = "207.154.193.223";
     private final int port = 3306;
-    private final String database = "FogProject";
-    private final String username = "fogtest";
-    private final String password = "Geden@Fisk123";
+    private final String database = "Fogshop";
+    private final String username = "fog";
+    private final String password = "Fog12345";
     private Connection conn = null;
 
     public Connection connectDB() {

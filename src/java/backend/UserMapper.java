@@ -20,6 +20,9 @@ import java.util.logging.Logger;
  *
  * @author bloch
  */
+
+
+//Sofar working as login to Employee at Fog with test@test.dk // 123.. need to split up to make 1 for Fog 1 for customer.
 public class UserMapper {
 
     private DBConnector dbc = new DBConnector();
@@ -28,7 +31,7 @@ public class UserMapper {
     Statement st;
     
     public User validateUser(String email, String pass) {
-        String sql = "select * from user where email = ? && password = ?;";
+        String sql = "select * from FogUser where empEmail = ? && password = ?;";
 
         try {
             PreparedStatement preStmt = conn.prepareStatement(sql);
@@ -36,9 +39,9 @@ public class UserMapper {
             preStmt.setString(2, pass);
             ResultSet rs = preStmt.executeQuery();
             if (rs.next()) {
-                int id = rs.getInt("userID");
-                String mail = rs.getString("email");
-                String name = rs.getString("userName");         
+                int id = rs.getInt("empId");
+                String mail = rs.getString("empEmail");
+                String name = rs.getString("empName");         
 
                 return new User(id, mail, name);
             }
@@ -47,6 +50,9 @@ public class UserMapper {
         }
         return null;
     }
+    
+    
+    //Making userRegistration.
     public Register validate(String firstname, String lastname, String adress, String zip, String city, String phone, String email, String password1, String password2, Hashtable errors) {
        // boolean bool = true;
 
@@ -122,6 +128,9 @@ public class UserMapper {
 
     public void insertData(String firstname, String lastname, String adress, String zip, String city, String phone, String email, String password1, String password2, Hashtable errors) throws SQLException {
 
+        String sql = "insert into Customer(userName, userLastname, userAddress, userZip, userCity, userPhone, userEmail, password)
+                + values (?,?,?,?,?,?,?,?);";
+        
         try {
             try{
             Class.forName("com.mysql.jdbc.Driver");
@@ -130,12 +139,15 @@ public class UserMapper {
             org.jboss.logging.Logger.getLogger(Register.class.getName()).log(org.jboss.logging.Logger.Level.FATAL, lastname);
         }
 
-        conn = (Connection) DriverManager.getConnection("207.154.197.253");
+        conn = (Connection) DriverManager.getConnection("207.154.193.223");
 
-        st = (Statement) conn.createStatement();
+        PreparedStatement prStmt = conn.prepareStatement(sql);
+                
+              
         
-        String table = "create table if not exists Registration (first_Name varchar(20), last_name varchar(20), adress varchar(20), "
-                + " zip_Code varchar(20), city varchar (20), phone varchar(20), email_Adress varchar(20), password  varchar(20)) ";
+//        String table = "create table if not exists Fogshop.Customer (first_Name varchar(20), last_name varchar(20), adress varchar(20), "
+//                + " zip_Code varchar(20), city varchar (20), phone varchar(20), email_Adress varchar(20), password  varchar(20)) ";
+        String table = null;
 
         st.executeUpdate(table);
         firstname = r.getFirstname();
@@ -147,7 +159,8 @@ public class UserMapper {
         email = r.getEmail();
         password1 = r.getPassword1();
         
-        st.executeUpdate("insert into Registration(first_name, last_name, email, city, zip, password) values ('" + firstname + "','" + lastname + "', '" + adress + "','" + zip + "', '" + city + "', '" + phone + "', " + email + "', '" + password1 + "') ");
+        st.executeUpdate("insert into Fogshop.Customer(userName, userLastname, userAddress, userZip, userCity, userPhone, userEmail, password)"
+                + "values ('" + firstname + "','" + lastname + "', '" + adress + "','" + zip + "', '" + city + "', '" + phone + "', " + email + "', '" + password1 + "') ");
 
         System.out.println("Store into the database");
     }
