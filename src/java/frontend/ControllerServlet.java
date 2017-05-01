@@ -6,7 +6,6 @@
 package frontend;
 
 import backend.DataCtrl;
-import backend.PartMapper;
 import backend.UserMapper;
 import logic.Part;
 import logic.User;
