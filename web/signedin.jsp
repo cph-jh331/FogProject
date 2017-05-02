@@ -11,8 +11,34 @@
     <% Register r = (Register) session.getAttribute("r");%>
     
     <head>
+        <style>
+            
+a:link, a:visited {
+    background-color: #21912c;
+    color: white;
+    padding: 16px 37px;
+    text-align: center;
+    text-decoration: chocolate;
+    display: inline-table;    
+}
+
+.wrapper {
+    text-align: center;
+}
+
+.button {
+    position: relative;
+    top: 50%;
+}
+
+
+a:hover, a:active {
+    background-color: greenyellow;
+}
+</style>
         
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="css/modalcss.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap-theme.min.css"> 
@@ -26,6 +52,35 @@
     </head>
     <body>
         
-        <h1>Du er nu oprettet som bruger!</h1>
+        <br>
+        <br>
+        <br>
+        
+        <h1 id="undertitle" class="text-center">Du er nu oprettet som bruger!</h1>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+      
+        <h2 id="undertitle" class="text-center"> Klik i venstre hjørne for at ansøge om byggetilladelse til din personlige carport</h2>
+        
+
+<a href="https://www.bygogmiljoe.dk" target="_blank">Klik her for byggetilladelse</a>
+    
     </body>
 </html>
