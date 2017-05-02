@@ -7,13 +7,8 @@ package frontend;
 
 import backend.DataCtrl;
 import logic.Part;
-import java.io.IOException;
 import java.util.List;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import logic.User;
 
 /**
  *
@@ -46,7 +41,13 @@ public class AddToDatabase {
         dataCtrl.addPart(part);
         catList = dataCtrl.getTypeCategory(typeCat);
         return catList;
-
     }
 
+    public boolean addUser(String email, String userName, String lastName, String address, String city, Integer zip, Integer phone, DataCtrl dataCtrl)   
+    {
+        User user = new User(email, userName, lastName, address, city, zip, phone);
+        dataCtrl.insertUser(user);
+        return true;
+                
+    }
 }
