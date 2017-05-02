@@ -37,17 +37,6 @@ public class Login {
 //
 //    }
     
-    public Register createUser(String firstname, String lastname, String adress, String zip, String city, String phone, String email, String password1, String password2, Hashtable errors, DataCtrl dataCtrl){
-        
-        Register reg = dataCtrl.validate(firstname, lastname, adress, zip, city, phone, email, password1, password2, errors);
-        return reg;
-        
-       
-            }
-         
-        
-        
-        
             
     public User checkLogin(String email, String password, DataCtrl dataCtrl)
     {

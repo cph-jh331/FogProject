@@ -55,10 +55,12 @@ public class DataCtrl {
     {
         return userMap.validateUser(email, password);
     }
-     public Register validate(String firstname, String lastname, String adress, String zip, String city, String phone, String email, String password1, String password2, Hashtable errors){
-         return userMap.validate(firstname, lastname, adress, zip, city, phone, email, password1, password2, errors);
+     
+     public void insertUser(User user){
+         userMap.insertUser(user);
      }
-    
+     
+     
     public void addPart(Part part)
     {
         partMap.addPart(part);
