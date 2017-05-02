@@ -14,6 +14,23 @@
         <meta charset="UTF-8">
     <link rel="stylesheet" href="css/modalcss.css">
     
+        
+        
+    
+    <style>
+    .sign {
+        background-color: #33e03c;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+    </style>
     </head>
     
     
@@ -40,7 +57,7 @@
     
 <h2>Sign up</h2>
 
-<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign Up</button>
+<button class="sign" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign Up</button>
 
 <div id="id01" class="modal">
   <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
