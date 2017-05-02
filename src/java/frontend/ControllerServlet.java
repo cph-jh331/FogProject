@@ -116,7 +116,7 @@ public class ControllerServlet extends HttpServlet {
         }else{
             
 
-          // r = login.createUser(firstname, lastname, adress, zip, city, phone, email, password1, password2, errors, dataCtrl);
+           r = login.createUser(firstname, lastname, adress, zip, city, phone, email, password1, password2, errors, dataCtrl);
     }
             
             

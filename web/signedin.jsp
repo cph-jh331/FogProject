@@ -26,6 +26,6 @@
     </head>
     <body>
         
-        <h1>Signed in</h1>
+        <h1>Du er nu oprettet som bruger!</h1>
     </body>
 </html>
