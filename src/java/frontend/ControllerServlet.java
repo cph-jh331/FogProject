@@ -5,14 +5,11 @@
  */
 package frontend;
 
-import backend.DataCtrl;
-import backend.PartMapper;
-import backend.UserMapper;
+
+
 import logic.Part;
 import logic.User;
-import logic.Register;
 import java.io.IOException;
-import java.util.Hashtable;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import logic.LogicCtrl;
 
 @WebServlet(name = "ControllerServlet", urlPatterns
         = {
@@ -37,130 +35,21 @@ public class ControllerServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    public void checkSignUp(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-
-        UserMapper map = new UserMapper();
-
-        HttpSession ses = request.getSession();
-        String action2 = request.getParameter("action2");
-        Register r = (Register) ses.getAttribute("r");
-        DataCtrl dataCtrl = new DataCtrl();
-
-        if (action2.equals("signup")) {
-
-            Login login = new Login();
-
-            String firstname = request.getParameter("firstname");
-            String lastname = request.getParameter("lastname");
-            String adress = request.getParameter("adress");
-            String zip = request.getParameter("zip");
-            String city = request.getParameter("city");
-            String phone = request.getParameter("phone");
-            String email = request.getParameter("email");
-            String password1 = request.getParameter("password1");
-            String password2 = request.getParameter("password2");
-            Hashtable errors = (Hashtable) request.getParameterMap();
-        
-
-        if (firstname.equals("")) {
-            errors.put("firstname", "indtast venligst fornavn");
-
-           
-        }
-        if (lastname.equals("")) {
-            errors.put("lastname", "indtast venligst efternavn");
-            
-        }
-        if (adress.equals("")) {
-            errors.put("adress", "indtast venligts adresse");
-            
-        }
-        if (zip.equals("") || zip.length() != 4) {
-            errors.put("zip", "indtast venligt postnummer");
-            
-        } else {
-            
-            try {
-                int x = Integer.parseInt(zip);
-            } catch (NumberFormatException e) {
-                errors.put("zip", "indtast venligst postnummer");
-                
-
-            }
-        }
-
-        if (city.equals("")) {
-            errors.put("city", "indtast venligst by");
-           
-        }
-        if (phone.equals("") || phone.length() != 8) {
-            errors.put("phone", "indtast venligst tlfnummer");
-            
-
-        }
-        if (email.equals("") || email.indexOf('@') == -1) {
-            errors.put("email", "indtast venligst email");
-            
-        }
-        if (password1.equals("")) {
-            errors.put("password1", "indtast venligst password");
-            
-        }
-        if (!password1.equals("") && (password2.equals("") || !password1.equals(password2))) {
-            errors.put("password2", "bekræft venligst password");
-           
-
-        }else{
-            
-
-           r = login.createUser(firstname, lastname, adress, zip, city, phone, email, password1, password2, errors, dataCtrl);
-    }
-            
-            
-           
-            if (r == null) {
-                ses.invalidate();
-                RequestDispatcher rd = request.getRequestDispatcher("signup.jsp");
-                rd.forward(request, response);
-            } else {
-                ses.setAttribute("register", r);
-                RequestDispatcher rd = request.getRequestDispatcher("signedin.jsp");
-                rd.forward(request, response);
-
-            }
-
-            return;
-        }
-        if (r != null && action2.equals("")) {
-        RequestDispatcher rd = request.getRequestDispatcher("signedin.jsp");
-        rd.forward(request, response);
-        return;
-        }
-        if (r == null) {
-            RequestDispatcher rd = request.getRequestDispatcher("signup.jsp");
-            rd.forward(request, response);
-            return;
-    }
-    }
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
 
-        HttpSession session = request.getSession();
         String action = request.getParameter("action");
+        //String actionSign = request.getParameter("actionSign");
+        HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        DataCtrl dataCtrl = new DataCtrl();
+        LogicCtrl lc = new LogicCtrl();
 
         if (action.equals("login")) {
-            Login login = new Login();
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            user = login.checkLogin(email, password, dataCtrl);
+            user = lc.checkLogin(email, password);
             if (user == null) {
                 session.invalidate();
                 RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
@@ -171,6 +60,27 @@ public class ControllerServlet extends HttpServlet {
                 rd.forward(request, response);
             }
             return;
+        }
+        if (action.equals("signup")) {
+            
+            String email = request.getParameter("email");
+            String firstname = request.getParameter("Fornavn");
+            String lastname = request.getParameter("Efternavn");
+            String adress = request.getParameter("Adresse");
+            String zipStr = request.getParameter("Postnummer");
+            String city = request.getParameter("By");
+            String phoneStr = request.getParameter("telefon");
+            String password = request.getParameter("psw");
+            int zip = Integer.parseInt(zipStr);
+            int phone = Integer.parseInt(phoneStr);
+            user = lc.addUser(email, firstname, lastname, adress, zip, city, phone, password);
+            user = lc.checkLogin(email, password);
+            session.setAttribute("user", user);
+            RequestDispatcher rd = request.getRequestDispatcher("loggedIn.jsp");
+            rd.forward(request, response);
+            return;
+            //Check Login with parameters before putting parameters into Db.
+            
         }
 
         if (user != null && action.equals("")) {
@@ -200,10 +110,10 @@ public class ControllerServlet extends HttpServlet {
             return;
         }
         if (action.equals("seeTypeCategory")) {
-            typeCat tcat = new typeCat();
+
             String type = request.getParameter("TypeCategory");
             session.setAttribute("type", type);
-            List<Part> typeCategory = tcat.typeCat(type, dataCtrl);
+            List<Part> typeCategory = lc.typeCat(type);
             String category = typeCategory.get(0).getCategory();
             session.setAttribute("category", category);
             session.setAttribute("catList", typeCategory);
@@ -212,25 +122,23 @@ public class ControllerServlet extends HttpServlet {
             return;
         }
         if (action.equals("addToDatabase")) {
-            AddToDatabase adb = new AddToDatabase();
             String type = request.getParameter("Type");
             String category = (String) session.getAttribute("category");
             String unitType = request.getParameter("Pakketype");
             String desc = request.getParameter("Beskrivelse");
             List<Part> catList = (List<Part>) session.getAttribute("catList");
-            catList = adb.addTo(type, category, unitType, desc, catList, dataCtrl);
+            catList = lc.addTo(type, category, unitType, desc, catList);
             session.setAttribute("catList", catList);
             RequestDispatcher rd = request.getRequestDispatcher("typeCat.jsp");
             rd.forward(request, response);
             return;
         }
         if (action.equals("removeFromDatabase")) {
-            RemoveFromDatabase rfd = new RemoveFromDatabase();
             String removeId = request.getParameter("removeItem");
             String type = (String) session.getAttribute("type");
             session.setAttribute("type", type);
-            rfd.parseId(removeId);
-            List<Part> typeCategory = rfd.removePart(type, dataCtrl);
+            lc.parseId(removeId);
+            List<Part> typeCategory = lc.removePart(type);
             session.setAttribute("catList", typeCategory);
             RequestDispatcher rd = request.getRequestDispatcher("typeCat.jsp");
             rd.forward(request, response);

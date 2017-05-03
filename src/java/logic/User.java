@@ -19,6 +19,9 @@ public class User {
     private String city;
     private int zip;
     private int phone;
+<<<<<<< HEAD
+    private String password;
+=======
 
     public User(int userId, String email, String userName, String lastName, String address, String city, int zip, int phone) {
         this.userId = userId;
@@ -40,12 +43,39 @@ public class User {
         this.zip = zip;
         this.phone = phone;
     }
+>>>>>>> 7277fc479bb98ff1ea3f57fd689d494d7d516b7f
 
     public User(int userId, String email, String userName) {
         this.userId = userId;
         this.email = email;
         this.userName = userName;
 
+<<<<<<< HEAD
+    }
+
+    public User(int userId, String email, String firstName, String lastName, String address, String city, int zip, int phone) {
+        this.userId = userId;
+        this.email = email;
+        this.userName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.city = city;
+        this.zip = zip;
+        this.phone = phone;
+        
+    }
+
+    public User(String email, String userName, String lastName, String address, String city, int zip, int phone, String password) {
+        this.email = email;
+        this.userName = userName;
+        this.lastName = lastName;
+        this.address = address;
+        this.city = city;
+        this.zip = zip;
+        this.phone = phone;
+        this.password = password;
+=======
+>>>>>>> 7277fc479bb98ff1ea3f57fd689d494d7d516b7f
     }
 
     public int getUserId() {
@@ -112,4 +142,12 @@ public class User {
         this.phone = phone;
     }
 
+<<<<<<< HEAD
+    public String getPassword() {
+        return password;
+    }
+    
+
+=======
+>>>>>>> 7277fc479bb98ff1ea3f57fd689d494d7d516b7f
 }

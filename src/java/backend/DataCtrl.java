@@ -53,7 +53,8 @@ public class DataCtrl {
 
     public User validateUser(String email, String password)
     {
-        return userMap.validateUser(email, password);
+        return userMap.validateCustomer(email, password);
+        //return userMap.validateUser(email, password);
     }
      
      public void insertUser(User user){
