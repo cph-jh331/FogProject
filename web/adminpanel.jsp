@@ -94,8 +94,6 @@
                             <input type="radio" id="r2" name="rate" value="refuse" />Kassér
                             <br>
                             <input type="submit" class="btn-success" value="Send">
-<<<<<<< HEAD
-=======
                             <button class="btn-success" name="action" onclick="myFunction()">Vis tegning fra: <%= user.getUserName()%></button>
                         </div>
 
@@ -104,10 +102,8 @@
 
         </table>
         </form>
-<<<<<<< HEAD
+
                             <button class="btn-success" name="action" onclick="myFunction()">Vis tegning fra: <%= user.getUserName()%></button>
-=======
->>>>>>> 8cd58bed855a91d853052c2325bdb4d248b1845a
     </div>
     <div class="jumbotron">
         <table class="table table-bordered">
@@ -134,15 +130,14 @@
                     <%-- <form action="controllerServlet" method="post">
                          <input type="hidden" name="action" value="draw"/>
                     --%>
-<<<<<<< HEAD
+
                     
 
                     <button class="btn-success" name="action" style="padding: 1px 2px; " onclick="myFunction()">Vis tegning fra: <%= user.getUserName()%></button>  
-=======
+
                     <button class="btn-success" name="action" style="padding: 1px 2px; " onclick="myFunction()">Vis tegning fra: <%= user.getUserName()%></button>  
                     
 
->>>>>>> 8cd58bed855a91d853052c2325bdb4d248b1845a
                 </td>
             </tr>
 
