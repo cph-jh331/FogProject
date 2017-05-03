@@ -27,7 +27,7 @@ DataCtrl dataCtrl = new DataCtrl();
 
     public User checkLogin(String email, String password) {
         //User user = dataCtrl.validateUser(email, password);
-        User user = dataCtrl.validateUser(email, password);
+        User user = dataCtrl.validateCustomer(email, password);
         return user;
 
     }

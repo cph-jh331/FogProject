@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+
+            <form action="TestServlet" method="post">
+                <input type="hidden" name="action" value="fisk">
+                <input type="number" name="length" value="" placeholder="Længde" required  />
+                <input type="number" name="width" value="" placeholder="Bredde" required />
+                <input type="number" name="height" value="" placeholder="Højde" required/>
+                <input type="submit" value="trykher">
+            </form>
+
+            <!-- side view -->
+            <!-- viewbox skal nok ændres... hvordan gør man det dynamisk? -->
+            <svg width="1000" height="500" viewbox="0 0 500 300">
+
+            <!-- er selve firkanten til viewboxen -->
+            <rect x="1" y="1" width="498" height="298"
+                  style="stroke: #000000; fill: none;"/>
+            <!-- stolper -->
+            <rect x="100" y="50" width="5" height="200"
+                  style="stroke: #000000; fill: none;"/>
+            <rect x="250" y="50" width="5" height="200"
+                  style="stroke: #000000; fill: none;"/>
+            <rect x="400" y="50" width="5" height="200"
+                  style="stroke: #000000; fill: none;"/>
+            <!-- rem på taget, vinkel skal lige findes. -->
+            <rect x="50" y="39" width="400" height="20"
+                  style="stroke: #000000; fill: white;" transform="rotate(1, 50, 200)"/>
+            <!-- under og overstern -->
+            <rect x="50" y="32" width="400" height="20"
+                  style="stroke: #000000; fill: white;" transform="rotate(1, 50, 200)"/>
+            </svg>
+
+            <!-- topdown view -->
+            <svg width="1000" height="500" viewbox="0,0,500,300">
+
+            <rect x="1" y="1" width="498" height="298"
+                  style="stroke: #000000; fill: none;"/>
+            <!-- stolper -->
+            <rect x="100" y="50" width="5" height="5"
+                  style="stroke: #000000; fill: none;"/>
+            <rect x="100" y="250" width="5" height="5"
+                  style="stroke: #000000; fill: none;"/>
+
+            <rect x="250" y="50" width="5" height="5"
+                  style="stroke: #000000; fill: none;"/>
+            <rect x="250" y="250" width="5" height="5"
+                  style="stroke: #000000; fill: none;"/>
+
+            <rect x="400" y="50" width="5" height="5"
+                  style="stroke: #000000; fill: none;"/>
+            <rect x="400" y="250" width="5" height="5"
+                  style="stroke: #000000; fill: none;"/>
+
+            <rect x="50" y="50" width="400" height="3"
+                  style="stroke: #000000; fill: none;"/>
+            <rect x="50" y="252" width="400" height="3"
+                  style="stroke: #000000; fill: none;"/>
+
+            <!-- spær -->
+            <rect x="50" y="25" width="3" height="250"
+                  style="stroke: #000000; fill: none;"/>
+            <rect x="90" y="25" width="3" height="250"
+                  style="stroke: #000000; fill: none;"/>
+            <rect x="130" y="25" width="3" height="250"
+                  style="stroke: #000000; fill: none;"/>
+            <rect x="170" y="25" width="3" height="250"
+                  style="stroke: #000000; fill: none;"/>
+            <rect x="210" y="25" width="3" height="250"
+                  style="stroke: #000000; fill: none;"/>
+            <rect x="250" y="25" width="3" height="250"
+                  style="stroke: #000000; fill: none;"/>
+            <rect x="290" y="25" width="3" height="250"
+                  style="stroke: #000000; fill: none;"/>
+            <rect x="330" y="25" width="3" height="250"
+                  style="stroke: #000000; fill: none;"/>
+            <rect x="370" y="25" width="3" height="250"
+                  style="stroke: #000000; fill: none;"/>
+            <rect x="410" y="25" width="3" height="250"
+                  style="stroke: #000000; fill: none;"/>
+            <rect x="446" y="25" width="3" height="250"
+                  style="stroke: #000000; fill: none;"/>
+
+            <!-- sterne -->
+            <rect x="50" y="22" width="400" height="3"
+                  style="stroke: #000000; fill: none;"/>
+            <rect x="50" y="275" width="400" height="3"
+                  style="stroke: #000000; fill: none;"/>
+
+
+            </svg>
+
+        </div>
+    </body>
+</html>

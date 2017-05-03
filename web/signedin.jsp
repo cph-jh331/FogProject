@@ -58,24 +58,7 @@ a:hover, a:active {
         
         <h1 id="undertitle" class="text-center">Du er nu oprettet som bruger!</h1>
         <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+      
       
         <h2 id="undertitle" class="text-center"> Klik i venstre hjørne for at ansøge om byggetilladelse til din personlige carport</h2>
         
