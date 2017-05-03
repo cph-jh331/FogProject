@@ -97,7 +97,6 @@
 <<<<<<< HEAD
 =======
                             <button class="btn-success" name="action" onclick="myFunction()">Vis tegning fra: <%= user.getUserName()%></button>
->>>>>>> 8cd58bed855a91d853052c2325bdb4d248b1845a
                         </div>
 
                 </td>
