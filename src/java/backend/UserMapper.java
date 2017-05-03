@@ -23,9 +23,10 @@ import java.util.logging.Logger;
  */
 //Sofar working as login to Employee at Fog with test@test.dk // 123.. need to split up to make 1 for Fog 1 for customer.
 public class UserMapper {
-
+    
     private DBConnector dbc = new DBConnector();
     private Connection conn = dbc.connectDB();
+<<<<<<< HEAD
     private Register r = new Register();
     private Statement st;
 
@@ -34,10 +35,20 @@ public class UserMapper {
         String sql = "select * from Customer where userEmail = ? && password = ?;";
         try
         {
+=======
+    Register r = new Register();
+    Statement st;
+    
+    public User validateUser(String email, String pass) {
+        String sql = "select * from FogUser where empEmail = ? && password = ?;";
+        
+        try {
+>>>>>>> 7277fc479bb98ff1ea3f57fd689d494d7d516b7f
             PreparedStatement preStmt = conn.prepareStatement(sql);
             preStmt.setString(1, email);
             preStmt.setString(2, pass);
             ResultSet rs = preStmt.executeQuery();
+<<<<<<< HEAD
             if (rs.next())
             {
                 int id = rs.getInt("customerId");
@@ -51,6 +62,14 @@ public class UserMapper {
                 
 
                 return new User(id, mail, firstname, lastName, address, userCity, zip, userPhone);
+=======
+            if (rs.next()) {
+                int id = rs.getInt("empId");
+                String mail = rs.getString("empEmail");
+                String name = rs.getString("empName");
+                
+                return new User(id, mail, name);
+>>>>>>> 7277fc479bb98ff1ea3f57fd689d494d7d516b7f
             }
         } catch (SQLException ex)
         {
@@ -61,6 +80,7 @@ public class UserMapper {
 
     }
 
+<<<<<<< HEAD
     public User validateUser(String email, String pass)
     {
         String sql = "select * from FogUser where empEmail = ? && password = ?;";
@@ -86,6 +106,8 @@ public class UserMapper {
         return null;
     }
 
+=======
+>>>>>>> 7277fc479bb98ff1ea3f57fd689d494d7d516b7f
 //    //Making userRegistration.
 //    public Register validate(String firstname, String lastname, String adress, String zip, String city, String phone, String email, String password1, String password2, Hashtable errors) {
 //       // boolean bool = true;
@@ -158,6 +180,7 @@ public class UserMapper {
 //        return (errorMsg == null) ? "" : errorMsg;
 //
 //    }
+<<<<<<< HEAD
     public void insertUser(User user)
     {
 
@@ -165,6 +188,13 @@ public class UserMapper {
 
         try
         {
+=======
+    public void insertUser(User user) {
+        
+        String sql = "insert into Customer (userName, userLastname, userAddress, userZip, userCity, userPhone, userEmail, password) values (?,?,?,?,?,?,?,?);";
+        
+        try {
+>>>>>>> 7277fc479bb98ff1ea3f57fd689d494d7d516b7f
             PreparedStatement preStmt = conn.prepareStatement(sql);
             preStmt.setString(1, user.getUserName());
             preStmt.setString(2, user.getLastName());
@@ -172,6 +202,7 @@ public class UserMapper {
             preStmt.setInt(4, user.getZip());
             preStmt.setString(5, user.getCity());
             preStmt.setInt(6, user.getPhone());
+<<<<<<< HEAD
             preStmt.setString(7, user.getEmail());
             preStmt.setString(8, user.getPassword());
             preStmt.executeUpdate();
@@ -184,6 +215,17 @@ public class UserMapper {
 
     }
 
+=======
+            preStmt.executeUpdate();
+            
+        } catch (SQLException ex) {
+            
+            Logger.getLogger(UserMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+>>>>>>> 7277fc479bb98ff1ea3f57fd689d494d7d516b7f
 //    public void insertData(String firstname, String lastname, String adress, String zip, String city, String phone, String email, String password1, String password2, Hashtable errors) throws SQLException {
 //        
 //        String sql = "insert into Customer (userName, userLastname, userAddress, userZip, userCity, userPhone, userEmail, password) values (?,?,?,?,?,?,?,?);";
@@ -199,6 +241,10 @@ public class UserMapper {
 //            conn = (Connection) DriverManager.getConnection("207.154.193.223");
 //            
 //            PreparedStatement prStmt = conn.prepareStatement(sql);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7277fc479bb98ff1ea3f57fd689d494d7d516b7f
 //        String table = "create table if not exists Fogshop.Customer (first_Name varchar(20), last_name varchar(20), adress varchar(20), "
 //                + " zip_Code varchar(20), city varchar (20), phone varchar(20), email_Adress varchar(20), password  varchar(20)) ";
 //            String table = null;
@@ -221,4 +267,8 @@ public class UserMapper {
 //            System.out.println("Error in connection::" + ex.getCause());
 //        }
 //    }
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 7277fc479bb98ff1ea3f57fd689d494d7d516b7f
 }
