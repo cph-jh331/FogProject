@@ -51,7 +51,7 @@ public class DataCtrl {
         return partMap.getMiscParts();
     }
 
-    public User validateUser(String email, String password)
+    public User validateCustomer(String email, String password)
     {
         return userMap.validateCustomer(email, password);
         //return userMap.validateUser(email, password);

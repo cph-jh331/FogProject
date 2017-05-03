@@ -145,8 +145,29 @@ public class ControllerServlet extends HttpServlet {
 
             return;
         }
+//             if(action.equals("hej")){
+//            RequestDispatcher rd = request.getRequestDispatcher("adminpanel.jsp");
+//            rd.forward(request, response);
+//            return;
+        //}
+        }
+//        if(action.equals("blueAccept")){
+//           // Fog skal hente fra en liste hvori, der bliver vist de kunder der er klar til godkendelse af carport.
+//           // den liste skal sendes videre gennem lagene (klasserne).
+//           // fog skal have mulighed for at se og godkende kundernes tegning.
+//           blueAccept ba = new blueAccept();
+//
+//            if(action.equals("draw")){
+//                RequestDispatcher rd = request.getRequestDispatcher("")
+//             Ja/nej til submit button. Sender metoden videre, og så skal der vises noget nyt på siden. 
+//             if(ja){
+//                 Godkendes tegning - Og hvad så? besked sendes til kunden.
+//             } else {
+//                 Kasseres tegningen - og hvad så?
+//             }
+             
 
-    }
+    
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

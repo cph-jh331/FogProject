@@ -45,8 +45,9 @@
                     </ul>
                     <!-- Setup of the right side of nav-bar 2 different links for now. No href yet missing pages -->
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><span class="glyphicon glyphicon-user"></span><%= user.getUserName()%></a></li>
-
+                        <li class="active"><a href="adminpanel.jsp"> Admin accept</a></li>
+                        <li><a href="adminpanel.jsp"><span class="glyphicon glyphicon-check"></span> KundeKartotek</a></li>
+                        <li><a><span class="glyphicon glyphicon-user"></span><%= user.getUserName()%></a></li>
 
                         </li>
                         <!--<li><a href="login.jsp"><span class="glyphicon glyphicon-login"></span>Login</a></li>-->
@@ -65,7 +66,7 @@
                     <input type="hidden" name="action" value="seeTypeCategory"/>
 
                     <h2> Tilføj og fjern materialer:</h2>
-                    <select class="btn btn-danger dropdown-toggle, col-lg-10" name="TypeCategory">
+                    <select class="btn btn-success dropdown-toggle, col-lg-10" name="TypeCategory">
                         <li class="dropdown-header">Type</li>
                         <option class="form-control" value="Bolt/møtrik">Bolt/Møtrik</option>                    
                         <option class="form-control" value="Hulbånd">Hulbånd</option>
