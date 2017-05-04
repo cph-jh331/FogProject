@@ -76,4 +76,7 @@ public class LogicCtrl {
         //unit test til user validering i datactrl eller partMapper...
         return user;
     }
+    
+    //CreateSvg
+    //SaveSvg
 }

@@ -5,10 +5,64 @@
  */
 package backend;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import logic.SvgDrawing;
+import logic.User;
+
 /**
  *
  * @author bloch
  */
 public class SvgMapper {
+
+    private Connection conn;
+
+    public SvgMapper(Connection conn) {
+        this.conn = conn;
+    }
+
+    public List<SvgDrawing> getSvg(int userId) {
+        String sql = "select * from Svg where customerId = ?;";
+        List<SvgDrawing> SvgList = new ArrayList<>();
+        try {
+            PreparedStatement preStmt = conn.prepareStatement(sql);
+            preStmt.setInt(1, userId);
+            ResultSet rs = preStmt.executeQuery();
+            while (rs.next()) {
+                int svgId = rs.getInt("svgId");
+                String svgInline = rs.getString("svgImage");
+                userId = rs.getInt("customerId");
+                String dateCreated = rs.getString("dateCreated");
+                String dateAccepted = rs.getString("dateAccept");
+                boolean accepted = rs.getBoolean("accepted");
+                SvgDrawing svgDrawing = new SvgDrawing(svgId, svgInline, userId, dateCreated, dateAccepted, accepted);
+                SvgList.add(svgDrawing);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SvgMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return SvgList;
+    }
     
+    public boolean saveDrawing(String SvgInLine, int userId) {
+       String sql = "insert into Svg (customerId, svgImage) values (?, ?);" ;
+        try {
+            PreparedStatement preStmt = conn.prepareStatement(sql);
+            preStmt.setInt(1, userId);
+            preStmt.setString(2, SvgInLine);
+            preStmt.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(SvgMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return true;
+    }
 }
