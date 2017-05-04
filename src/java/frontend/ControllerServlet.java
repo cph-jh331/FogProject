@@ -5,8 +5,6 @@
  */
 package frontend;
 
-
-
 import logic.Part;
 import logic.User;
 import java.io.IOException;
@@ -21,7 +19,8 @@ import javax.servlet.http.HttpSession;
 import logic.LogicCtrl;
 
 @WebServlet(name = "ControllerServlet", urlPatterns
-        = {
+        =
+        {
             "/controllerServlet"
         })
 public class ControllerServlet extends HttpServlet {
@@ -36,66 +35,103 @@ public class ControllerServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException
+    {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
 
-        String action = request.getParameter("action");
-        //String actionSign = request.getParameter("actionSign");
+        String action = request.getParameter("action");        
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         LogicCtrl lc = new LogicCtrl();
+        
+        if(action == null){
+            RequestDispatcher rd = request.getRequestDispatcher("index.html");
+            rd.forward(request, response);
+        }
+        if(action.equals("drawlist")){
+            RequestDispatcher rd = request.getRequestDispatcher("adminpanel.jsp");
+            rd.forward(request, response);
+            
+        }
+        
+        if(action.equals("logout")){
+            session.invalidate();
+            RequestDispatcher rd = request.getRequestDispatcher("index.html");
+            rd.forward(request, response);
+        }
 
-        if (action.equals("login")) {
+        if (action.equals("login"))
+        {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             user = lc.checkLogin(email, password);
-            if (user == null) {
+            if (user == null)
+            {
                 session.invalidate();
                 RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
                 rd.forward(request, response);
-            } else {
+            } else
+            {
                 session.setAttribute("user", user);
-                RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
-                rd.forward(request, response);
+                if (lc.checkAdmin(user) == true)
+                {
+                    RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
+                    rd.forward(request, response);
+                } else
+                {
+                    RequestDispatcher rd = request.getRequestDispatcher("loggedin.jsp");
+                    rd.forward(request, response);
+                }
             }
             return;
         }
-        if (action.equals("signup")) {
-            
+        if (action.equals("signup"))
+        {
+
             String email = request.getParameter("email");
             String firstname = request.getParameter("Fornavn");
             String lastname = request.getParameter("Efternavn");
-            String adress = request.getParameter("Adresse");
+            String address = request.getParameter("Adresse");
             String zipStr = request.getParameter("Postnummer");
             String city = request.getParameter("By");
             String phoneStr = request.getParameter("telefon");
             String password = request.getParameter("psw");
             int zip = Integer.parseInt(zipStr);
             int phone = Integer.parseInt(phoneStr);
-            user = lc.addUser(email, firstname, lastname, adress, zip, city, phone, password);
+            user = lc.addUser(email, firstname, lastname, address, zip, city, phone, password);
             user = lc.checkLogin(email, password);
             session.setAttribute("user", user);
-            RequestDispatcher rd = request.getRequestDispatcher("loggedIn.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("loggedin.jsp");
             rd.forward(request, response);
             return;
             //Check Login with parameters before putting parameters into Db.
-            
+
         }
 
-        if (user != null && action.equals("")) {
-            RequestDispatcher rd = request.getRequestDispatcher("loggedIn.jsp");
-            rd.forward(request, response);
+        if (user != null && action.equals(""))
+        {
+            if (lc.checkAdmin(user) == true)
+            {
+                RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
+                rd.forward(request, response);
+            } else
+            {
+                RequestDispatcher rd = request.getRequestDispatcher("loggedin.jsp");
+                rd.forward(request, response);
+            }
             return;
         }
 
-        if (user == null) {
+        if (user == null)
+        {
             RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
             rd.forward(request, response);
             return;
         }
 
-        if (action.equals("seelist")) {
+        if (action.equals("seelist"))
+        {
             PartList partList = new PartList();
             String length = request.getParameter("length");
             String width = request.getParameter("width");
@@ -109,8 +145,8 @@ public class ControllerServlet extends HttpServlet {
             rd.forward(request, response);
             return;
         }
-        if (action.equals("seeTypeCategory")) {
-
+        if (action.equals("seeTypeCategory"))
+        {
             String type = request.getParameter("TypeCategory");
             session.setAttribute("type", type);
             List<Part> typeCategory = lc.typeCat(type);
@@ -121,7 +157,8 @@ public class ControllerServlet extends HttpServlet {
             rd.forward(request, response);
             return;
         }
-        if (action.equals("addToDatabase")) {
+        if (action.equals("addToDatabase"))
+        {
             String type = request.getParameter("Type");
             String category = (String) session.getAttribute("category");
             String unitType = request.getParameter("Pakketype");
@@ -133,7 +170,8 @@ public class ControllerServlet extends HttpServlet {
             rd.forward(request, response);
             return;
         }
-        if (action.equals("removeFromDatabase")) {
+        if (action.equals("removeFromDatabase"))
+        {
             String removeId = request.getParameter("removeItem");
             String type = (String) session.getAttribute("type");
             session.setAttribute("type", type);
@@ -150,7 +188,7 @@ public class ControllerServlet extends HttpServlet {
 //            rd.forward(request, response);
 //            return;
         //}
-        }
+    }
 //        if(action.equals("blueAccept")){
 //           // Fog skal hente fra en liste hvori, der bliver vist de kunder der er klar til godkendelse af carport.
 //           // den liste skal sendes videre gennem lagene (klasserne).
@@ -165,9 +203,6 @@ public class ControllerServlet extends HttpServlet {
 //             } else {
 //                 Kasseres tegningen - og hvad så?
 //             }
-             
-
-    
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -180,7 +215,8 @@ public class ControllerServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException
+    {
         processRequest(request, response);
     }
 
@@ -194,7 +230,8 @@ public class ControllerServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException
+    {
         processRequest(request, response);
     }
 
@@ -204,7 +241,8 @@ public class ControllerServlet extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() {
+    public String getServletInfo()
+    {
         return "Short description";
     }// </editor-fold>
 

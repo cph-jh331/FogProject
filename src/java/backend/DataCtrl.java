@@ -1,5 +1,6 @@
 package backend;
 
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
@@ -15,20 +16,23 @@ public class DataCtrl {
 
     private PartMapper partMap;
     private UserMapper userMap;
-    //private Connection conn;
-    
+    private DBConnector dbc;
+    private Connection conn;
+
     //skal finde ud af hvor langt ud vi skal hente connection.
-//    public DataCtrl(Connection conn)
-//    {
-//        this.conn = conn;
-//        this.partMap = new PartMapper(conn);
-//        this.userMap = new UserMapper(conn);
-//    }
+    public DataCtrl(Connection conn)
+    {
+        this.conn = conn;
+        this.partMap = new PartMapper(conn);
+        this.userMap = new UserMapper(conn);
+    }
 
     public DataCtrl()
     {
-        partMap = new PartMapper();
-        userMap = new UserMapper();
+        this.dbc = new DBConnector();
+        this.conn = dbc.connectDB();
+        this.partMap = new PartMapper(conn);
+        this.userMap = new UserMapper(conn);
     }
 
     public List<Part> getTypeCategory(String typeCategory)
@@ -56,12 +60,12 @@ public class DataCtrl {
         return userMap.validateCustomer(email, password);
         //return userMap.validateUser(email, password);
     }
-     
-     public void insertUser(User user){
-         userMap.insertUser(user);
-     }
-     
-     
+
+    public void insertUser(User user)
+    {
+        userMap.insertUser(user);
+    }
+
     public void addPart(Part part)
     {
         partMap.addPart(part);
