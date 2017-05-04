@@ -183,11 +183,15 @@ public class ControllerServlet extends HttpServlet {
 
             return;
         }
-//             if(action.equals("hej")){
-//            RequestDispatcher rd = request.getRequestDispatcher("adminpanel.jsp");
-//            rd.forward(request, response);
-//            return;
-        //}
+        if(action.equals("sendTegning")){
+            //Parameter kommer fra tegning.jsp
+            String højde = request.getParameter("Højde");
+            String bredde = request.getParameter("bredde");
+            String længde = request.getParameter("længde");
+            lc.createSvg(højde, længde, bredde);
+            
+        }
+
     }
 //        if(action.equals("blueAccept")){
 //           // Fog skal hente fra en liste hvori, der bliver vist de kunder der er klar til godkendelse af carport.
