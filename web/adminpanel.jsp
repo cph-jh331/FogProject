@@ -48,15 +48,14 @@
                     </ul>
                     <!-- Setup of the right side of nav-bar 2 different links for now. No href yet missing pages -->
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="loggedIn.jsp">Back To Admin</a></li>
+                        <li><a href="admin.jsp">Back To Admin</a></li>
                 </div>
-                </li>
+               
                 <!--<li><a href="login.jsp"><span class="glyphicon glyphicon-login"></span>Login</a></li>-->
-                </ul>
+               
 
             </div>
-        </div>
-    </div>
+    
 </nav>
 
 <div class="container">
