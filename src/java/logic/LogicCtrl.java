@@ -77,6 +77,15 @@ public class LogicCtrl {
         return user;
     }
     
+//    public String createSvg(String højde, String længde, String bredde){
+//        SvgDrawing svgImage = new SvgDrawing(id, højde, id, længde, bredde, true);
+//        return svgImage;
+//    }
+    public SvgDrawing saveSvg (int svgId, String svgInline, int userId, String dateCreated, String dateAccepted, boolean accepted){
+        SvgDrawing svgDrawing = new SvgDrawing(svgId, svgInline, userId, dateCreated, dateAccepted, accepted);
+        dataCtrl.insertSvg(svgInline, userId);
+        return svgDrawing;
+    }
     //CreateSvg
     //SaveSvg
 }

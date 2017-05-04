@@ -16,6 +16,7 @@ public class DataCtrl {
 
     private PartMapper partMap;
     private UserMapper userMap;
+    private SvgMapper svgMap;
     private DBConnector dbc;
     private Connection conn;
 
@@ -25,6 +26,7 @@ public class DataCtrl {
         this.conn = conn;
         this.partMap = new PartMapper(conn);
         this.userMap = new UserMapper(conn);
+        this.svgMap = new SvgMapper(conn);
     }
 
     public DataCtrl()
@@ -33,6 +35,7 @@ public class DataCtrl {
         this.conn = dbc.connectDB();
         this.partMap = new PartMapper(conn);
         this.userMap = new UserMapper(conn);
+        this.svgMap = new SvgMapper(conn);
     }
 
     public List<Part> getTypeCategory(String typeCategory)
@@ -76,6 +79,9 @@ public class DataCtrl {
         partMap.removePart(removeId);
     }
     
-    public 
+    public void insertSvg(String SvgInLine, int userId)
+    {
+        svgMap.saveDrawing(SvgInLine, userId);
+    }
 
 }
