@@ -47,9 +47,10 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="active"><a href="adminpanel.jsp"> Admin accept</a></li>
                         <li><a href="adminpanel.jsp"><span class="glyphicon glyphicon-check"></span> KundeKartotek</a></li>
-                        <li><a><span class="glyphicon glyphicon-user"></span><%= user.getUserName()%></a></li>
+                        
+                       <li><a><span class="glyphicon glyphicon-user"></span><%= user.getUserName()%></a></li>
 
-                        </li>
+                       
                         <!--<li><a href="login.jsp"><span class="glyphicon glyphicon-login"></span>Login</a></li>-->
                     </ul>
                 </div>
@@ -67,7 +68,9 @@
 
                     <h2> Tilføj og fjern materialer:</h2>
                     <select class="btn btn-success dropdown-toggle, col-lg-10" name="TypeCategory">
-                        <li class="dropdown-header">Type</li>
+                        
+                        <ul>
+                        <li class="dropdown-header">Type< </li>
                         <option class="form-control" value="Bolt/møtrik">Bolt/Møtrik</option>                    
                         <option class="form-control" value="Hulbånd">Hulbånd</option>
                         <option class="form-control" value="Overstern">Overstern</option>                    
@@ -88,7 +91,7 @@
             </div>
             <div class="jumbotron">
                 <h2> Lav en stykliste til en carport med mål</h2>
-                <form action="controllerServlet" method="post">
+                    <form action="controllerServlet" method="post">
                     <input type="hidden" name="action" value="seelist">
                     <input type="number" name="length" value="" placeholder="Længde" required  />
                     <input type="number" name="width" value="" placeholder="Bredde" required />

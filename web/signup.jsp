@@ -12,14 +12,8 @@
     <head>
         <title>Sign up</title>
         <meta charset="UTF-8">
-<<<<<<< HEAD
-        <link rel="stylesheet" href="css/modalcss.css">
 
-=======
-    <link rel="stylesheet" href="css/modalcss.css">
-    
-        
-        
+        <link rel="stylesheet" href="css/modalcss.css">
     
     <style>
     .sign {
@@ -35,7 +29,7 @@
         cursor: pointer;
     }
     </style>
->>>>>>> 7277fc479bb98ff1ea3f57fd689d494d7d516b7f
+
     </head>
 
 
@@ -56,14 +50,14 @@
                     </a>
                 </div>
 
-<<<<<<< HEAD
+
                 <br>
                 <br>
                 <br>
 
                 <h2>Sign up</h2>
 
-                <button onclick="document.getElementById('id01').style.display = 'block'" style="width:auto;">Sign Up</button>
+                <button class="sign" onclick="document.getElementById('id01').style.display = 'block'" style="width:auto;">Sign Up</button>
 
                 <div id="id01" class="modal">
                     <span onclick="document.getElementById('id01').style.display = 'none'" class="close" title="Close Modal">×</span>
@@ -114,71 +108,7 @@
                     };
                 </script>
 
-                </body>
-                </html>
-=======
-    <br>
-    <br>
-    <br>
-    
-<h2>Sign up</h2>
+                
+       </body>
+</html>         
 
-<button class="sign" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign Up</button>
-
-<div id="id01" class="modal">
-  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
-  
-  <form class="modal-content " action="ControllerServlet">
-       
-      <% Register r = (Register) session.getAttribute("register");%>
-    <div class="container">
-        <form action="ControllerServlet" method="post">
-            
-      <label><b>Fornavn</b></label>
-      <input type="text" placeholder="Indtast Navn" name="Fornavn" required>
-      <label><b>Efternavn</b></label>
-      <input type="text" placeholder="Indtast Efternavn" name="Efternavn" required>
-      <label><b>Adresse</b></label>
-      <input type="text" placeholder="Indtast Adresse" name="Adresse" required>
-      <label><b>Postnummer</b></label>
-      <input type="text" placeholder="Indtast Postnummer" name="Postnummer" required>
-      <label><b>By</b></label>
-      <input type="text" placeholder="Indtast By" name="By" required>
-      <label><b>Tlf</b></label>
-      <input type="text" placeholder="Indtast telefon" name="telefon" required>
-        
-        <label><b>Email</b></label>
-      <input type="text" placeholder="Indtast Email" name="email" required>
-
-      <label><b>Password</b></label>
-      <input type="password" placeholder="Indtast Password" name="psw" required>
-
-      <label><b>Repeat Password</b></label>
-      <input type="password" placeholder="Gentag Password" name="psw-repeat" required>
-      <input type="checkbox" checked="checked"> Remember me
-      <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-
-      <div class="clearfix">
-        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-        <button type="submit" class="signupbtn" >Sign Up</button> 
-       
-      </div>
-    </div>
-  </form>
-</div>
-
-<script>
-// Get the modal
-var modal = document.getElementById('id01');
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target === modal) {
-        modal.style.display = "none";
-    }
-};
-</script>
-
-</body>
-</html>
->>>>>>> 7277fc479bb98ff1ea3f57fd689d494d7d516b7f
