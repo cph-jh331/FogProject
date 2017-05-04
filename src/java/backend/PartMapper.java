@@ -15,8 +15,13 @@ public class PartMapper {
 
     private DBConnector dbc = new DBConnector();
     private Connection conn = dbc.connectDB();
-    
-        public void removePart(int PartId)
+
+    public PartMapper(Connection conn)
+    {
+        this.conn = conn;
+    }
+
+    public void removePart(int PartId)
     {
         String sql = "delete from Part where partId = ?;";
         try
@@ -67,7 +72,7 @@ public class PartMapper {
         }
 
     }
-    
+
     public List<Part> getTypeCategory(String typeCategory)
     {
         List<Part> typeCatMap = new ArrayList<>();
@@ -134,7 +139,7 @@ public class PartMapper {
                 packetSize = 0; //skal være 0 og ikke null i databasen.
                 unitName = rs.getString("unitName");
                 desc = rs.getString("desc");
-                 typeCat = rs.getString("typeCategory");
+                typeCat = rs.getString("typeCategory");
                 partMap.put(partId, new Part(type, length, 0, unitName, desc, partId, category, typeCat));
             }
         } catch (SQLException ex)

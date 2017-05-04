@@ -20,7 +20,8 @@ public class User {
     private int zip;
     private int phone;
     private String password;
-
+    private boolean isAdmin = false;
+    
     public User(int userId, String email, String userName) {
         this.userId = userId;
         this.email = email;
@@ -28,7 +29,7 @@ public class User {
 
     }
 
-    public User(int userId, String email, String firstName, String lastName, String address, String city, int zip, int phone) {
+    public User(int userId, String email, String firstName, String lastName, String address, String city, int zip, int phone, boolean isAdmin) {
         this.userId = userId;
         this.email = email;
         this.userName = firstName;
@@ -37,6 +38,7 @@ public class User {
         this.city = city;
         this.zip = zip;
         this.phone = phone;
+        this.isAdmin = isAdmin;
         
     }
 
@@ -117,6 +119,14 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    /**
+     * @return the isAdmin
+     */
+    public boolean isAdmin()
+    {
+        return isAdmin;
     }
     
 

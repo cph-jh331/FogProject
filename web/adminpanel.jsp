@@ -48,14 +48,15 @@
                     </ul>
                     <!-- Setup of the right side of nav-bar 2 different links for now. No href yet missing pages -->
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="admin.jsp">Back To Admin</a></li>
+                        <li><a href="loggedin.jsp">Back To Admin</a></li>
                 </div>
-               
+                </li>
                 <!--<li><a href="login.jsp"><span class="glyphicon glyphicon-login"></span>Login</a></li>-->
-               
+                </ul>
 
             </div>
-    
+        </div>
+    </div>
 </nav>
 
 <div class="container">
@@ -95,14 +96,11 @@
                             <input type="submit" class="btn-success" value="Send">
                             <button class="btn-success" name="action" onclick="myFunction()">Vis tegning fra: <%= user.getUserName()%></button>
                         </div>
-
+                    </form>
                 </td>
             </tr>
-
         </table>
-        </form>
-
-                            <button class="btn-success" name="action" onclick="myFunction()">Vis tegning fra: <%= user.getUserName()%></button>
+        <button class="btn-success" name="action" onclick="myFunction()">Vis tegning fra: <%= user.getUserName()%></button>
     </div>
     <div class="jumbotron">
         <table class="table table-bordered">
@@ -130,12 +128,12 @@
                          <input type="hidden" name="action" value="draw"/>
                     --%>
 
-                    
+
 
                     <button class="btn-success" name="action" style="padding: 1px 2px; " onclick="myFunction()">Vis tegning fra: <%= user.getUserName()%></button>  
 
                     <button class="btn-success" name="action" style="padding: 1px 2px; " onclick="myFunction()">Vis tegning fra: <%= user.getUserName()%></button>  
-                    
+
 
                 </td>
             </tr>
