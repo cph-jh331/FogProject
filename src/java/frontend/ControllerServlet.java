@@ -56,7 +56,7 @@ public class ControllerServlet extends HttpServlet {
                 rd.forward(request, response);
             } else {
                 session.setAttribute("user", user);
-                RequestDispatcher rd = request.getRequestDispatcher("loggedIn.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
                 rd.forward(request, response);
             }
             return;
