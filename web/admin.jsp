@@ -49,6 +49,7 @@
                         <li><a href="signup.jsp"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
                         <li id="makeLink" class="list-group-item">
                             <div id="makeLink2" class="input-group">
+
                                 <form action="controllerServlet" method="post">
                                     <input type="hidden" name="action" value=""/>
                                     <input class="btn btn-success" type="submit" name="Login" value="Login"/>
@@ -65,12 +66,12 @@
             <div id="loginbox" class="col-lg-4">
                 <div class="form-group">
                     <form action="controllerServlet" method="post">
-                        <input type="hidden" name="action" value="login"/>
+                        <input type="hidden" name="action" value="adminlogin"/>
                         <input class="input-group" type="text" name="email" value="" placeholder="email" required/>
                         <input class="input-group" type="password" name="password" value="" placeholder="password"  required>
-                        <input class="btn btn-success" type="submit" name="Login" value="Enter">
+                        <input class="btn btn-success" type="submit" name="ske" value="Enter">
                     </form>
-                    
+
                     <h1>admin SKe</h1>
                 </div>
             </div>

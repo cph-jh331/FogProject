@@ -65,7 +65,7 @@
             <div id="loginbox" class="col-lg-4">
                 <div class="form-group">
                     <form action="controllerServlet" method="post">
-                        <input type="hidden" name="action" value="login"/>
+                        <input type="hidden" name="action" value="customerlogin"/>
                         <input class="input-group" type="text" name="email" value="" placeholder="email" required/>
                         <input class="input-group" type="password" name="password" value="" placeholder="password"  required>
                         <input class="btn btn-success" type="submit" name="Login" value="Enter">
