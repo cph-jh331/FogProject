@@ -138,8 +138,8 @@ public class ControllerServlet extends HttpServlet {
             String width = request.getParameter("width");
             String height = request.getParameter("height");
             //skal flyttes ud til logicCtrl, plus der skal være en topDrawing.
-            SideDrawing topd = new SideDrawing();
-            String svgInlineTop = topd.createSideView(length, width, height);
+            SideDrawing sideDrawing = new SideDrawing();
+            String svgInlineTop = sideDrawing.createSideView(length, width, height);
             session.setAttribute("topDrawing", svgInlineTop);
             RequestDispatcher rd = request.getRequestDispatcher("drawing.jsp");
             rd.forward(request, response);
