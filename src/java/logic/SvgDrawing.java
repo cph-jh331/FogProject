@@ -8,9 +8,9 @@ public class SvgDrawing {
     private String dateCreated;
     private String dateAccepted;
     private boolean accepted = false;
+    private int empId;
 
-    public SvgDrawing(int svgId, String svgInline, int userId, String dateCreated, String dateAccepted, boolean accepted)
-    {
+    public SvgDrawing(int svgId, String svgInline, int userId, String dateCreated, String dateAccepted, boolean accepted) {
         this.svgId = svgId;
         this.svgInline = svgInline;
         this.userId = userId;
@@ -19,75 +19,76 @@ public class SvgDrawing {
         this.accepted = accepted;
     }
 
+    public SvgDrawing(int svgId,int customerId, String dateCreated,int empId,String dateAccept,String svgImage) {
+        this.svgId = svgId;
+        this.userId = userId;
+        this.dateCreated = dateCreated;
+        this.empId = empId;
+        this.dateAccepted = dateAccept;
+        this.svgInline = svgImage;
+        
+    }
+
     /**
      * @return the svgInline
      */
-    public String getSvgInline()
-    {
+    public String getSvgInline() {
         return svgInline;
     }
 
     /**
      * @return the userId
      */
-    public int getUserId()
-    {
+    public int getUserId() {
         return userId;
     }
 
     /**
      * @return the accepted
      */
-    public boolean isAccepted()
-    {
+    public boolean isAccepted() {
         return accepted;
     }
 
     /**
      * @param svgInline the svgInline to set
      */
-    public void setSvgInline(String svgInline)
-    {
+    public void setSvgInline(String svgInline) {
         this.svgInline = svgInline;
     }
 
     /**
      * @param userId the userId to set
      */
-    public void setUserId(int userId)
-    {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
     /**
      * @param accepted the accepted to set
      */
-    public void setAccepted(boolean accepted)
-    {
+    public void setAccepted(boolean accepted) {
         this.accepted = accepted;
     }
 
     /**
      * @return the svgId
      */
-    public int getSvgId()
-    {
+    public int getSvgId() {
         return svgId;
     }
 
     /**
      * @return the dateCreated
      */
-    public String getDateCreated()
-    {
+    public String getDateCreated() {
         return dateCreated;
     }
 
     /**
      * @return the dateAccepted
      */
-    public String getDateAccepted()
-    {
+    public String getDateAccepted() {
         return dateAccepted;
     }
 

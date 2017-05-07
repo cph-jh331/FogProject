@@ -10,8 +10,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import logic.SvgDrawing;
 
 /**
  *
@@ -102,8 +105,33 @@ public class UserMapper {
 
             Logger.getLogger(UserMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
+
+    public List<SvgDrawing> getDrawings(int userId) {
+        String sql = "select * from Svg where userId = ?";
+        List<SvgDrawing> svgDrawings = new ArrayList<>();
+        try {
+            PreparedStatement preStmt = conn.prepareStatement(sql);
+            preStmt.setInt(1, userId);
+            ResultSet rs = preStmt.executeQuery();
+            while (rs.next()) {
+                int svgId = rs.getInt("svgId");
+                int customerId = rs.getInt("customerId");
+                String dateCreated = rs.getString("dateCreated");
+                int empId = rs.getInt("empId");
+                String dateAccept = rs.getString("dateAccept");
+                String svgImage = rs.getString("svgImage");
+                return (List<SvgDrawing>) new SvgDrawing(svgId, customerId, dateCreated, empId, dateAccept, svgImage);
+                
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return svgDrawings;
+    }
+
+}
 
 //    public void insertData(String firstname, String lastname, String adress, String zip, String city, String phone, String email, String password1, String password2, Hashtable errors) throws SQLException {
 //        
@@ -142,4 +170,4 @@ public class UserMapper {
 //            System.out.println("Error in connection::" + ex.getCause());
 //        }
 //    }
-}
+
