@@ -73,6 +73,7 @@
 
         <div class="container">
             <h1>Hello World!<%= user.getUserName()%> </h1>
+
             <div class="jumbotron">
                 <h2> Lav en tegning</h2>
                 <form action="controllerServlet" method="post">
@@ -87,6 +88,12 @@
 
         </div>
 
+
+
+            
+        
+                
+            
 
     </body>
 </html>
