@@ -21,8 +21,8 @@
     <body>
         <div class="container">
             <div class="jumbotron">
-                <%String drawing = (String) request.getSession().getAttribute("drawing");%>
-                <%=drawing%>
+                <%String topDrawing = (String) request.getSession().getAttribute("topDrawing");%>
+                <%=topDrawing%>
             </div>
         </div>
     </body>
