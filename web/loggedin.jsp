@@ -74,7 +74,9 @@
 
         <div class="container">
             <h1>Hello World!<%= user.getUserName()%> </h1>
-
+            
+        </div>
+                
             
     </body>
 </html>
