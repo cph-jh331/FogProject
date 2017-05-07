@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import logic.LogicCtrl;
-import logic.TopDrawing;
+import logic.SideDrawing;
 
 @WebServlet(name = "ControllerServlet", urlPatterns
         =
@@ -131,13 +131,15 @@ public class ControllerServlet extends HttpServlet {
             return;
         }
 
+        //ikke done.
         if (action.equals("genDrawing"))
         {
             String length = request.getParameter("length");
             String width = request.getParameter("width");
             String height = request.getParameter("height");
-            TopDrawing topd = new TopDrawing();
-            String svgInlineTop = topd.createSvg(length, width, height);
+            //skal flyttes ud til logicCtrl, plus der skal være en topDrawing.
+            SideDrawing topd = new SideDrawing();
+            String svgInlineTop = topd.createSideView(length, width, height);
             session.setAttribute("topDrawing", svgInlineTop);
             RequestDispatcher rd = request.getRequestDispatcher("drawing.jsp");
             rd.forward(request, response);

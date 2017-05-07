@@ -65,7 +65,6 @@
                                 </form>
                             </div>
                         </li>
-
                     </ul>
                 </div>
             </div>
@@ -84,16 +83,14 @@
                     <input type="submit" value="Generer tegning">
                 </form>
             </div>
-
-
         </div>
 
 
 
-            
-        
-                
-            
+
+
+
+
 
     </body>
 </html>
