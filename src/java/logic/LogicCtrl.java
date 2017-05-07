@@ -35,6 +35,12 @@ public class LogicCtrl {
         User user = dataCtrl.validateCustomer(email, password);
         return user;
     }
+    public User checkAdminLogin(String email, String password)
+    {
+       User user = dataCtrl.validateAdmin(email, password);
+       
+        return user;
+    }
 
     public boolean checkAdmin(User user)
     {

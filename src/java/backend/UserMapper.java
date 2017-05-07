@@ -22,28 +22,24 @@ public class UserMapper {
 
     private DBConnector dbc;
     private Connection conn;
-    
-    public UserMapper(Connection conn){
+
+    public UserMapper(Connection conn) {
         this.conn = conn;
     }
-    
-    public UserMapper(){
+
+    public UserMapper() {
         this.dbc = new DBConnector();
         this.conn = dbc.connectDB();
     }
 
-
-    public User validateCustomer(String email, String pass)
-    {
+    public User validateCustomer(String email, String pass) {
         String sql = "select * from Customer where userEmail = ? && password = ?;";
-        try
-        {
+        try {
             PreparedStatement preStmt = conn.prepareStatement(sql);
             preStmt.setString(1, email);
             preStmt.setString(2, pass);
             ResultSet rs = preStmt.executeQuery();
-            if (rs.next())
-            {
+            if (rs.next()) {
                 int id = rs.getInt("customerId");
                 String firstname = rs.getString("userName");
                 String lastName = rs.getString("userLastname");
@@ -53,51 +49,44 @@ public class UserMapper {
                 int userPhone = rs.getInt("userPhone");
                 String mail = rs.getString("userEmail");
                 boolean isAdmin = rs.getBoolean("admin");
-                
 
                 return new User(id, mail, firstname, lastName, address, userCity, zip, userPhone, isAdmin);
             }
-        } catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             Logger.getLogger(UserMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return null;
 
     }
 
-    public User validateUser(String email, String pass)
-    {
+    public User validateUser(String email, String pass) {
         String sql = "select * from FogUser where empEmail = ? && password = ?;";
 
-        try
-        {
+        try {
             PreparedStatement preStmt = conn.prepareStatement(sql);
             preStmt.setString(1, email);
             preStmt.setString(2, pass);
             ResultSet rs = preStmt.executeQuery();
-            if (rs.next())
-            {
+            if (rs.next()) {
                 int id = rs.getInt("empId");
                 String mail = rs.getString("empEmail");
                 String name = rs.getString("empName");
+                boolean admin = rs.getBoolean("admin");
 
-                return new User(id, mail, name);
+                return new User(id, mail, name, admin);
             }
-        } catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             Logger.getLogger(UserMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
-    public void insertUser(User user)
-    {
+    public void insertUser(User user) {
 
         String sql = "insert into Customer (userName, userLastname, userAddress, userZip, userCity, userPhone, userEmail, password) values (?,?,?,?,?,?,?,?);";
 
-        try
-        {
+        try {
             PreparedStatement preStmt = conn.prepareStatement(sql);
             preStmt.setString(1, user.getUserName());
             preStmt.setString(2, user.getLastName());
@@ -109,8 +98,7 @@ public class UserMapper {
             preStmt.setString(8, user.getPassword());
             preStmt.executeUpdate();
 
-        } catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
 
             Logger.getLogger(UserMapper.class.getName()).log(Level.SEVERE, null, ex);
         }

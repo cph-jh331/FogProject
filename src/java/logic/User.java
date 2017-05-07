@@ -22,10 +22,11 @@ public class User {
     private String password;
     private boolean isAdmin = false;
     
-    public User(int userId, String email, String userName) {
+    public User(int userId, String email, String userName, boolean admin) {
         this.userId = userId;
         this.email = email;
         this.userName = userName;
+        this.isAdmin = admin;
 
     }
 
