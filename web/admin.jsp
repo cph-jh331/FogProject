@@ -1,14 +1,13 @@
 <%-- 
     Document   : login
-    Created on : 31-03-2017, 10:17:34
-    Author     : Pva
+    Created on : 06-04-2017, 21:49:03
+    Author     : Lasse, Per, Marco, John
 --%>
 
 <%@page import="logic.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <% User user = (User) session.getAttribute("user");%>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,9 +17,10 @@
         <link href="https://fonts.googleapis.com/css?family=Droid+Serif|Roboto" rel="stylesheet">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <title>Welcome to Fog  </title>
+        <title>Login Page</title>
     </head>
     <body>
+
         <nav id="navbar-color" class="navbar navbar-default">
             <div class="container-fluid">
                 <!--Nav bar logo with link to picture. -->
@@ -45,59 +45,34 @@
                     </ul>
                     <!-- Setup of the right side of nav-bar 2 different links for now. No href yet missing pages -->
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="active"><a href="adminpanel.jsp"> Admin accept</a></li>
-                        <li><a href="adminpanel.jsp"><span class="glyphicon glyphicon-check"></span> KundeKartotek</a></li>
-                        
-                       <li><a><span class="glyphicon glyphicon-user"></span><%= user.getUserName()%></a></li>
-
-                       
+                        <li><a href="admin.jsp"><span class="glyphicon glyphicon-wrench"></span>Admin</a></li>
+                        <li><a href="signup.jsp"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
+                        <li id="makeLink" class="list-group-item">
+                            <div id="makeLink2" class="input-group">
+                                <form action="controllerServlet" method="post">
+                                    <input type="hidden" name="action" value=""/>
+                                    <input class="btn btn-success" type="submit" name="Login" value="Login"/>
+                                </form>
+                            </div>
+                        </li>
                         <!--<li><a href="login.jsp"><span class="glyphicon glyphicon-login"></span>Login</a></li>-->
                     </ul>
                 </div>
             </div>
         </nav>
-
-
+        <% User user = (User) session.getAttribute("user");%>
         <div class="container">
-            <h1>Hello World!<%= user.getUserName()%> </h1>
-
-            <div class="jumbotron">
-                <form action="controllerServlet" method="post">
-
-                    <input type="hidden" name="action" value="seeTypeCategory"/>
-
-                    <h2> Tilføj og fjern materialer:</h2>
-                    <select class="btn btn-success dropdown-toggle, col-lg-10" name="TypeCategory">
-                        
-                        <ul>
-                        <li class="dropdown-header">Type< </li>
-                        <option class="form-control" value="Bolt/møtrik">Bolt/Møtrik</option>                    
-                        <option class="form-control" value="Hulbånd">Hulbånd</option>
-                        <option class="form-control" value="Overstern">Overstern</option>                    
-                        <option class="form-control" value="Rem">Rem</option>                    
-                        <option class="form-control"  value="Skur">Skur</option>                    
-                        <option class="form-control" value="Skruer">Skruer</option>                                            
-                        <option class="form-control" value="Stolpe">Stolpe</option>                    
-                        <option class="form-control" value="Spær">Spær</option>                    
-                        <option class="form-control" value="Tag">Tag</option>
-                        <option class="form-control" value="Understern">Understern</option>                    
-                        <option class="form-control" value="Vandbræt">Vandbræt</option>                    
-                        </ul>                    
-                    </select>
-                    <input class="btn btn-group-lg" type="submit" value="vælg">
-
-
-                </form>
-            </div>
-            <div class="jumbotron">
-                <h2> Lav en stykliste til en carport med mål</h2>
+            <div id="loginbox" class="col-lg-4">
+                <div class="form-group">
                     <form action="controllerServlet" method="post">
-                    <input type="hidden" name="action" value="seelist">
-                    <input type="number" name="length" value="" placeholder="Længde" required  />
-                    <input type="number" name="width" value="" placeholder="Bredde" required />
-                    <input type="number" name="height" value="" placeholder="Højde" required/>
-                    <input type="submit" value="trykher">
-                </form>
+                        <input type="hidden" name="action" value="login"/>
+                        <input class="input-group" type="text" name="email" value="" placeholder="email" required/>
+                        <input class="input-group" type="password" name="password" value="" placeholder="password"  required>
+                        <input class="btn btn-success" type="submit" name="Login" value="Enter">
+                    </form>
+                    
+                    <h1>admin SKe</h1>
+                </div>
             </div>
         </div>
     </body>

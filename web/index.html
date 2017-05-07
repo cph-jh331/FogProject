@@ -41,14 +41,21 @@ and open the template in the editor.
                         <li><a href="https://johannesfog.dk/byggecenter/om-fog/">Om Fog</a></li>
                     </ul>
                     <!-- Setup of the right side of nav-bar 2 different links for now. No href yet missing pages -->
+
                     <ul class="nav navbar-nav navbar-right">
+
                         <li><a href="signup.jsp"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
                         <li id="makeLink" class="list-group-item">
                             <div id="makeLink2" class="input-group">
                                 <form action="controllerServlet" method="post">
-                                    <input type="hidden" name="action" value=""/>
-                                    <input class="btn btn-danger" type="submit" name="Login" value="Login"/>
+                                    <input type="hidden" name="action" value="customer"/>
+                                    <input class="btn btn-success" type="submit" name="Login" value="Login213"/>
                                 </form>
+                                <form action="controllerServlet" method="post">
+                                    <input type="hidden" name="action" value="admin"/>
+                                    <input class="btn btn-success" type="submit" name="Admin" value="Admin345"/> 
+                                </form>
+
                             </div>
                         </li>
                         <!--<li><a href="login.jsp"><span class="glyphicon glyphicon-login"></span>Login</a></li>-->

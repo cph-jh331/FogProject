@@ -61,7 +61,32 @@ public class ControllerServlet extends HttpServlet {
             rd.forward(request, response);
         }
 
-        if (action.equals("login"))
+        if (action.equals("admin"))
+        {
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+            user = lc.checkLogin(email, password);
+            if (user == null)
+            {
+                session.invalidate();
+                RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
+                rd.forward(request, response);
+            } else
+            {
+                session.setAttribute("user", user);
+                if (lc.checkAdmin(user) == true)
+                {
+                    RequestDispatcher rd = request.getRequestDispatcher("logedadmin.jsp");
+                    rd.forward(request, response);
+                } else
+                {
+                    RequestDispatcher rd = request.getRequestDispatcher("index.html");
+                    rd.forward(request, response);
+                }
+            }
+            return;
+        }
+        if (action.equals("customer"))
         {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
@@ -74,13 +99,13 @@ public class ControllerServlet extends HttpServlet {
             } else
             {
                 session.setAttribute("user", user);
-                if (lc.checkAdmin(user) == true)
+                if (lc.checkAdmin(user) == false)
                 {
-                    RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
+                    RequestDispatcher rd = request.getRequestDispatcher("loggedin.jsp");
                     rd.forward(request, response);
                 } else
                 {
-                    RequestDispatcher rd = request.getRequestDispatcher("loggedin.jsp");
+                    RequestDispatcher rd = request.getRequestDispatcher("signup.jsp");
                     rd.forward(request, response);
                 }
             }
@@ -109,7 +134,28 @@ public class ControllerServlet extends HttpServlet {
 
         }
 
-        if (user != null && action.equals(""))
+        if (user != null && action.equals("admin"))
+        {
+            if (lc.checkAdmin(user) == true)
+            {
+                RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
+                rd.forward(request, response);
+            } else
+            {
+                RequestDispatcher rd = request.getRequestDispatcher("loggedin.jsp");
+                rd.forward(request, response);
+            }
+            return;
+        }
+
+        if (user == null)
+        {
+            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+            rd.forward(request, response);
+            return;
+        }
+        
+        if (user != null && action.equals("customer"))
         {
             if (lc.checkAdmin(user) == true)
             {
@@ -183,14 +229,14 @@ public class ControllerServlet extends HttpServlet {
 
             return;
         }
-        if(action.equals("sendTegning")){
-            //Parameter kommer fra tegning.jsp
-            String højde = request.getParameter("Højde");
-            String bredde = request.getParameter("bredde");
-            String længde = request.getParameter("længde");
-            lc.createSvg(højde, længde, bredde);
-            
-        }
+//        if(action.equals("sendTegning")){
+//            //Parameter kommer fra tegning.jsp
+//            String højde = request.getParameter("Højde");
+//            String bredde = request.getParameter("bredde");
+//            String længde = request.getParameter("længde");
+//            lc.createSvg(højde, længde, bredde);
+//            
+//        }
 
     }
 //        if(action.equals("blueAccept")){
