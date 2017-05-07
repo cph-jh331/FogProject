@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import logic.LogicCtrl;
+import logic.TopDrawing;
 
 @WebServlet(name = "ControllerServlet", urlPatterns
         = {
@@ -42,7 +43,10 @@ public class ControllerServlet extends HttpServlet {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         LogicCtrl lc = new LogicCtrl();
-
+        
+        //TopDrawing topDrawingSvg = new TopDrawing();
+        //topDrawingSvg.createSvg(length, width, height);
+        
         if (action == null) {
             RequestDispatcher rd = request.getRequestDispatcher("index.html");
             rd.forward(request, response);
