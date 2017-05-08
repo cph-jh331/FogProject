@@ -266,9 +266,10 @@ public class ControllerServlet extends HttpServlet {
         if(action.equals("savedrawing")){
             String svgImage = (String) session.getAttribute("topDrawing");
             user = (User) session.getAttribute("user");
-            int userId = user.getUserId();
-            lc.saveSvg(svgImage, userId);
-            session.setAttribute("listDrawings", lc.svgList(userId));
+            //int userId = user.getUserId();
+            int customerId = user.getCustomerId();
+            lc.saveSvg(svgImage, customerId);
+            session.setAttribute("listDrawings", lc.svgList(customerId));
             RequestDispatcher rd = request.getRequestDispatcher("loggedin.jsp");
             rd.forward(request, response);
             return;

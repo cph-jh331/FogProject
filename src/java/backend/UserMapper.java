@@ -107,21 +107,23 @@ public class UserMapper {
         }
     }
 
-    public List<SvgDrawing> getDrawings(int userId) {
-        String sql = "select * from Svg where userId = ?";
+    public List<SvgDrawing> getDrawings(int customerId) {
+        String sql = "select * from Svg where customerId = ?";
         List<SvgDrawing> svgDrawings = new ArrayList<>();
         try {
             PreparedStatement preStmt = conn.prepareStatement(sql);
-            preStmt.setInt(1, userId);
+            preStmt.setInt(1, customerId);
             ResultSet rs = preStmt.executeQuery();
             while (rs.next()) {
                 int svgId = rs.getInt("svgId");
-                int customerId = rs.getInt("customerId");
+                customerId = rs.getInt("customerId");
                 String dateCreated = rs.getString("dateCreated");
                 int empId = rs.getInt("empId");
                 String dateAccept = rs.getString("dateAccept");
                 String svgImage = rs.getString("svgImage");
-                return (List<SvgDrawing>) new SvgDrawing(svgId, customerId, dateCreated, empId, dateAccept, svgImage);
+
+                svgDrawings.add(new SvgDrawing(svgId, customerId, dateCreated, empId, dateAccept, svgImage));
+               
                 
             }
 
