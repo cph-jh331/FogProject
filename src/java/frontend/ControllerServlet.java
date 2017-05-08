@@ -120,6 +120,7 @@ public class ControllerServlet extends HttpServlet {
                 session.setAttribute("user", user);
                 if (lc.checkAdmin(user) == false)
                 {
+                    session.setAttribute("listDrawings", lc.svgList(user.getUserId()));
                     RequestDispatcher rd = request.getRequestDispatcher("loggedin.jsp");
                     rd.forward(request, response);
                 } else
@@ -137,9 +138,7 @@ public class ControllerServlet extends HttpServlet {
             String length = request.getParameter("length");
             String width = request.getParameter("width");
             String height = request.getParameter("height");
-            //skal flyttes ud til logicCtrl, plus der skal være en topDrawing.
-            SideDrawing sideDrawing = new SideDrawing();
-            String svgInlineTop = sideDrawing.createSideView(length, width, height);
+            String svgInlineTop = lc.createSvgSideView(height, length, width);
             session.setAttribute("topDrawing", svgInlineTop);
             RequestDispatcher rd = request.getRequestDispatcher("drawing.jsp");
             rd.forward(request, response);
@@ -263,6 +262,19 @@ public class ControllerServlet extends HttpServlet {
             rd.forward(request, response);
 
             return;
+        }
+        if(action.equals("savedrawing")){
+            String svgImage = (String) session.getAttribute("topDrawing");
+            user = (User) session.getAttribute("user");
+            int userId = user.getUserId();
+            lc.saveSvg(svgImage, userId);
+            session.setAttribute("listDrawings", lc.svgList(userId));
+            RequestDispatcher rd = request.getRequestDispatcher("loggedin.jsp");
+            rd.forward(request, response);
+            return;
+        }
+        if(action.equals("refusedrawing")){
+            
         }
 //        if(action.equals("sendTegning")){
 //            //Parameter kommer fra tegning.jsp

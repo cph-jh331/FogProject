@@ -10,5 +10,10 @@ package logic;
  * @author bloch
  */
 public class TopDrawing {
-    
+    public String createTopView(String len, String wid, String hei){
+        String svg1 = "";
+        
+        return svg1;
+        
+    }
 }

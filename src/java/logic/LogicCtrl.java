@@ -83,15 +83,29 @@ public class LogicCtrl {
         return user;
     }
     
-//    public String createSvg(String højde, String længde, String bredde){
-//        SvgDrawing svgImage = new SvgDrawing(id, højde, id, længde, bredde, true);
-//        return svgImage;
-//    }
-    public SvgDrawing saveSvg (int svgId, String svgInline, int userId, String dateCreated, String dateAccepted, boolean accepted){
-        SvgDrawing svgDrawing = new SvgDrawing(svgId, svgInline, userId, dateCreated, dateAccepted, accepted);
-        dataCtrl.insertSvg(svgInline, userId);
-        return svgDrawing;
+    public String createSvgSideView(String height, String length, String width){
+        SideDrawing sideDrawing = new SideDrawing();
+        String svgImage = sideDrawing.createSideView(length, width, height);
+        return svgImage;
     }
+    public String createSvgTopView(String height, String length, String width){
+        TopDrawing topDrawing = new TopDrawing();
+        String svgImage = topDrawing.createTopView(length, width, height);
+        return svgImage;
+    }
+//    public SvgDrawing saveSvg (int svgId, String svgInline, int userId, String dateCreated, String dateAccepted, boolean accepted){
+//        SvgDrawing svgDrawing = new SvgDrawing(svgId, svgInline, userId, dateCreated, dateAccepted, accepted);
+//        dataCtrl.insertSvg(svgInline, userId);
+//        return svgDrawing;
+//    }
+     public void saveSvg (String svgInline, int userId){
+        dataCtrl.insertSvg(svgInline, userId);
+       
+    }
+     public List<SvgDrawing> svgList(int userId){
+         return dataCtrl.getDrawings(userId);
+         
+     }
     //CreateSvg
     //SaveSvg
 }
