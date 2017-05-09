@@ -21,6 +21,7 @@ public class User {
     private int phone;
     private String password;
     private boolean isAdmin = false;
+    private int customerId;
     
     public User(int userId, String email, String userName, boolean admin) {
         this.userId = userId;
@@ -30,6 +31,22 @@ public class User {
 
     }
 
+    public User(int customerId ,String email, String userName, String lastName, String address, String city, int zip, int phone, String password) {
+        this.customerId = customerId;
+        this.email = email;
+        this.userName = userName;
+        this.lastName = lastName;
+        this.address = address;
+        this.city = city;
+        this.zip = zip;
+        this.phone = phone;
+        this.password = password;
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+    
     public User(int userId, String email, String firstName, String lastName, String address, String city, int zip, int phone, boolean isAdmin) {
         this.userId = userId;
         this.email = email;

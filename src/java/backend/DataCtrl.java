@@ -78,8 +78,8 @@ public class DataCtrl {
         svgMap.saveDrawing(SvgInLine, userId);
     }
 
-    public List<SvgDrawing> getDrawings(int userId) {
-        return userMap.getDrawings(userId);
+    public List<SvgDrawing> getDrawings(int customerId) {
+        return userMap.getDrawings(customerId);
 
     }
 

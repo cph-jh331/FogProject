@@ -98,12 +98,12 @@ public class LogicCtrl {
 //        dataCtrl.insertSvg(svgInline, userId);
 //        return svgDrawing;
 //    }
-     public void saveSvg (String svgInline, int userId){
-        dataCtrl.insertSvg(svgInline, userId);
+     public void saveSvg (String svgInline, int customerId){
+        dataCtrl.insertSvg(svgInline, customerId);
        
     }
-     public List<SvgDrawing> svgList(int userId){
-         return dataCtrl.getDrawings(userId);
+     public List<SvgDrawing> svgList(int customerId){
+         return dataCtrl.getDrawings(customerId);
          
      }
     //CreateSvg

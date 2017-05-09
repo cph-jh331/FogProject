@@ -95,32 +95,29 @@
                     <th> Dato oprettet: </th>
 
                     </thead>
-                    <% for (int i = 0; i < listDrawing.size(); i++) {
-                    %>
+                    <tbody class="bg-primary">
+                        
+                    <%
+                            for (SvgDrawing listDrawings : listDrawing)
+                            {
+                        %>
                     <tr class="btn-basic">
                         <td>
-                            <%=listDrawing.get(i).getSvgId()%>
-                        </td>
-                        <td> <%=listDrawing.get(i).getDateCreated()%> 
+                            <%=listDrawings.getSvgId()%>
                         </td>
                         <td>
-
-                            <%}
-                            %>                
+                            <%=listDrawings.getDateCreated()%>
                         </td>
+                        <td>
+                            <%}%>  
+                        </td>
+
                     </tr>
 
+                    </tbody>
                 </table>
             </div>
         </div>
-
-
-
-
-
-
-
-
 
     </body>
 </html>
