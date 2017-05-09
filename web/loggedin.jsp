@@ -1,4 +1,4 @@
-<%-- 
+    <%-- 
     Document   : login
     Created on : 31-03-2017, 10:17:34
     Author     : Pva
@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
     <% User user = (User) session.getAttribute("user");%>
-    <% List<SvgDrawing> svgDrawings = (List<SvgDrawing>) session.getAttribute("svgDrawings");%>
+   
 
     <head>
         <meta charset="UTF-8">
@@ -96,10 +96,7 @@
 
                     </thead>
                     <tbody class="bg-primary">
-                    <p> Antal elemneter i listen: <%= svgDrawings.size()%></p>   
-                    <%
-                              
-                        %>
+                  
                     <tr class="btn-basic">
                         <td>
                             
@@ -117,3 +114,10 @@
 
     </body>
 </html>
+ <%-- <p> Antal elemneter i listen: <%= svgDrawings.size()%></p>   
+                    <!--
+    <% List<SvgDrawing> svgDrawings = (List<SvgDrawing>) session.getAttribute("svgDrawings");%>  
+    -->
+                    <%
+                              
+%> --%>
