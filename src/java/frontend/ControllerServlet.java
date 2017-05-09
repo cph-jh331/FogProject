@@ -120,7 +120,7 @@ public class ControllerServlet extends HttpServlet {
                 session.setAttribute("user", user);
                 if (lc.checkAdmin(user) == false)
                 {
-                    session.setAttribute("listDrawings", lc.svgList(user.getUserId()));
+                    session.setAttribute("listDrawings", lc.svgList(user.getCustomerId()));
                     RequestDispatcher rd = request.getRequestDispatcher("loggedin.jsp");
                     rd.forward(request, response);
                 } else
@@ -269,7 +269,7 @@ public class ControllerServlet extends HttpServlet {
             //int userId = user.getUserId();
             int customerId = user.getCustomerId();
             lc.saveSvg(svgImage, customerId);
-            session.setAttribute("listDrawings", lc.svgList(customerId));
+            session.setAttribute("svgDrawings", lc.svgList(customerId));
             RequestDispatcher rd = request.getRequestDispatcher("loggedin.jsp");
             rd.forward(request, response);
             return;
