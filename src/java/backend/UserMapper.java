@@ -108,11 +108,11 @@ public class UserMapper {
     }
 
     public List<SvgDrawing> getDrawings(int customerId) {
-        String sql = "select * from Svg where customerId = ?";
+        String sql = "select * from Svg where customerId = 1";
         List<SvgDrawing> svgDrawings = new ArrayList<>();
         try {
             PreparedStatement preStmt = conn.prepareStatement(sql);
-            preStmt.setInt(1, customerId);
+           //preStmt.setInt(1, customerId);
             ResultSet rs = preStmt.executeQuery();
             while (rs.next()) {
                 int svgId = rs.getInt("svgId");

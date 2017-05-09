@@ -11,6 +11,7 @@
 <!DOCTYPE html>
 <html>
     <% User user = (User) session.getAttribute("user");%>
+    <% List<SvgDrawing> svgDrawings = (List<SvgDrawing>) session.getAttribute("svgDrawings");%>
    
 
     <head>
@@ -90,6 +91,7 @@
                 <table class="table table-bordered">
 
                     <p style="color: white"> Dine tegninger: </p>
+                    <p> Antal elemneter i listen: <%= svgDrawings.size()%></p>
                     <thead class="bg-primary">
                     <th> Tegning nummer: </th>
                     <th> Dato oprettet: </th>

@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import logic.LogicCtrl;
 import logic.SideDrawing;
+import logic.SvgDrawing;
 
 @WebServlet(name = "ControllerServlet", urlPatterns
         =
@@ -269,7 +270,8 @@ public class ControllerServlet extends HttpServlet {
             //int userId = user.getUserId();
             int customerId = user.getCustomerId();
             lc.saveSvg(svgImage, customerId);
-            session.setAttribute("svgDrawings", lc.svgList(customerId));
+            List<SvgDrawing> list = lc.svgList(customerId);
+            session.setAttribute("svgDrawings", list);
             RequestDispatcher rd = request.getRequestDispatcher("loggedin.jsp");
             rd.forward(request, response);
             return;
