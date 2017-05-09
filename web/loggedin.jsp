@@ -4,11 +4,15 @@
     Author     : Pva
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="logic.SvgDrawing"%>
 <%@page import="logic.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <% User user = (User) session.getAttribute("user");%>
+    <% List<SvgDrawing> svgDrawings = (List<SvgDrawing>) session.getAttribute("svgDrawings");%>
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -82,15 +86,34 @@
                     <input type="number" name="height" value="" placeholder="Højde" required/>
                     <input type="submit" value="Generer tegning">
                 </form>
+
+                <table class="table table-bordered">
+
+                    <p style="color: white"> Dine tegninger: </p>
+                    <thead class="bg-primary">
+                    <th> Tegning nummer: </th>
+                    <th> Dato oprettet: </th>
+
+                    </thead>
+                    <tbody class="bg-primary">
+                    <p> Antal elemneter i listen: <%= svgDrawings.size()%></p>   
+                    <%
+                              
+                        %>
+                    <tr class="btn-basic">
+                        <td>
+                            
+                        </td>
+                        <td>
+                           
+                        </td>
+                       </tr>
+                            
+
+                    </tbody>
+                </table>
             </div>
         </div>
-
-
-
-
-
-
-
 
     </body>
 </html>

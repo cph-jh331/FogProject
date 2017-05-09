@@ -23,6 +23,16 @@
             <div class="jumbotron">
                 <%String topDrawing = (String) request.getSession().getAttribute("topDrawing");%>
                 <%=topDrawing%>
+                <form action="controllerServlet" method="post">
+                        <input type="hidden" name="action" value="savedrawing"/>
+                        <input type="submit" class="btn-success" value="Accepter tegning"/>
+                </form>
+                <form action="controllerServlet" method="post">
+                        <input type="hidden" name="action" value="refusedrawing"/>
+                        <input type="submit" class="btn-danger" value="Fortryd tegning"/>
+                </form>        
+                        
+                    </form>
             </div>
         </div>
     </body>
