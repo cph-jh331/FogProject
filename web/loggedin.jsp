@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
     <% User user = (User) session.getAttribute("user");%>
-    <% List<SvgDrawing> listDrawing = (List<SvgDrawing>) session.getAttribute("listDrawings");%>
+    <% List<SvgDrawing> svgDrawings = (List<SvgDrawing>) session.getAttribute("svgDrawings");%>
 
     <head>
         <meta charset="UTF-8">
@@ -96,23 +96,19 @@
 
                     </thead>
                     <tbody class="bg-primary">
-                        
+                    <p> Antal elemneter i listen: <%= svgDrawings.size()%></p>   
                     <%
-                            for (SvgDrawing listDrawings : listDrawing)
-                            {
+                              
                         %>
                     <tr class="btn-basic">
                         <td>
-                            <%=listDrawings.getSvgId()%>
+                            
                         </td>
                         <td>
-                            <%=listDrawings.getDateCreated()%>
+                           
                         </td>
-                        <td>
-                            <%}%>  
-                        </td>
-
-                    </tr>
+                       </tr>
+                            
 
                     </tbody>
                 </table>

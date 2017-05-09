@@ -121,6 +121,7 @@ public class UserMapper {
                 int empId = rs.getInt("empId");
                 String dateAccept = rs.getString("dateAccept");
                 String svgImage = rs.getString("svgImage");
+                
 
                 svgDrawings.add(new SvgDrawing(svgId, customerId, dateCreated, empId, dateAccept, svgImage));
                
