@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
+import logic.Customer;
 import logic.Part;
 import logic.User;
 import logic.Register;
@@ -53,17 +54,17 @@ public class DataCtrl {
         return partMap.getMiscParts();
     }
 
-    public User validateCustomer(String email, String password) {
+    public Customer validateCustomer(String email, String password) {
         return userMap.validateCustomer(email, password);
         //return userMap.validateUser(email, password);
     }
 
-    public User validateAdmin(String email, String password) {
+    public Customer validateAdmin(String email, String password) {
         return userMap.validateUser(email, password);
     }
 
-    public void insertUser(User user) {
-        userMap.insertUser(user);
+    public void insertUser(Customer customer) {
+        userMap.insertUser(customer);
     }
 
     public void addPart(Part part) {
@@ -74,8 +75,8 @@ public class DataCtrl {
         partMap.removePart(removeId);
     }
 
-    public void insertSvg(String SvgInLine, int userId) {
-        svgMap.saveDrawing(SvgInLine, userId);
+    public void insertSvg(String SvgInLine, int customerId) {
+        svgMap.saveDrawing(SvgInLine, customerId);
     }
 
     public List<SvgDrawing> getDrawings(int customerId) {

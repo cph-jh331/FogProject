@@ -6,7 +6,7 @@ public class SvgDrawing implements Serializable{
 
     private int svgId;
     private String svgInline;
-    private int userId;
+    private int customerId;
     private String dateCreated;
     private String dateAccepted;
     private boolean accepted = false;
@@ -15,7 +15,7 @@ public class SvgDrawing implements Serializable{
     public SvgDrawing(int svgId, String svgInline, int userId, String dateCreated, String dateAccepted, boolean accepted) {
         this.svgId = svgId;
         this.svgInline = svgInline;
-        this.userId = userId;
+        this.customerId = userId;
         this.dateCreated = dateCreated;
         this.dateAccepted = dateAccepted;
         this.accepted = accepted;
@@ -23,7 +23,7 @@ public class SvgDrawing implements Serializable{
 
     public SvgDrawing(int svgId,int customerId, String dateCreated,int empId,String dateAccept,String svgImage) {
         this.svgId = svgId;
-        this.userId = userId;
+        this.customerId = customerId;
         this.dateCreated = dateCreated;
         this.empId = empId;
         this.dateAccepted = dateAccept;
@@ -41,8 +41,8 @@ public class SvgDrawing implements Serializable{
     /**
      * @return the userId
      */
-    public int getUserId() {
-        return userId;
+    public int getCustomerId() {
+        return customerId;
     }
 
     /**
@@ -62,8 +62,8 @@ public class SvgDrawing implements Serializable{
     /**
      * @param userId the userId to set
      */
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
     /**

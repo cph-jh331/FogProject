@@ -5,11 +5,11 @@
 --%>
 
 <%@page import="java.util.List"%>
-<%@page import="logic.User"%>
+<%@page import="logic.Customer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <% User user = (User) session.getAttribute("user");%>
+    <% Customer customer = (Customer) session.getAttribute("user");%>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,7 +54,7 @@
         </nav>
         <div class="container">
             <%--Brugers tegninger til godkendelse--%>
-            <h1>Hej <%= user.getUserName()%> </h1>
+            <h1>Hej <%= customer.getCusName()%> </h1>
             <div class="jumbotron">
                 <form action="controllerServlet" method="post">
                     <input type="hidden" name="action" value=""/>
@@ -74,15 +74,15 @@
                     <%-- <% List<Svg> svgList = (List<Svg>) session.getAttribute("svgList");% --%>
                     <tr class="btn-basic">
                         <td>
-                            <%=user.getUserName()%>
+                            <%=customer.getCusName()%>
                         </td>
-                        <td> <%=user.getPhone()%> </td>
+                        <td> <%=customer.getCusPhone()%> </td>
                         <td>
-                            <%=user.getEmail()%>
+                            <%=customer.getCusEmail()%>
                         </td>
                         <td>
-                            <button class="btn-success" name="action" onclick="myFunction()">Vis tegning fra: <%= user.getUserName()%></button>
-                            <button id="myBtn" style="padding: 1px 2px; ">Vis tegning Fra: <%= user.getUserName()%></button>  <!-- The Modal -->
+                            <button class="btn-success" name="action" onclick="myFunction()">Vis tegning fra: <%= customer.getCusName()%></button>
+                            <button id="myBtn" style="padding: 1px 2px; ">Vis tegning Fra: <%= customer.getCusName()%></button>  <!-- The Modal -->
                             <div id="myModal" class="modal">
                                 <!-- Modal content -->
                                 <div class="modal-content">
@@ -92,7 +92,7 @@
                                     <div class="">
                                         <p></p>
                                     </div>
-                                    <button class="btn-success" name="action" onclick="myFunction()">Vis tegning fra: <%= user.getUserName()%></button>
+                                    <button class="btn-success" name="action" onclick="myFunction()">Vis tegning fra: <%= customer.getCusName()%></button>
                                 </div>
                                 <!--Vis tegning-->
                         </td>
@@ -114,11 +114,11 @@
 
                     <tr class="btn-basic">
                         <td>
-                            <%=user.getUserName()%>
+                            <%=customer.getCusName()%>
                         </td>
-                        <td> <%=user.getPhone()%> </td>
+                        <td> <%=customer.getCusPhone()%> </td>
                         <td>
-                            <%=user.getEmail()%>
+                            <%=customer.getCusEmail()%>
                         </td>
                         <td>
                             <%-- <form action="controllerServlet" method="post">
@@ -126,7 +126,7 @@
                             --%>
 
                             <div class="btn-success">
-                                <button id="Btn" style="padding: 1px 1px; ">Vis tegning Fra: <%= user.getUserName()%></button>  <!-- The Modal -->
+                                <button id="Btn" style="padding: 1px 1px; ">Vis tegning Fra: <%= customer.getCusName()%></button>  <!-- The Modal -->
                                 <div id="myModal" class="modal">
                                     <!-- Modal content -->
                                     <div class="modal-content">
@@ -137,7 +137,7 @@
                                         <div class="block">
                                             <p></p>
                                         </div>
-                                        <button class="btn-success" name="action" style="padding: 1px 2px; " onclick="myFunction()">Vis tegning fra: <%= user.getUserName()%></button>  
+                                        <button class="btn-success" name="action" style="padding: 1px 2px; " onclick="myFunction()">Vis tegning fra: <%= customer.getCusName()%></button>  
                                         </td>
                                         </tr>
                             </div>

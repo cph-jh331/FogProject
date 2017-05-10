@@ -6,13 +6,13 @@
 
 <%@page import="java.util.List"%>
 <%@page import="logic.Part"%>
-<%@page import="logic.User"%>
+<%@page import="logic.Customer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <%String type = (String) session.getAttribute("type");%>
     <%String category = (String) session.getAttribute("category");%>
-    <% User user = (User) session.getAttribute("user");%>
+    <% Customer customer = (Customer) session.getAttribute("user");%>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,7 +49,7 @@
                     </ul>
                     <!-- Setup of the right side of nav-bar 2 different links for now. No href yet missing pages -->
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><span class="glyphicon glyphicon-user"></span><%= user.getUserName()%></a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span><%= customer.getCusName()%></a></li>
 
 
                         </li>

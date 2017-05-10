@@ -6,11 +6,11 @@ Author     : Pva
 
 <%@page import="java.util.List"%>
 <%@page import="logic.SvgDrawing"%>
-<%@page import="logic.User"%>
+<%@page import="logic.Customer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <% User user = (User) session.getAttribute("user");%>
+    <% Customer customer = (Customer) session.getAttribute("user");%>
     <% List<SvgDrawing> svgDrawings = (List<SvgDrawing>) session.getAttribute("listDrawings");%>
 
 
@@ -76,7 +76,7 @@ Author     : Pva
         </nav>
 
         <div class="container">
-            <h1>Hello World!<%= user.getUserName()%> </h1>
+            <h1>Hello World!<%= customer.getCusName()%> </h1>
 
             <div class="jumbotron">
                 <h2> Lav en tegning</h2>
@@ -92,7 +92,7 @@ Author     : Pva
 
                     <p style="color: white"> Dine tegninger: </p>
                     <!-- user.getcustomerid er der for at se, om det rigtige id kommer ind -->
-                    <p> <%=user.getCustomerId()%>Antal elemneter i listen: <%= svgDrawings.size()%></p>
+                    <p> <%=customer.getCustomerId()%>Antal elemneter i listen: <%= svgDrawings.size()%></p>
                     <thead class="bg-primary">
                     <th> Tegning id: </th>
                     <th> Dato oprettet: </th>

@@ -6,7 +6,7 @@
 package frontend;
 
 import logic.Part;
-import logic.User;
+import logic.Customer;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -44,7 +44,7 @@ public class ControllerServlet extends HttpServlet {
 
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        Customer customer = (Customer) session.getAttribute("user");
         LogicCtrl lc = new LogicCtrl();
 
         //TopDrawing topDrawingSvg = new TopDrawing();
@@ -70,9 +70,9 @@ public class ControllerServlet extends HttpServlet {
             rd.forward(request, response);
             return;
         }
-        if (user != null && action.equals("admin"))
+        if (customer != null && action.equals("admin"))
         {
-            if (lc.checkAdmin(user) == true)
+            if (lc.checkAdmin(customer) == true)
             {
                 RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
                 rd.forward(request, response);
@@ -83,9 +83,9 @@ public class ControllerServlet extends HttpServlet {
             }
             return;
         }
-        if (user != null && action.equals("customer"))
+        if (customer != null && action.equals("customer"))
         {
-            if (lc.checkAdmin(user) == true)
+            if (lc.checkAdmin(customer) == true)
             {
                 RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
                 rd.forward(request, response);
@@ -113,17 +113,17 @@ public class ControllerServlet extends HttpServlet {
         {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            user = lc.checkAdminLogin(email, password);
+            customer = lc.checkAdminLogin(email, password);
 
-            if (user == null)
+            if (customer == null)
             {
                 session.invalidate();
                 RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
                 rd.forward(request, response);
             } else
             {
-                session.setAttribute("user", user);
-                if (lc.checkAdmin(user) == true)
+                session.setAttribute("user", customer);
+                if (lc.checkAdmin(customer) == true)
                 {
                     RequestDispatcher rd = request.getRequestDispatcher("loggedinadmin.jsp");
                     rd.forward(request, response);
@@ -139,18 +139,18 @@ public class ControllerServlet extends HttpServlet {
         {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            user = lc.checkLogin(email, password);
-            if (user == null)
+            customer = lc.checkLogin(email, password);
+            if (customer == null)
             {
                 session.invalidate();
                 RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
                 rd.forward(request, response);
             } else
             {
-                session.setAttribute("user", user);
-                if (lc.checkAdmin(user) == false)
+                session.setAttribute("user", customer);
+                if (lc.checkAdmin(customer) == false)
                 {
-                    session.setAttribute("listDrawings", lc.svgList(user.getCustomerId()));
+                    session.setAttribute("listDrawings", lc.svgList(customer.getCustomerId()));
                     RequestDispatcher rd = request.getRequestDispatcher("loggedin.jsp");
                     rd.forward(request, response);
                 } else
@@ -206,16 +206,16 @@ public class ControllerServlet extends HttpServlet {
             String password = request.getParameter("psw");
             int zip = Integer.parseInt(zipStr);
             int phone = Integer.parseInt(phoneStr);
-            user = lc.addUser(email, firstname, lastname, address, zip, city, phone, password);
-            user = lc.checkLogin(email, password);
-            session.setAttribute("user", user);
+            customer = lc.addUser(email, firstname, lastname, address, zip, city, phone, password);
+            customer = lc.checkLogin(email, password);
+            session.setAttribute("user", customer);
             RequestDispatcher rd = request.getRequestDispatcher("loggedin.jsp");
             rd.forward(request, response);
             return;
             //Check Login with parameters before putting parameters into Db.
         }
 
-        if (user == null)
+        if (customer == null)
         {
             RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
             rd.forward(request, response);
@@ -278,9 +278,8 @@ public class ControllerServlet extends HttpServlet {
         if (action.equals("savedrawing"))
         {
             String svgImage = (String) session.getAttribute("topDrawing");
-            user = (User) session.getAttribute("user");
-            //int userId = user.getUserId();
-            int customerId = user.getCustomerId();
+            customer = (Customer) session.getAttribute("user");
+            int customerId = customer.getCustomerId();
             lc.saveSvg(svgImage, customerId);
             List<SvgDrawing> list = lc.svgList(customerId);
             session.setAttribute("listDrawings", list);
