@@ -32,9 +32,6 @@
 
     </head>
 
-
-
-
     <body>
 
         <nav id="navbar-color" class="navbar navbar-default">
@@ -46,7 +43,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-left" href="#">
-                        <img src="img/foglogo2.png" alt="FogHouse" width="120" height="50">
+                        <img src="img/foglogo2.png" alt="FogHouse" width="110" height="50">
                     </a>
                 </div>
 
@@ -95,7 +92,8 @@
                         </div>
                     </form>
                 </div>
-
+            </div>
+        </nav>
                 <script>
                     // Get the modal
                     var modal = document.getElementById('id01');
