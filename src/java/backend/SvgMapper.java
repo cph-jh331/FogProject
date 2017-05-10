@@ -39,10 +39,11 @@ public class SvgMapper {
                 int svgId = rs.getInt("svgId");
                 String svgInline = rs.getString("svgImage");
                 userId = rs.getInt("customerId");
-                String dateCreated = rs.getString("dateCreated");
+                String dateCreated = rs.getString("dateCreate");
                 String dateAccepted = rs.getString("dateAccept");
-                boolean accepted = rs.getBoolean("accepted");
-                SvgDrawing svgDrawing = new SvgDrawing(svgId, svgInline, userId, dateCreated, dateAccepted, accepted);
+                //udkommenteret indtil det er muligt at hive det ud af databasen
+                //boolean accepted = rs.getBoolean("accepted");
+                SvgDrawing svgDrawing = new SvgDrawing(svgId, svgInline, userId, dateCreated, dateAccepted, false);
                 SvgList.add(svgDrawing);
             }
         } catch (SQLException ex) {

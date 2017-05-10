@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
     <% User user = (User) session.getAttribute("user");%>
-    <% List<SvgDrawing> svgDrawings = (List<SvgDrawing>) session.getAttribute("svgDrawings");%>
+    <% List<SvgDrawing> svgDrawings = (List<SvgDrawing>) session.getAttribute("listDrawings");%>
    
 
     <head>
@@ -91,22 +91,32 @@
                 <table class="table table-bordered">
 
                     <p style="color: white"> Dine tegninger: </p>
-                    <p> Antal elemneter i listen: <%= svgDrawings.size()%></p>
+                    <!-- user.getcustomerid er der for at se, om det rigtige id kommer ind -->
+                    <p> <%=user.getCustomerId()%>Antal elemneter i listen: <%= svgDrawings.size()%></p>
                     <thead class="bg-primary">
-                    <th> Tegning nummer: </th>
+                    <th> Tegning id: </th>
                     <th> Dato oprettet: </th>
 
                     </thead>
                     <tbody class="bg-primary">
-                  
-                    <tr class="btn-basic">
-                        <td>
-                            
-                        </td>
-                        <td>
-                           
-                        </td>
-                       </tr>
+
+                        <tr class="btn-basic">
+                            <%for (SvgDrawing drawing : svgDrawings)
+                                {
+                            %>
+
+
+                            <td>
+                                <%= drawing.getSvgId()%>
+                            </td>
+                            <td>
+                            <%= drawing.getDateCreated()%>
+                            </td>
+                        </tr>
+
+                        <%
+                            }
+                        %>
                             
 
                     </tbody>

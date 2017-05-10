@@ -31,10 +31,10 @@ public class User {
 
     }
 
-    public User(int customerId ,String email, String userName, String lastName, String address, String city, int zip, int phone, String password) {
+    public User(int customerId ,String email, String firsName, String lastName, String address, String city, int zip, int phone, String password) {
         this.customerId = customerId;
         this.email = email;
-        this.userName = userName;
+        this.userName = firsName;
         this.lastName = lastName;
         this.address = address;
         this.city = city;
