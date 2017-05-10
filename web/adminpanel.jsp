@@ -47,10 +47,24 @@
                         <li><a href="https://johannesfog.dk/byggecenter/om-fog/">Om Fog</a></li>
                     </ul>
                     <!-- Setup of the right side of nav-bar 2 different links for now. No href yet missing pages -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="loggedin.jsp">Back To Admin</a></li>
+                    <ul class="nav navbar-nav navbar-right">                      
+                        <li id="makeLink" class="list-group-item">
+                            <div id="makeLink2" class="input-group">
+                                <li><a href="loggedinadmin.jsp">Back To Admin</a></li>
+                            </div>
+                            <form action="controllerServlet" method="post">
+                                <input type="hidden" name="action" value="logout"/>
+                                <input class="btn btn-success" type="submit" name="logout" value="Logout"/>
+                            </form>
+                        </li>                        
+                        <!--<li><a href="login.jsp"><span class="glyphicon   fdsafdsf  glyphicon-login"></span>Login</a></li>-->
+                    </ul>
+
+
                 </div>
-            </div>
+
+
+
         </nav>
         <div class="container">
             <%--Brugers tegninger til godkendelse--%>
@@ -60,175 +74,175 @@
                     <input type="hidden" name="action" value="godkend"/>
                     <div id="rates">
                         <input type="submit" class="btn-success" value="Accepter">
-                </form>
-                       
-                <form action="controllerServlet" method="post">
-                    <input type="hidden" name="action" value="removesvg"/>
-                    <div id="rates">
-                        <input type="submit" class="btn-success" value="Afvis">
-                </form>  
-                    </div>
-                </form>
-                <table class="table table-bordered">
-                    <p style="color: red"> Tegninger til godkendelse: </p>
-                    <thead class="bg-primary">
-                    <th> Navn: </th>
-                    <th> Nummer: </th>
-                    <th> Email: </th>
-                    <th> Tegning: </th>
-                    </thead>
-                    <%-- <% List<Svg> svgList = (List<Svg>) session.getAttribute("svgList");% --%>
-                    <tr class="btn-basic">
-                        <td>
-                            <%=customer.getCusName()%>
-                        </td>
-                        <td> <%=customer.getCusPhone()%> </td>
-                        <td>
-                            <%=customer.getCusEmail()%>
-                        </td>
-                        <td>
-                            <button class="btn-success" name="action" onclick="myFunction()">Vis tegning fra: <%= customer.getCusName()%></button>
-                            <button id="myBtn" style="padding: 1px 2px; ">Vis tegning Fra: <%= customer.getCusName()%></button>  <!-- The Modal -->
-                            <div id="myModal" class="modal">
-                                <!-- Modal content -->
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <span class="close">&times;</span>
-                                    </div>
-                                    <div class="">
-                                        <p></p>
-                                    </div>
+                        </form>
+
+                        <form action="controllerServlet" method="post">
+                            <input type="hidden" name="action" value="removesvg"/>
+                            <div id="rates">
+                                <input type="submit" class="btn-success" value="Afvis">
+                                </form>  
+                            </div>
+                        </form>
+                        <table class="table table-bordered">
+                            <p style="color: red"> Tegninger til godkendelse: </p>
+                            <thead class="bg-primary">
+                            <th> Navn: </th>
+                            <th> Nummer: </th>
+                            <th> Email: </th>
+                            <th> Tegning: </th>
+                            </thead>
+                            <%-- <% List<Svg> svgList = (List<Svg>) session.getAttribute("svgList");% --%>
+                            <tr class="btn-basic">
+                                <td>
+                                    <%=customer.getCusName()%>
+                                </td>
+                                <td> <%=customer.getCusPhone()%> </td>
+                                <td>
+                                    <%=customer.getCusEmail()%>
+                                </td>
+                                <td>
                                     <button class="btn-success" name="action" onclick="myFunction()">Vis tegning fra: <%= customer.getCusName()%></button>
-                                </div>
-                                <!--Vis tegning-->
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <%--De godkendte tegninger--%>
-            <div class="jumbotron">
-                <table class="table table-bordered">
-
-                    <p style="color: white"> Godkendte tegninger: </p>
-                    <thead class="bg-primary">
-                    <th> Navn: </th>
-                    <th> Nummer: </th>
-                    <th> Email: </th>
-                    <th> Tegning: </th>
-                    </thead>
-                    <%-- <% List<Svg> svgList = (List<Svg>) session.getAttribute("svgList");% --%>
-
-                    <tr class="btn-basic">
-                        <td>
-                            <%=customer.getCusName()%>
-                        </td>
-                        <td> <%=customer.getCusPhone()%> </td>
-                        <td>
-                            <%=customer.getCusEmail()%>
-                        </td>
-                        <td>
-                            <%-- <form action="controllerServlet" method="post">
-                                 <input type="hidden" name="action" value="draw"/>
-                            --%>
-
-                            <div class="btn-success">
-                                <button id="Btn" style="padding: 1px 1px; ">Vis tegning Fra: <%= customer.getCusName()%></button>  <!-- The Modal -->
-                                <div id="myModal" class="modal">
-                                    <!-- Modal content -->
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <span class="close">&times;</span>
-                                            <h2></h2>
+                                    <button id="myBtn" style="padding: 1px 2px; ">Vis tegning Fra: <%= customer.getCusName()%></button>  <!-- The Modal -->
+                                    <div id="myModal" class="modal">
+                                        <!-- Modal content -->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <span class="close">&times;</span>
+                                            </div>
+                                            <div class="">
+                                                <p></p>
+                                            </div>
+                                            <button class="btn-success" name="action" onclick="myFunction()">Vis tegning fra: <%= customer.getCusName()%></button>
                                         </div>
-                                        <div class="block">
-                                            <p></p>
+                                        <!--Vis tegning-->
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <%--De godkendte tegninger--%>
+                    <div class="jumbotron">
+                        <table class="table table-bordered">
+
+                            <p style="color: white"> Godkendte tegninger: </p>
+                            <thead class="bg-primary">
+                            <th> Navn: </th>
+                            <th> Nummer: </th>
+                            <th> Email: </th>
+                            <th> Tegning: </th>
+                            </thead>
+                            <%-- <% List<Svg> svgList = (List<Svg>) session.getAttribute("svgList");% --%>
+
+                            <tr class="btn-basic">
+                                <td>
+                                    <%=customer.getCusName()%>
+                                </td>
+                                <td> <%=customer.getCusPhone()%> </td>
+                                <td>
+                                    <%=customer.getCusEmail()%>
+                                </td>
+                                <td>
+                                    <%-- <form action="controllerServlet" method="post">
+                                         <input type="hidden" name="action" value="draw"/>
+                                    --%>
+
+                                    <div class="btn-success">
+                                        <button id="Btn" style="padding: 1px 1px; ">Vis tegning Fra: <%= customer.getCusName()%></button>  <!-- The Modal -->
+                                        <div id="myModal" class="modal">
+                                            <!-- Modal content -->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <span class="close">&times;</span>
+                                                    <h2></h2>
+                                                </div>
+                                                <div class="block">
+                                                    <p></p>
+                                                </div>
+                                                <button class="btn-success" name="action" style="padding: 1px 2px; " onclick="myFunction()">Vis tegning fra: <%= customer.getCusName()%></button>  
+                                                </td>
+                                                </tr>
+                                            </div>
                                         </div>
-                                        <button class="btn-success" name="action" style="padding: 1px 2px; " onclick="myFunction()">Vis tegning fra: <%= customer.getCusName()%></button>  
-                                        </td>
-                                        </tr>
-                            </div>
-                            </div>
-                                        </table>
-                                    </div>
-                                </div>                             
-                            </body>
-                            <script>
+                        </table>
+                    </div>
+            </div>                             
+    </body>
+    <script>
 
-                                // Get the modal
-                                var modal = document.getElementById('myModal');
+        // Get the modal
+        var modal = document.getElementById('myModal');
 
-                                // Get the button that opens the modal
-                                var btn = document.getElementById("myBtn");
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
 
-                                // Get the <span> element that closes the modal
-                                var span = document.getElementsByClassName("close")[0];
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
 
-                                // When the user clicks the button, open the modal 
-                                btn.onclick = function () {
-                                    modal.style.display = "block";
-                                };
+        // When the user clicks the button, open the modal 
+        btn.onclick = function () {
+            modal.style.display = "block";
+        };
 
-                                // When the user clicks on <span> (x), close the modal
-                                span.onclick = function () {
-                                    modal.style.display = "none";
-                                };
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        };
 
-                                // When the user clicks anywhere outside of the modal, close it
-                                window.onclick = function (event) {
-                                    if (event.target === modal) {
-                                        modal.style.display = "none";
-                                    }
-                                };
-                            </script>
-                            <script>
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+    </script>
+    <script>
 
-                                // Get the modal
-                                var modal = document.getElementById('myModal');
+        // Get the modal
+        var modal = document.getElementById('myModal');
 
-                                // Get the button that opens the modal
-                                var btn = document.getElementById("Btn");
+        // Get the button that opens the modal
+        var btn = document.getElementById("Btn");
 
-                                // Get the <span> element that closes the modal
-                                var span = document.getElementsByClassName("close")[0];
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
 
-                                // When the user clicks the button, open the modal 
-                                btn.onclick = function () {
-                                    modal.style.display = "block";
-                                };
+        // When the user clicks the button, open the modal 
+        btn.onclick = function () {
+            modal.style.display = "block";
+        };
 
-                                // When the user clicks on <span> (x), close the modal
-                                span.onclick = function () {
-                                    modal.style.display = "none";
-                                };
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        };
 
-                                // When the user clicks anywhere outside of the modal, close it
-                                window.onclick = function (event) {
-                                    if (event.target === modal) {
-                                        modal.style.display = "none";
-                                    }
-                                };
-                            </script>
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+    </script>
 
-                            <script type="text/javascript">
+    <script type="text/javascript">
 
 
-                                function myFunction()
-                                {
-                                    window.open("tegning.html");
-                                }
-                                var rates = document.getElementById('rates').value;
-                                var rate_value;
+        function myFunction()
+        {
+            window.open("tegning.html");
+        }
+        var rates = document.getElementById('rates').value;
+        var rate_value;
 
-                                if (rates === 'accept') {
-                                    rate_value = document.getElementById('r1').value;
+        if (rates === 'accept') {
+            rate_value = document.getElementById('r1').value;
 
-                                } else if (rates === 'refuse') {
-                                    rate_value = document.getElementById('r2').value;
+        } else if (rates === 'refuse') {
+            rate_value = document.getElementById('r2').value;
 
-                                }
+        }
 
-                                document.getElementById('results').innerHTML = rate_value;
+        document.getElementById('results').innerHTML = rate_value;
 
 
-                            </script>
-                            </html>
+    </script>
+</html>
