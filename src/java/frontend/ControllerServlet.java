@@ -53,11 +53,13 @@ public class ControllerServlet extends HttpServlet {
         {
             RequestDispatcher rd = request.getRequestDispatcher("index.html");
             rd.forward(request, response);
+            return;
         }
         if (action.equals("drawlist"))
         {
             RequestDispatcher rd = request.getRequestDispatcher("adminpanel.jsp");
             rd.forward(request, response);
+            return;
 
         }
 
@@ -66,6 +68,33 @@ public class ControllerServlet extends HttpServlet {
             session.invalidate();
             RequestDispatcher rd = request.getRequestDispatcher("index.html");
             rd.forward(request, response);
+            return;
+        }
+        if (user != null && action.equals("admin"))
+        {
+            if (lc.checkAdmin(user) == true)
+            {
+                RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
+                rd.forward(request, response);
+            } else
+            {
+                RequestDispatcher rd = request.getRequestDispatcher("loggedin.jsp");
+                rd.forward(request, response);
+            }
+            return;
+        }
+        if (user != null && action.equals("customer"))
+        {
+            if (lc.checkAdmin(user) == true)
+            {
+                RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
+                rd.forward(request, response);
+            } else
+            {
+                RequestDispatcher rd = request.getRequestDispatcher("loggedin.jsp");
+                rd.forward(request, response);
+            }
+            return;
         }
         if (action.equals("admin"))
         {
@@ -144,6 +173,23 @@ public class ControllerServlet extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("drawing.jsp");
             rd.forward(request, response);
             return;
+        }
+
+        if (action.equals("seeDrawing"))
+        {
+            int drawingId = Integer.parseInt(request.getParameter("drawId"));
+            List<SvgDrawing> svgList = (List<SvgDrawing>) session.getAttribute("listDrawings");
+
+            //den her søgning skal flyttes væk, evt ind i logicCtrl, den skal bare returnere en int.
+            for (SvgDrawing svgDrawing : svgList)
+            {
+                if (drawingId == svgDrawing.getSvgId())
+                {
+                    session.setAttribute("topDrawing", svgDrawing.getSvgInline());
+                    RequestDispatcher rd = request.getRequestDispatcher("drawing.jsp");
+                    rd.forward(request, response);
+                }
+            }
 
         }
 
@@ -167,41 +213,6 @@ public class ControllerServlet extends HttpServlet {
             rd.forward(request, response);
             return;
             //Check Login with parameters before putting parameters into Db.
-        }
-
-        if (user != null && action.equals("admin"))
-        {
-            if (lc.checkAdmin(user) == true)
-            {
-                RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
-                rd.forward(request, response);
-            } else
-            {
-                RequestDispatcher rd = request.getRequestDispatcher("loggedin.jsp");
-                rd.forward(request, response);
-            }
-            return;
-        }
-
-        if (user == null)
-        {
-            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-            rd.forward(request, response);
-            return;
-        }
-
-        if (user != null && action.equals("customer"))
-        {
-            if (lc.checkAdmin(user) == true)
-            {
-                RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
-                rd.forward(request, response);
-            } else
-            {
-                RequestDispatcher rd = request.getRequestDispatcher("loggedin.jsp");
-                rd.forward(request, response);
-            }
-            return;
         }
 
         if (user == null)
@@ -264,7 +275,8 @@ public class ControllerServlet extends HttpServlet {
 
             return;
         }
-        if(action.equals("savedrawing")){
+        if (action.equals("savedrawing"))
+        {
             String svgImage = (String) session.getAttribute("topDrawing");
             user = (User) session.getAttribute("user");
             //int userId = user.getUserId();
@@ -276,8 +288,9 @@ public class ControllerServlet extends HttpServlet {
             rd.forward(request, response);
             return;
         }
-        if(action.equals("refusedrawing")){
-            
+        if (action.equals("refusedrawing"))
+        {
+
         }
 //        if(action.equals("sendTegning")){
 //            //Parameter kommer fra tegning.jsp

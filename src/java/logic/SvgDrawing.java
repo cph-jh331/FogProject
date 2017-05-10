@@ -1,6 +1,8 @@
 package logic;
 
-public class SvgDrawing {
+import java.io.Serializable;
+
+public class SvgDrawing implements Serializable{
 
     private int svgId;
     private String svgInline;
