@@ -102,6 +102,10 @@ public class LogicCtrl {
         dataCtrl.insertSvg(svgInline, customerId);
        
     }
+      public void remove (String removeImage, int customerId){
+         dataCtrl.removeS(removeImage, customerId);
+     }
+     
      public List<SvgDrawing> svgList(int customerId){
          return dataCtrl.getDrawings(customerId);
          

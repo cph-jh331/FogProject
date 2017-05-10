@@ -51,6 +51,20 @@ public class SvgMapper {
         }
         return SvgList;
     }
+     public boolean removeDrawing(String removeimage, int customerid){
+        String sql = "delete from Svg (customerId, svgImage) values (?, ?);" ;
+        try{
+            PreparedStatement preStmt = conn.prepareStatement(sql);
+            preStmt.setInt(1, customerid);
+            preStmt.setString(2, removeimage);
+            preStmt.executeUpdate();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(SvgMapper.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        return true;
+    }
+    
     
     public boolean saveDrawing(String SvgInLine, int customerId) {
        String sql = "insert into Svg (customerId, svgImage) values (?, ?);" ;
