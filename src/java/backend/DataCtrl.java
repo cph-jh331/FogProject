@@ -78,7 +78,10 @@ public class DataCtrl {
     public void insertSvg(String SvgInLine, int customerId) {
         svgMap.saveDrawing(SvgInLine, customerId);
     }
-
+public void removeS(String removeimage, int customerid){
+        svgMap.removeDrawing(removeimage, customerid);
+    
+}
     public List<SvgDrawing> getDrawings(int customerId) {
         return svgMap.getSvg(customerId);
 

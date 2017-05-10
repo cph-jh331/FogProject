@@ -275,6 +275,22 @@ public class ControllerServlet extends HttpServlet {
 
             return;
         }
+        if(action.equals("removesvg"))
+        {
+            String removeImage = (String) session.getAttribute("topDrawing");
+            customer = (Customer) session.getAttribute("user");
+            int customerId = customer.getCustomerId();
+            lc.remove(removeImage, customerId);
+            List<SvgDrawing> liste =  lc.svgList(customerId);
+            session.setAttribute("listDrawings", liste);
+            RequestDispatcher rd = request.getRequestDispatcher("adminpanel.jsp");
+            rd.forward(request, response);
+            return;
+        }
+        if (action.equals("godkend"))
+        {
+        }
+        
         if (action.equals("savedrawing"))
         {
             String svgImage = (String) session.getAttribute("topDrawing");

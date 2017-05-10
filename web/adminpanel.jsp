@@ -57,10 +57,16 @@
             <h1>Hej <%= customer.getCusName()%> </h1>
             <div class="jumbotron">
                 <form action="controllerServlet" method="post">
-                    <input type="hidden" name="action" value=""/>
+                    <input type="hidden" name="action" value="godkend"/>
                     <div id="rates">
                         <input type="submit" class="btn-success" value="Accepter">
+                </form>
+                       
+                <form action="controllerServlet" method="post">
+                    <input type="hidden" name="action" value="removesvg"/>
+                    <div id="rates">
                         <input type="submit" class="btn-success" value="Afvis">
+                </form>  
                     </div>
                 </form>
                 <table class="table table-bordered">
