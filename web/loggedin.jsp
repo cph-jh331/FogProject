@@ -1,7 +1,7 @@
-    <%-- 
-    Document   : login
-    Created on : 31-03-2017, 10:17:34
-    Author     : Pva
+<%-- 
+Document   : login
+Created on : 31-03-2017, 10:17:34
+Author     : Pva
 --%>
 
 <%@page import="java.util.List"%>
@@ -12,7 +12,7 @@
 <html>
     <% User user = (User) session.getAttribute("user");%>
     <% List<SvgDrawing> svgDrawings = (List<SvgDrawing>) session.getAttribute("listDrawings");%>
-   
+
 
     <head>
         <meta charset="UTF-8">
@@ -104,20 +104,23 @@
                             <%for (SvgDrawing drawing : svgDrawings)
                                 {
                             %>
-
-
                             <td>
                                 <%= drawing.getSvgId()%>
                             </td>
                             <td>
-                            <%= drawing.getDateCreated()%>
+                                <%= drawing.getDateCreated()%>
+                                <form action="controllerServlet" method="post">
+                                    <input type="hidden" name="action" value="seeDrawing">
+                                    <input type="hidden" name="drawId" value ="<%=drawing.getSvgId()%>"/>
+                                    <input class="btn btn-default" type="submit" value="Se Tegning">
+                                </form>
                             </td>
                         </tr>
 
                         <%
                             }
                         %>
-                            
+
 
                     </tbody>
                 </table>
@@ -126,10 +129,10 @@
 
     </body>
 </html>
- <%-- <p> Antal elemneter i listen: <%= svgDrawings.size()%></p>   
-                    <!--
-    <% List<SvgDrawing> svgDrawings = (List<SvgDrawing>) session.getAttribute("svgDrawings");%>  
-    -->
-                    <%
-                              
+<%-- <p> Antal elemneter i listen: <%= svgDrawings.size()%></p>   
+                   <!--
+   <% List<SvgDrawing> svgDrawings = (List<SvgDrawing>) session.getAttribute("svgDrawings");%>  
+   -->
+                   <%
+                             
 %> --%>
