@@ -53,7 +53,7 @@ public class UserMapper {
                 String mail = rs.getString("userEmail");
                 boolean isAdmin = rs.getBoolean("admin");
 
-                return new User(id, mail, firstname, lastName, address, userCity, zip, userPhone, isAdmin);
+                return new User(id, email, firstname, lastName, address, mail, zip, userPhone, pass);
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserMapper.class.getName()).log(Level.SEVERE, null, ex);
@@ -107,32 +107,32 @@ public class UserMapper {
         }
     }
 
-    public List<SvgDrawing> getDrawings(int customerId) {
-        String sql = "select * from Svg where customerId = 1";
-        List<SvgDrawing> svgDrawings = new ArrayList<>();
-        try {
-            PreparedStatement preStmt = conn.prepareStatement(sql);
-           //preStmt.setInt(1, customerId);
-            ResultSet rs = preStmt.executeQuery();
-            while (rs.next()) {
-                int svgId = rs.getInt("svgId");
-                customerId = rs.getInt("customerId");
-                String dateCreated = rs.getString("dateCreated");
-                int empId = rs.getInt("empId");
-                String dateAccept = rs.getString("dateAccept");
-                String svgImage = rs.getString("svgImage");
-                
-
-                svgDrawings.add(new SvgDrawing(svgId, customerId, dateCreated, empId, dateAccept, svgImage));
-               
-                
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(UserMapper.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return svgDrawings;
-    }
+//    public List<SvgDrawing> getDrawings(int customerId) {
+//        String sql = "select * from Svg where customerId = 1";
+//        List<SvgDrawing> svgDrawings = new ArrayList<>();
+//        try {
+//            PreparedStatement preStmt = conn.prepareStatement(sql);
+//            preStmt.setInt(1, customerId);
+//            ResultSet rs = preStmt.executeQuery();
+//            while (rs.next()) {
+//                int svgId = rs.getInt("svgId");
+//                customerId = rs.getInt("customerId");
+//                String dateCreated = rs.getString("dateCreate");
+//                int empId = rs.getInt("empId");
+//                String dateAccept = rs.getString("dateAccept");
+//                String svgImage = rs.getString("svgImage");
+//                
+//
+//                svgDrawings.add(new SvgDrawing(svgId, customerId, dateCreated, empId, dateAccept, svgImage));
+//               
+//                
+//            }
+//
+//        } catch (SQLException ex) {
+//            Logger.getLogger(UserMapper.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return svgDrawings;
+//    }
 
 }
 

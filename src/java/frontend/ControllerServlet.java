@@ -271,7 +271,7 @@ public class ControllerServlet extends HttpServlet {
             int customerId = user.getCustomerId();
             lc.saveSvg(svgImage, customerId);
             List<SvgDrawing> list = lc.svgList(customerId);
-            session.setAttribute("svgDrawings", list);
+            session.setAttribute("listDrawings", list);
             RequestDispatcher rd = request.getRequestDispatcher("loggedin.jsp");
             rd.forward(request, response);
             return;

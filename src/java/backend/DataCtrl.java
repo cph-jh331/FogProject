@@ -79,7 +79,7 @@ public class DataCtrl {
     }
 
     public List<SvgDrawing> getDrawings(int customerId) {
-        return userMap.getDrawings(customerId);
+        return svgMap.getSvg(customerId);
 
     }
 
