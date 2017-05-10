@@ -45,7 +45,6 @@
                     </ul>
                     <!-- Setup of the right side of nav-bar 2 different links for now. No href yet missing pages -->
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="admin.jsp"><span class="glyphicon glyphicon-wrench"></span>Admin</a></li>
                         <li><a href="signup.jsp"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
                         <li id="makeLink" class="list-group-item">
                             <div id="makeLink2" class="input-group">
