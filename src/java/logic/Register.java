@@ -1,10 +1,8 @@
 package logic;
 
-import java.util.Hashtable;
 public class Register {
 
-    private String firstname, lastname, adress, zip, city, phone, email, password1, password2;
-    private Hashtable errors;
+    private String firstname, lastname, adress, zip, city, phone, email, password1;
 
     public Register() {
 
@@ -16,17 +14,9 @@ public class Register {
         phone = "";
         email = "";
         password1 = "";
-        password2 = "";
-        errors = new Hashtable();
     }
 
-    public Hashtable getErrors() {
-        return errors;
-    }
-
-    public void setErrors(Hashtable errors) {
-        this.errors = errors;
-    }
+    
 
     public String getFirstname() {
         return firstname;
@@ -92,12 +82,6 @@ public class Register {
         this.password1 = p1;
     }
 
-    public String getPassword2() {
-        return password2;
-    }
 
-    public void setPassword2(String p2) {
-        this.password2 = p2;
-    }
 
 }

@@ -11,7 +11,7 @@ package logic;
  */
 public class User {
 
-    private int userId;
+   
     private String email;
     private String userName;
     private String lastName;
@@ -23,8 +23,8 @@ public class User {
     private boolean isAdmin = false;
     private int customerId;
     
-    public User(int userId, String email, String userName, boolean admin) {
-        this.userId = userId;
+    public User(int customerId, String email, String userName, boolean admin) {
+        this.customerId = customerId;
         this.email = email;
         this.userName = userName;
         this.isAdmin = admin;
@@ -43,12 +43,9 @@ public class User {
         this.password = password;
     }
 
-    public int getCustomerId() {
-        return customerId;
-    }
     
-    public User(int userId, String email, String firstName, String lastName, String address, String city, int zip, int phone, boolean isAdmin) {
-        this.userId = userId;
+    public User(int customerId, String email, String firstName, String lastName, String address, String city, int zip, int phone, boolean isAdmin) {
+        this.customerId = customerId;
         this.email = email;
         this.userName = firstName;
         this.lastName = lastName;
@@ -70,13 +67,12 @@ public class User {
         this.phone = phone;
         this.password = password;
     }
-
-    public int getUserId() {
-        return userId;
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
     public String getEmail() {

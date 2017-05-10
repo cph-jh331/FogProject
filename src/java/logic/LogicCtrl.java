@@ -29,22 +29,22 @@ public class LogicCtrl {
         return true;
     }
 
-    public User checkLogin(String email, String password)
+    public Customer checkLogin(String email, String password)
     {
         //User user = dataCtrl.validateUser(email, password);
-        User user = dataCtrl.validateCustomer(email, password);
-        return user;
+        Customer customer = dataCtrl.validateCustomer(email, password);
+        return customer;
     }
-    public User checkAdminLogin(String email, String password)
+    public Customer checkAdminLogin(String email, String password)
     {
-       User user = dataCtrl.validateAdmin(email, password);
+       Customer customer = dataCtrl.validateAdmin(email, password);
        
-        return user;
+        return customer;
     }
 
-    public boolean checkAdmin(User user)
+    public boolean checkAdmin(Customer customer)
     {
-        return user.isAdmin();
+        return customer.isAdmin();
     }
 
     public List<Part> addTo(String type, String category, String unitType, String desc, List<Part> catList)
@@ -74,13 +74,13 @@ public class LogicCtrl {
         return typeCategory;
     }
 
-    public User addUser(String email, String firstname, String lastname, String adress, int zip, String city, int phone, String password)
+    public Customer addUser(String email, String firstname, String lastname, String adress, int zip, String city, int phone, String password)
     {
-        User user = new User(email, firstname, lastname, adress, city, zip, phone, password);
-        dataCtrl.insertUser(user);
+        Customer customer = new Customer(email, firstname, lastname, adress, city, zip, phone, password);
+        dataCtrl.insertUser(customer);
 
         //unit test til user validering i datactrl eller partMapper...
-        return user;
+        return customer;
     }
     
     public String createSvgSideView(String height, String length, String width){
@@ -106,6 +106,5 @@ public class LogicCtrl {
          return dataCtrl.getDrawings(customerId);
          
      }
-    //CreateSvg
-    //SaveSvg
+   
 }
