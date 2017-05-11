@@ -81,17 +81,14 @@ Author     : Pva
                 </form>
 
                 <table class="table table-bordered">
-
                     <p style="color: white"> Dine tegninger: </p>
                     <!-- user.getcustomerid er der for at se, om det rigtige id kommer ind -->
                     <p> <%=customer.getCustomerId()%>Antal tegninger på liste: <%= svgDrawings.size()%></p>
                     <thead class="bg-primary">
                     <th> Tegning id: </th>
                     <th> Dato oprettet: </th>
-
                     </thead>
                     <tbody class="bg-primary">
-
                         <tr class="modal">
                             <%for (SvgDrawing drawing : svgDrawings) {
                             %>
@@ -105,25 +102,57 @@ Author     : Pva
                                         <input type="hidden" name="action" value="seeDrawing">
                                         <input type="hidden" name="drawId" value ="<%=drawing.getSvgId()%>"/>
                                         <input id="ourBtn" class="modal-open" type="submit" value="Se Tegning">
-
-
                                     </form>
                                 </div>     
                             </td>
                         </tr>
-
                         <%
                             }
                         %>
-
-
+                    </tbody>
+                </table>
+                    <table class="table table-bordered">
+                    <p style="color: white"> Dine tegninger: </p>
+                    <!-- user.getcustomerid er der for at se, om det rigtige id kommer ind -->
+                    <p> <%=customer.getCustomerId()%>Antal tegninger på liste: <%= svgDrawings.size()%></p>
+                    <thead class="bg-primary">
+                    <th> Tegning id: </th>
+                    <th> Dato oprettet: </th>
+                    </thead>
+                    <tbody class="bg-primary">
+                        <tr class="modal">
+                            <%for (SvgDrawing drawing : svgDrawings) {
+                            %>
+                            <td>
+                                <%= drawing.getSvgId()%>
+                            </td>
+                            <td>
+                                <%= drawing.getDateCreated()%>
+                                <div id="popupWindow">
+                                    <form action="controllerServlet" method="post">
+                                        <input type="hidden" name="action" value="seeDrawing">
+                                        <input type="hidden" name="drawId" value ="<%=drawing.getSvgId()%>"/>
+                                        <input id="ourBtn" class="modal-open" type="submit" value="Se Tegning">
+                                    </form>
+                                </div>     
+                            </td>
+                        </tr>
+                        <%
+                            }
+                        %>
                     </tbody>
                 </table>
             </div>
         </div>
-
     </body>
 </html>
+
+
+
+
+
+
+
 <script>
     // Get the modal
     var modal = document.getElementById('popupWindow');
