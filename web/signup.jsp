@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="css/modalcss.css">
     
     <style>
+        <%--style for sign up button--%>
     .sign {
         background-color: #33e03c;
         border: none;
@@ -28,29 +29,47 @@
         margin: 4px 2px;
         cursor: pointer;
     }
+    
+     <%--style for Nav Bar--%>
+     ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #0013a3;
+}
+
+li {
+    float: right;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #0013a3;
+}
     </style>
 
     </head>
 
     <body>
 
-        <nav id="navbar-color" class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavBar">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-left" href="#">
+        <ul class="nav navbar-nav">
+                  <a class="navbar-left" href="#">
                         <img src="img/foglogo2.png" alt="FogHouse" width="110" height="50">
                     </a>
-                </div>
-
-
-                <br>
-                <br>
-                <br>
+                        <li class="active"> <a href="index.html">Home</a></li>
+                        <li><a href="https://johannesfog.dk/byggecenter/">Byggecenter</a></li>
+                        <li><a href="https://johannesfog.dk/designhus/">Designhus</a></li>
+                        <li><a href="https://johannesfog.dk/pro/">FogPro</a></li>
+                        <li><a href="https://johannesfog.dk/byggecenter/om-fog/">Om Fog</a></li>
+                    </ul>
 
                 <h2>Sign up</h2>
 
