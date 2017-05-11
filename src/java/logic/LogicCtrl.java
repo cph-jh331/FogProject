@@ -110,5 +110,13 @@ public class LogicCtrl {
          return dataCtrl.getDrawings(customerId);
          
      }
+     public String getSvgInLine (List<SvgDrawing> drawList, int drawingId){
+         for (int i = 0; i < drawList.size(); i++) {
+             if(drawingId == drawList.get(i).getSvgId()){
+                 return drawList.get(i).getSvgInline();
+             }
+         }
+         return null;
+     }
    
 }
