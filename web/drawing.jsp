@@ -27,13 +27,11 @@
                 <%=topDrawing%>
                 <form action="controllerServlet" method="post">
                     <input type="hidden" name="action" value="savedrawing"/>
-                    <input type="submit" class="btn-success" value="Accepter tegning"/>
+                    <input type="submit" class="btn-success" value="Gem tegning"/>
                 </form>
                 <form action="controllerServlet" method="post">
                     <input type="hidden" name="action" value="refusedrawing"/>
                     <input type="submit" class="btn-danger" value="Fortryd tegning"/>
-                </form>        
-
                 </form>
             </div>
         </div>

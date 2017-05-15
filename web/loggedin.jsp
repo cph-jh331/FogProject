@@ -12,8 +12,9 @@ Author     : Pva
 <html>
     <% Customer customer = (Customer) session.getAttribute("user");%>
     <% List<SvgDrawing> svgDrawings = (List<SvgDrawing>) session.getAttribute("listDrawings");%>
-
-
+    <% List<SvgDrawing> svgMapReqApproval = (List<SvgDrawing>) session.getAttribute("svgMapReqApproval");%>
+    <% List<SvgDrawing> svgMapApproved = (List<SvgDrawing>) session.getAttribute("svgMapApproved");%>
+    <% List<SvgDrawing> svgMapDone = (List<SvgDrawing>) session.getAttribute("svgMapDone");%>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,11 +52,7 @@ Author     : Pva
                         <li><a href="https://johannesfog.dk/byggecenter/om-fog/">Om Fog</a></li>
                     </ul>
                     <!-- Setup of the right side of nav-bar 2 different links for now. No href yet missing pages -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <%-- <li><a href="adminpanel.jsp"><span class="glyphicon glyphicon-check"></span> KundeKartotek</a></li>
- <li><a><span class="glyphicon glyphicon-user"></span><%= user.getUserName()%></a></li>
- </li> --%>
-                        <!--<li><a href="login.jsp"><span class="glyphicon glyphicon-login"></span>Login</a></li>-->
+                    <ul class="nav navbar-nav navbar-right">                        
                         <li id="makeLink" class="list-group-item">
                             <div id="makeLink2" class="input-group">
                                 <form action="controllerServlet" method="post">
@@ -79,82 +76,149 @@ Author     : Pva
                     <input type="number" name="length" value="" placeholder="Længde" required  />
                     <input type="number" name="width" value="" placeholder="Bredde" required />
                     <input type="number" name="height" value="" placeholder="Højde" required/>
-                    <input type="submit" value="Generer tegning">
-                </form>
+                    <input class="btn btn-primary" type="submit" value="Generer tegning">
+                </form>                
 
                 <table class="table table-bordered">
-                    <p style="color: white"> Dine tegninger: </p>
-                    <!-- user.getcustomerid er der for at se, om det rigtige id kommer ind -->
-                    <p> <%=customer.getCustomerId()%>Antal tegninger på liste: <%= svgDrawings.size()%></p>
+
+                    <p style="color: white"> Godkendte Tegninger: <%=svgMapApproved.size()%> </p>                   
+
                     <thead class="bg-primary">
                     <th> Tegning id: </th>
                     <th> Dato oprettet: </th>
+                    <th> Status </th>
+                    <th>Se Tegning:</th>
+
                     </thead>
                     <tbody class="bg-primary">
-                        <tr class="modal">
-                            <%for (SvgDrawing drawing : svgDrawings) {
+                        <tr>
+                            <%for (SvgDrawing drawing : svgMapApproved)
+                                {
                             %>
                             <td>
                                 <%= drawing.getSvgId()%>
                             </td>
                             <td>
                                 <%= drawing.getDateCreated()%>
+                            </td>
+                            <td>
+                                <%= drawing.getStatusToString()%>
+                            </td>
+                            <td>
                                 <div id="popupWindow">
                                     <form action="controllerServlet" method="post">
                                         <input type="hidden" name="action" value="seeDrawing">
                                         <input type="hidden" name="drawId" value ="<%=drawing.getSvgId()%>"/>
-                                        <input id="ourBtn" class="modal-open" type="submit" value="Se Tegning">
+                                        <input class="btn btn-default" type="submit" value="Se Tegning">
+
+
                                     </form>
                                 </div>     
                             </td>
                         </tr>
+
+                        <%
+                            }
+                        %>
+
+
+                    </tbody>
+                </table>
+
+                <table class="table table-bordered">
+
+                    <p style="color: white"> Tegninger der venter på at fog accepterer: <%=svgMapReqApproval.size()%> </p>
+                    <thead class="bg-primary">
+                    <th> Tegning id: </th>
+                    <th> Dato oprettet: </th>
+                    <th> Status </th>
+                    <th>Se Tegning:</th>
+
+                    </thead>
+                    <tbody class="bg-primary">
+
+                        <tr>
+                            <%for (SvgDrawing drawing : svgMapReqApproval)
+                                {
+                            %>
+                            <td>
+                                <%= drawing.getSvgId()%>
+                            </td>
+                            <td>
+                                <%= drawing.getDateCreated()%>
+                            </td>
+                            <td>
+                                <%= drawing.getStatusToString()%>
+                            </td>
+                            <td>
+                                <div id="popupWindow">
+                                    <form action="controllerServlet" method="post">
+                                        <input type="hidden" name="action" value="seeDrawing">
+                                        <input type="hidden" name="drawId" value ="<%=drawing.getSvgId()%>"/>
+                                        <input class="btn btn-default" type="submit" value="Se Tegning">
+
+
+                                    </form>
+                                </div>     
+                            </td>
+                        </tr>
+
                         <%
                             }
                         %>
                     </tbody>
                 </table>
-                    <table class="table table-bordered">
-                    <p style="color: white"> Dine tegninger: </p>
-                    <!-- user.getcustomerid er der for at se, om det rigtige id kommer ind -->
-                    <p> <%=customer.getCustomerId()%>Antal tegninger på liste: <%= svgDrawings.size()%></p>
+
+                <table class="table table-bordered">
+
+                    <p style="color: white"> Dine tegninger: <%=svgDrawings.size()%> </p>
                     <thead class="bg-primary">
                     <th> Tegning id: </th>
                     <th> Dato oprettet: </th>
+                    <th> Status </th>
+                    <th>Se Tegning:</th>
+
                     </thead>
                     <tbody class="bg-primary">
+
                         <tr class="modal">
-                            <%for (SvgDrawing drawing : svgDrawings) {
+                            <%for (SvgDrawing drawing : svgDrawings)
+                                {
                             %>
                             <td>
                                 <%= drawing.getSvgId()%>
                             </td>
                             <td>
                                 <%= drawing.getDateCreated()%>
+                            </td>
+                            <td>
+                                <%= drawing.getStatusToString()%>
+                            </td>
+                            <td>
                                 <div id="popupWindow">
                                     <form action="controllerServlet" method="post">
                                         <input type="hidden" name="action" value="seeDrawing">
                                         <input type="hidden" name="drawId" value ="<%=drawing.getSvgId()%>"/>
-                                        <input id="ourBtn" class="modal-open" type="submit" value="Se Tegning">
+                                        <input class="btn btn-default" type="submit" value="Se Tegning">
+
+
                                     </form>
                                 </div>     
                             </td>
                         </tr>
+
                         <%
                             }
                         %>
+
+
                     </tbody>
                 </table>
             </div>
         </div>
+
     </body>
 </html>
-
-
-
-
-
-
-
 <script>
     // Get the modal
     var modal = document.getElementById('popupWindow');
@@ -174,13 +238,13 @@ Author     : Pva
         modal.style.display = "none";
     };
     // When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target === modal) {
-        modal.style.display = "none";
-    }
-};
-    
-    
+    window.onclick = function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    };
+
+
 </script>
 
 

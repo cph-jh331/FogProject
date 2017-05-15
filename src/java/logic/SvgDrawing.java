@@ -2,7 +2,7 @@ package logic;
 
 import java.io.Serializable;
 
-public class SvgDrawing implements Serializable{
+public class SvgDrawing implements Serializable {
 
     private int svgId;
     private String svgInline;
@@ -11,8 +11,48 @@ public class SvgDrawing implements Serializable{
     private String dateAccepted;
     private boolean accepted = false;
     private int empId;
+    private Status status;
 
-    public SvgDrawing(int svgId, String svgInline, int userId, String dateCreated, String dateAccepted, boolean accepted) {
+    public enum Status {
+        created,
+        reqApproved,
+        approved,
+        done,
+    };
+
+    /**
+     * @return the status
+     */
+    public Status getStatus()
+    {
+        return status;
+    }
+
+    public String getStatusToString()
+    {
+        switch (status)
+        {
+            case reqApproved:
+                return "Sendt til Godkendelse";
+            case approved:
+                return "Godkendt";
+            case done:
+                return "Afsluttet";
+            default:
+                return "Oprettet";
+        }
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(Status status)
+    {
+        this.status = status;
+    }
+
+    public SvgDrawing(int svgId, String svgInline, int userId, String dateCreated, String dateAccepted, boolean accepted)
+    {
         this.svgId = svgId;
         this.svgInline = svgInline;
         this.customerId = userId;
@@ -21,76 +61,86 @@ public class SvgDrawing implements Serializable{
         this.accepted = accepted;
     }
 
-    public SvgDrawing(int svgId,int customerId, String dateCreated,int empId,String dateAccept,String svgImage) {
+    public SvgDrawing(int svgId, int customerId, String dateCreated, int empId, String dateAccept, String svgImage)
+    {
         this.svgId = svgId;
         this.customerId = customerId;
         this.dateCreated = dateCreated;
         this.empId = empId;
         this.dateAccepted = dateAccept;
         this.svgInline = svgImage;
-        
+
     }
 
     /**
      * @return the svgInline
      */
-    public String getSvgInline() {
+    public String getSvgInline()
+    {
         return svgInline;
     }
 
     /**
      * @return the userId
      */
-    public int getCustomerId() {
+    public int getCustomerId()
+    {
         return customerId;
     }
 
     /**
      * @return the accepted
      */
-    public boolean isAccepted() {
+    public boolean isAccepted()
+    {
         return accepted;
     }
 
     /**
      * @param svgInline the svgInline to set
      */
-    public void setSvgInline(String svgInline) {
+    public void setSvgInline(String svgInline)
+    {
         this.svgInline = svgInline;
     }
 
     /**
      * @param userId the userId to set
      */
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(int customerId)
+    {
         this.customerId = customerId;
     }
 
     /**
      * @param accepted the accepted to set
      */
-    public void setAccepted(boolean accepted) {
+    public void setAccepted(boolean accepted)
+    {
         this.accepted = accepted;
     }
 
     /**
      * @return the svgId
      */
-    public int getSvgId() {
+    public int getSvgId()
+    {
         return svgId;
     }
 
     /**
      * @return the dateCreated
      */
-    public String getDateCreated() {
+    public String getDateCreated()
+    {
         return dateCreated;
     }
 
     /**
      * @return the dateAccepted
      */
-    public String getDateAccepted() {
+    public String getDateAccepted()
+    {
         return dateAccepted;
     }
 
