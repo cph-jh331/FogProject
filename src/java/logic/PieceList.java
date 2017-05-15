@@ -1,6 +1,6 @@
 package logic;
 
-import backend.DataCtrl;
+import backend.DataFacade;
 import backend.PartMapper;
 import fogInterfaces.PieceListInterface;
 import java.util.ArrayList;
@@ -59,7 +59,7 @@ public class PieceList implements PieceListInterface {
     public void updateParts(int length, int width, int height)
     {
         PartCalculator calc = new PartCalculator();
-        DataCtrl dataCtrl = new DataCtrl();
+        DataFacade dataCtrl = new DataFacade();
         woodMap = dataCtrl.getWoodMap();
         roofMap = dataCtrl.getRoofMap();
         miscMap = dataCtrl.getMiscMap();

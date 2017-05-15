@@ -4,12 +4,16 @@
     Author     : Lasse Andersen
 --%>
 
+<%@page import="logic.SvgDrawing"%>
 <%@page import="java.util.List"%>
 <%@page import="logic.Customer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <% Customer customer = (Customer) session.getAttribute("user");%>
+    <% List<SvgDrawing> svgMapReqApproval = (List<SvgDrawing>) session.getAttribute("svgMapReqApproval");%>
+    <% List<SvgDrawing> svgMapApproved = (List<SvgDrawing>) session.getAttribute("svgMapApproved");%>
+    <% List<SvgDrawing> svgMapDone = (List<SvgDrawing>) session.getAttribute("svgMapDone");%>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +29,7 @@
         <%--Alt her er også nyt --%>
     </head>
     <body>
-        <!-- Beginning of navbar setup. using default to customize color in css with #id    -->
+     <!-- Beginning of navbar setup. using default to customize color in css with #id    -->
         <nav id="navbar-color" class="navbar navbar-default">
             <div class="container-fluid">
                 <!--Nav bar logo with link to picture. -->
@@ -72,101 +76,94 @@
             <%--Brugers tegninger til godkendelse--%>
             <h1>Hej <%= customer.getCusName()%> </h1>
             <div class="jumbotron">
-                <form action="controllerServlet" method="post">
-                    <input type="hidden" name="action" value="godkend"/>
-                    <div id="rates">
-                        <input type="submit" class="btn-success" value="Accepter">
-                        </form>
+                <table class="table table-bordered">
 
-                        <form action="controllerServlet" method="post">
-                            <input type="hidden" name="action" value="removesvg"/>
-                            <div id="rates">
-                                <input type="submit" class="btn-success" value="Afvis">
-                                </form>  
-                            </div>
-                        </form>
-                        <table class="table table-bordered">
-                            <p style="color: red"> Tegninger til godkendelse: </p>
-                            <thead class="bg-primary">
-                            <th> Navn: </th>
-                            <th> Nummer: </th>
-                            <th> Email: </th>
-                            <th> Tegning: </th>
-                            </thead>
-                            <%-- <% List<Svg> svgList = (List<Svg>) session.getAttribute("svgList");% --%>
-                            <tr class="btn-basic">
-                                <td>
-                                    <%=customer.getCusName()%>
-                                </td>
-                                <td> <%=customer.getCusPhone()%> </td>
-                                <td>
-                                    <%=customer.getCusEmail()%>
-                                </td>
-                                <td>
-                                    <button class="btn-success" name="action" onclick="myFunction()">Vis tegning fra: <%= customer.getCusName()%></button>
-                                    <button id="myBtn" style="padding: 1px 2px; ">Vis tegning Fra: <%= customer.getCusName()%></button>  <!-- The Modal -->
-                                    <div id="myModal" class="modal">
-                                        <!-- Modal content -->
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <span class="close">&times;</span>
-                                            </div>
-                                            <div class="">
-                                                <p></p>
-                                            </div>
-                                            <button class="btn-success" name="action" onclick="myFunction()">Vis tegning fra: <%= customer.getCusName()%></button>
-                                        </div>
-                                        <!--Vis tegning-->
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <%--De godkendte tegninger--%>
-                    <div class="jumbotron">
-                        <table class="table table-bordered">
+                    <p style="color: white"> Tegninger der venter godkendelse: <%= svgMapReqApproval.size()%> </p>                         
+                    <thead class="bg-primary">
+                    <th> Tegning id: </th>
+                    <th> Dato oprettet: </th>
+                    <th> Status </th>
+                    <th> Se Tegning </th>
 
-                            <p style="color: white"> Godkendte tegninger: </p>
-                            <thead class="bg-primary">
-                            <th> Navn: </th>
-                            <th> Nummer: </th>
-                            <th> Email: </th>
-                            <th> Tegning: </th>
-                            </thead>
-                            <%-- <% List<Svg> svgList = (List<Svg>) session.getAttribute("svgList");% --%>
 
-                            <tr class="btn-basic">
-                                <td>
-                                    <%=customer.getCusName()%>
-                                </td>
-                                <td> <%=customer.getCusPhone()%> </td>
-                                <td>
-                                    <%=customer.getCusEmail()%>
-                                </td>
-                                <td>
-                                    <%-- <form action="controllerServlet" method="post">
-                                         <input type="hidden" name="action" value="draw"/>
-                                    --%>
+                    </thead>
+                    <tbody class="bg-primary">
 
-                                    <div class="btn-success">
-                                        <button id="Btn" style="padding: 1px 1px; ">Vis tegning Fra: <%= customer.getCusName()%></button>  <!-- The Modal -->
-                                        <div id="myModal" class="modal">
-                                            <!-- Modal content -->
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <span class="close">&times;</span>
-                                                    <h2></h2>
-                                                </div>
-                                                <div class="block">
-                                                    <p></p>
-                                                </div>
-                                                <button class="btn-success" name="action" style="padding: 1px 2px; " onclick="myFunction()">Vis tegning fra: <%= customer.getCusName()%></button>  
-                                                </td>
-                                                </tr>
-                                            </div>
-                                        </div>
-                        </table>
-                    </div>
-            </div>                             
+                        <tr>
+                            <%for (SvgDrawing drawing : svgMapReqApproval)
+                                {
+                            %>
+                            <td>
+                                <%= drawing.getSvgId()%>
+                            </td>
+                            <td>
+                                <%= drawing.getDateCreated()%>
+                            </td>
+                            <td>
+
+                                <%= drawing.getStatusToString()%>
+                            </td>
+                            <td>
+                                <div id="popupWindow2">
+                                    <form action="controllerServlet" method="post">
+                                        <input type="hidden" name="action" value="seeDrawing">
+                                        <input type="hidden" name="drawId" value ="<%=drawing.getSvgId()%>"/>
+                                        <input class="btn btn-default" type="submit" value="Se Tegning">
+                                    </form>
+                                </div>     
+                            </td>
+                        </tr>
+                        <%
+                            }
+                        %>
+                    </tbody>
+                </table>
+                                    <table class="table table-bordered">
+
+                    <p style="color: white"> Godkendte tegninger: <%= svgMapApproved.size()%> </p>                         
+                    <thead class="bg-primary">
+                    <th> Tegning id: </th>
+                    <th> Dato oprettet: </th>
+                    <th> Status </th>
+                    <th> Se Tegning </th>
+
+
+                    </thead>
+                    <tbody class="bg-primary">
+
+                        <tr>
+                            <%for (SvgDrawing drawing : svgMapApproved)
+                                {
+                            %>
+                            <td>
+                                <%= drawing.getSvgId()%>
+                            </td>
+                            <td>
+                                <%= drawing.getDateCreated()%>
+                            </td>
+                            <td>
+
+                                <%= drawing.getStatusToString()%>
+                            </td>
+                            <td>
+                                <div id="popupWindow2">
+                                    <form action="controllerServlet" method="post">
+                                        <input type="hidden" name="action" value="seeDrawing">
+                                        <input type="hidden" name="drawId" value ="<%=drawing.getSvgId()%>"/>
+                                        <input class="btn btn-default" type="submit" value="Se Tegning">
+                                    </form>
+                                </div>     
+                            </td>
+                        </tr>
+                        <%
+                            }
+                        %>
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
     </body>
     <script>
 

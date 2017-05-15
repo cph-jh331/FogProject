@@ -5,9 +5,11 @@
  */
 package frontend;
 
+import backend.UserAlreadyExistException;
 import logic.Part;
 import logic.Customer;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,11 +19,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import logic.LogicCtrl;
-import logic.SideDrawing;
 import logic.SvgDrawing;
 
 @WebServlet(name = "ControllerServlet", urlPatterns
-        = {
+        =
+        {
             "/controllerServlet"
         })
 public class ControllerServlet extends HttpServlet {
@@ -36,7 +38,8 @@ public class ControllerServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException
+    {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
 
@@ -47,91 +50,124 @@ public class ControllerServlet extends HttpServlet {
 
         //TopDrawing topDrawingSvg = new TopDrawing();
         //topDrawingSvg.createSvg(length, width, height);
-        if (action == null) {
+        if (action == null)
+        {
             RequestDispatcher rd = request.getRequestDispatcher("index.html");
             rd.forward(request, response);
             return;
         }
-        if (action.equals("drawlist")) {
+        if (action.equals("drawlist"))
+        {
             RequestDispatcher rd = request.getRequestDispatcher("adminpanel.jsp");
             rd.forward(request, response);
             return;
 
         }
 
-        if (action.equals("logout")) {
+        if (action.equals("logout"))
+        {
             session.invalidate();
             RequestDispatcher rd = request.getRequestDispatcher("index.html");
             rd.forward(request, response);
             return;
         }
-        if (customer != null && action.equals("admin")) {
-            if (lc.checkAdmin(customer) == true) {
+        if (customer != null && action.equals("admin"))
+        {
+            if (lc.checkAdmin(customer) == true)
+            {
                 RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
                 rd.forward(request, response);
-            } else {
+            } else
+            {
                 RequestDispatcher rd = request.getRequestDispatcher("loggedin.jsp");
                 rd.forward(request, response);
             }
             return;
         }
-        if (customer != null && action.equals("customer")) {
-            if (lc.checkAdmin(customer) == true) {
+        if (customer != null && action.equals("customer"))
+        {
+            if (lc.checkAdmin(customer) == true)
+            {
                 RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
                 rd.forward(request, response);
-            } else {
+            } else
+            {
                 RequestDispatcher rd = request.getRequestDispatcher("loggedin.jsp");
                 rd.forward(request, response);
             }
             return;
         }
-        if (action.equals("admin")) {
+        if (action.equals("admin"))
+        {
             RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
             rd.forward(request, response);
             return;
         }
-        if (action.equals("customer")) {
+        if (action.equals("customer"))
+        {
             RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
             rd.forward(request, response);
             return;
         }
 
-        if (action.equals("adminlogin")) {
+        if (action.equals("adminlogin"))
+        {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             customer = lc.checkAdminLogin(email, password);
 
-            if (customer == null) {
+            if (customer == null)
+            {
                 session.invalidate();
                 RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
                 rd.forward(request, response);
-            } else {
+            } else
+            {
                 session.setAttribute("user", customer);
-                if (lc.checkAdmin(customer) == true) {
+                if (lc.checkAdmin(customer) == true)
+                {
+                    List<SvgDrawing> svgsReqApproval = lc.getAllSvgWithStatus(SvgDrawing.Status.reqApproved);
+                    List<SvgDrawing> svgsApproved = lc.getAllSvgWithStatus(SvgDrawing.Status.approved);
+                    List<SvgDrawing> svgsDone = lc.getAllSvgWithStatus(SvgDrawing.Status.done);
+                    session.setAttribute("svgMapReqApproval", svgsReqApproval);
+                    session.setAttribute("svgMapApproved", svgsApproved);
+                    session.setAttribute("svgMapDone", svgsDone);
                     RequestDispatcher rd = request.getRequestDispatcher("loggedinadmin.jsp");
                     rd.forward(request, response);
-                } else {
+                } else
+                {
                     RequestDispatcher rd = request.getRequestDispatcher("index.html");
                     rd.forward(request, response);
                 }
             }
             return;
         }
-        if (action.equals("customerlogin")) {
+        if (action.equals("customerlogin"))
+        {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             customer = lc.checkLogin(email, password);
-            if (customer == null) {
+            if (customer == null)
+            {
                 session.invalidate();
                 RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
                 rd.forward(request, response);
-            } else {
+            } else
+            {
                 session.setAttribute("user", customer);
-                if (lc.checkAdmin(customer) == false) {
-                    session.setAttribute("listDrawings", lc.svgList(customer.getCustomerId()));
+                if (lc.checkAdmin(customer) == false)
+                {
+                    session.setAttribute("listDrawings", lc.getAllSvgsWithCustomer(customer.getCustomerId()));
+                    List<SvgDrawing> svgsReqApproval = lc.getCustomerSvgWithStatus(SvgDrawing.Status.reqApproved, customer.getCustomerId());
+                    List<SvgDrawing> svgsApproved = lc.getCustomerSvgWithStatus(SvgDrawing.Status.approved, customer.getCustomerId());
+                    List<SvgDrawing> svgsDone = lc.getCustomerSvgWithStatus(SvgDrawing.Status.done, customer.getCustomerId());
+                    session.setAttribute("svgMapReqApproval", svgsReqApproval);
+                    session.setAttribute("svgMapApproved", svgsApproved);
+                    session.setAttribute("svgMapDone", svgsDone);
                     RequestDispatcher rd = request.getRequestDispatcher("loggedin.jsp");
                     rd.forward(request, response);
-                } else {
+                } else
+                {
                     RequestDispatcher rd = request.getRequestDispatcher("signup.jsp");
                     rd.forward(request, response);
                 }
@@ -140,7 +176,8 @@ public class ControllerServlet extends HttpServlet {
         }
 
         //ikke done.
-        if (action.equals("genDrawing")) {
+        if (action.equals("genDrawing"))
+        {
             String length = request.getParameter("length");
             String width = request.getParameter("width");
             String height = request.getParameter("height");
@@ -151,27 +188,22 @@ public class ControllerServlet extends HttpServlet {
             return;
         }
 
-        if (action.equals("seeDrawing")) {
+        if (action.equals("seeDrawing"))
+        {
             int drawingId = Integer.parseInt(request.getParameter("drawId"));
-            List<SvgDrawing> svgList = (List<SvgDrawing>) session.getAttribute("listDrawings");
-            String svgInLine = lc.getSvgInLine(svgList, drawingId);
-            session.setAttribute("svgInLine", svgInLine);
+            session.setAttribute("drawingId", drawingId);
+            SvgDrawing svgDrawing = lc.getSvgDrawingWithSvgId(drawingId);
+            session.setAttribute("svgDrawing", svgDrawing);
+            String whatToDo = lc.whatToDoWithDrawing(svgDrawing.getStatus(), customer.isAdmin());
+            String uiDanishSubmitButton = lc.uiWhatToDoWithDrawingDanish(svgDrawing.getStatus(), customer.isAdmin());
+            session.setAttribute("whatToDo", whatToDo);
+            session.setAttribute("seeDrawingSubmitButton", uiDanishSubmitButton);
             RequestDispatcher rd = request.getRequestDispatcher("seeDrawing.jsp");
             rd.forward(request, response);
-
-            //den her søgning skal flyttes væk, evt ind i logicCtrl, den skal bare returnere en int.
-//            for (SvgDrawing svgDrawing : svgList)
-//            {
-//                if (drawingId == svgDrawing.getSvgId())
-//                {
-//                    session.setAttribute("topDrawing", svgDrawing.getSvgInline());
-//                    RequestDispatcher rd = request.getRequestDispatcher("seeDrawing.jsp");
-//                    rd.forward(request, response);
-//                }
-//            }
         }
 
-        if (action.equals("signup")) {
+        if (action.equals("signup"))
+        {
 
             String email = request.getParameter("email");
             String firstname = request.getParameter("Fornavn");
@@ -183,7 +215,16 @@ public class ControllerServlet extends HttpServlet {
             String password = request.getParameter("psw");
             int zip = Integer.parseInt(zipStr);
             int phone = Integer.parseInt(phoneStr);
-            customer = lc.addUser(email, firstname, lastname, address, zip, city, phone, password);
+
+            try
+            {
+                customer = lc.addUser(email, firstname, lastname, address, zip, city, phone, password);
+            } catch (UserAlreadyExistException ex)
+            {
+                request.setAttribute("errorMessage", ex.toString());
+                RequestDispatcher rd = request.getRequestDispatcher("failed.jsp");
+                rd.forward(request, response);
+            }
             customer = lc.checkLogin(email, password);
             session.setAttribute("user", customer);
             RequestDispatcher rd = request.getRequestDispatcher("loggedin.jsp");
@@ -192,13 +233,15 @@ public class ControllerServlet extends HttpServlet {
             //Check Login with parameters before putting parameters into Db.
         }
 
-        if (customer == null) {
+        if (customer == null)
+        {
             RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
             rd.forward(request, response);
             return;
         }
 
-        if (action.equals("seelist")) {
+        if (action.equals("seelist"))
+        {
             PartList partList = new PartList();
             String length = request.getParameter("length");
             String width = request.getParameter("width");
@@ -212,7 +255,8 @@ public class ControllerServlet extends HttpServlet {
             rd.forward(request, response);
             return;
         }
-        if (action.equals("seeTypeCategory")) {
+        if (action.equals("seeTypeCategory"))
+        {
             String type = request.getParameter("TypeCategory");
             session.setAttribute("type", type);
             List<Part> typeCategory = lc.typeCat(type);
@@ -223,7 +267,8 @@ public class ControllerServlet extends HttpServlet {
             rd.forward(request, response);
             return;
         }
-        if (action.equals("addToDatabase")) {
+        if (action.equals("addToDatabase"))
+        {
             String type = request.getParameter("Type");
             String category = (String) session.getAttribute("category");
             String unitType = request.getParameter("Pakketype");
@@ -235,7 +280,8 @@ public class ControllerServlet extends HttpServlet {
             rd.forward(request, response);
             return;
         }
-        if (action.equals("removeFromDatabase")) {
+        if (action.equals("removeFromDatabase"))
+        {
             String removeId = request.getParameter("removeItem");
             String type = (String) session.getAttribute("type");
             session.setAttribute("type", type);
@@ -244,10 +290,10 @@ public class ControllerServlet extends HttpServlet {
             session.setAttribute("catList", typeCategory);
             RequestDispatcher rd = request.getRequestDispatcher("typeCat.jsp");
             rd.forward(request, response);
-
             return;
         }
-        if (action.equals("removesvg")) {
+        if (action.equals("removesvg"))
+        {
             String removeImage = (String) session.getAttribute("topDrawing");
             customer = (Customer) session.getAttribute("user");
             int customerId = customer.getCustomerId();
@@ -258,10 +304,75 @@ public class ControllerServlet extends HttpServlet {
             rd.forward(request, response);
             return;
         }
-        if (action.equals("godkend")) {
+
+        if (action.equals("seeDrawing"))
+        {
+            int drawingId = Integer.parseInt(request.getParameter("drawId"));
+            session.setAttribute("drawingId", drawingId);
+            SvgDrawing svgDrawing = lc.getSvgDrawingWithSvgId(drawingId);
+            session.setAttribute("svgDrawing", svgDrawing);
+            String whatToDo = lc.whatToDoWithDrawing(svgDrawing.getStatus(), customer.isAdmin());
+            String uiDanishSubmitButton = lc.uiWhatToDoWithDrawingDanish(svgDrawing.getStatus(), customer.isAdmin());
+            session.setAttribute("whatToDo", whatToDo);
+            session.setAttribute("seeDrawingSubmitButton", uiDanishSubmitButton);
+            RequestDispatcher rd = request.getRequestDispatcher("seeDrawing.jsp");
+            rd.forward(request, response);
         }
 
-        if (action.equals("savedrawing")) {
+        if (action.equals("svgRemoveDrawing"))
+        {
+            SvgDrawing svgdrawing = (SvgDrawing) session.getAttribute("svgDrawing");
+            lc.removeSvgDrawing(svgdrawing.getSvgId());
+            String jsp;
+            if (customer.isAdmin())
+            {
+                jsp = "adminpanel.jsp";
+            } else
+            {
+                jsp = "loggedin.jsp";
+            }
+            session.setAttribute("listDrawings", lc.getAllSvgsWithCustomer(customer.getCustomerId()));
+            List<SvgDrawing> svgsReqApproval = lc.getCustomerSvgWithStatus(SvgDrawing.Status.reqApproved, customer.getCustomerId());
+            List<SvgDrawing> svgsApproved = lc.getCustomerSvgWithStatus(SvgDrawing.Status.approved, customer.getCustomerId());
+            List<SvgDrawing> svgsDone = lc.getCustomerSvgWithStatus(SvgDrawing.Status.done, customer.getCustomerId());
+            session.setAttribute("svgMapReqApproval", svgsReqApproval);
+            session.setAttribute("svgMapApproved", svgsApproved);
+            session.setAttribute("svgMapDone", svgsDone);
+            RequestDispatcher rd = request.getRequestDispatcher(jsp);
+            rd.forward(request, response);
+        }
+
+        if (action.equals("svgreqapproval"))
+        {
+            int svgId = (Integer) session.getAttribute("drawingId");
+            lc.changeStatusOnSvg(svgId, SvgDrawing.Status.reqApproved);
+            session.setAttribute("listDrawings", lc.getAllSvgsWithCustomer(customer.getCustomerId()));
+            List<SvgDrawing> svgsReqApproval = lc.getCustomerSvgWithStatus(SvgDrawing.Status.reqApproved, customer.getCustomerId());
+            List<SvgDrawing> svgsApproved = lc.getCustomerSvgWithStatus(SvgDrawing.Status.approved, customer.getCustomerId());
+            List<SvgDrawing> svgsDone = lc.getCustomerSvgWithStatus(SvgDrawing.Status.done, customer.getCustomerId());
+            session.setAttribute("svgMapReqApproval", svgsReqApproval);
+            session.setAttribute("svgMapApproved", svgsApproved);
+            session.setAttribute("svgMapDone", svgsDone);
+            RequestDispatcher rd = request.getRequestDispatcher("loggedin.jsp");
+            rd.forward(request, response);
+        }
+
+        if (action.equals("approvedrawing"))
+        {
+            int svgId = (Integer) session.getAttribute("drawingId");
+            lc.changeStatusOnSvg(svgId, SvgDrawing.Status.approved);
+            List<SvgDrawing> svgsReqApproval = lc.getCustomerSvgWithStatus(SvgDrawing.Status.reqApproved, customer.getCustomerId());
+            List<SvgDrawing> svgsApproved = lc.getCustomerSvgWithStatus(SvgDrawing.Status.approved, customer.getCustomerId());
+            List<SvgDrawing> svgsDone = lc.getCustomerSvgWithStatus(SvgDrawing.Status.done, customer.getCustomerId());
+            session.setAttribute("svgMapReqApproval", svgsReqApproval);
+            session.setAttribute("svgMapApproved", svgsApproved);
+            session.setAttribute("svgMapDone", svgsDone);
+            RequestDispatcher rd = request.getRequestDispatcher("adminpanel.jsp");
+            rd.forward(request, response);
+        }
+
+        if (action.equals("savedrawing"))
+        {
             String svgImage = (String) session.getAttribute("topDrawing");
             customer = (Customer) session.getAttribute("user");
             int customerId = customer.getCustomerId();
@@ -272,33 +383,12 @@ public class ControllerServlet extends HttpServlet {
             rd.forward(request, response);
             return;
         }
-        if (action.equals("refusedrawing")) {
+
+        if (action.equals("refusedrawing"))
+        {
 
         }
-//        if(action.equals("sendTegning")){
-//            //Parameter kommer fra tegning.jsp
-//            String højde = request.getParameter("Højde");
-//            String bredde = request.getParameter("bredde");
-//            String længde = request.getParameter("længde");
-//            lc.createSvg(højde, længde, bredde);
-//            
-//        }
-
     }
-//        if(action.equals("blueAccept")){
-//           // Fog skal hente fra en liste hvori, der bliver vist de kunder der er klar til godkendelse af carport.
-//           // den liste skal sendes videre gennem lagene (klasserne).
-//           // fog skal have mulighed for at se og godkende kundernes tegning.
-//           blueAccept ba = new blueAccept();
-//
-//            if(action.equals("draw")){
-//                RequestDispatcher rd = request.getRequestDispatcher("")
-//             Ja/nej til submit button. Sender metoden videre, og så skal der vises noget nyt på siden. 
-//             if(ja){
-//                 Godkendes tegning - Og hvad så? besked sendes til kunden.
-//             } else {
-//                 Kasseres tegningen - og hvad så?
-//             }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -311,7 +401,8 @@ public class ControllerServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException
+    {
         processRequest(request, response);
     }
 
@@ -325,7 +416,8 @@ public class ControllerServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException
+    {
         processRequest(request, response);
     }
 
@@ -335,7 +427,8 @@ public class ControllerServlet extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() {
+    public String getServletInfo()
+    {
         return "Short description";
     }// </editor-fold>
 

@@ -4,6 +4,7 @@
     Author     : bloch
 --%>
 
+<%@page import="logic.SvgDrawing"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -20,13 +21,25 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <title>Drawing</title>
     </head>
-    <body>
+ <body>
         <div class="container">
             <div class="jumbotron">
-                <%String topDrawing = (String) request.getSession().getAttribute("svgInLine");%>
-                <%=topDrawing%>
-                   
-                      </div>
+                <% SvgDrawing svgDrawing = (SvgDrawing) request.getSession().getAttribute("svgDrawing");%>
+                <% String whatToDo = (String) request.getSession().getAttribute("whatToDo");%>
+                <% String uiDanishSubmitButton = (String) request.getSession().getAttribute("seeDrawingSubmitButton");%>
+                <%= svgDrawing.getSvgInline()%>
+                <div class="btn-group">
+                <form action="controllerServlet" method="post">
+                    <input type="hidden" name="action" value="<%=whatToDo%>"/>
+                    <input type="hidden" name="drawId" value="<%=svgDrawing.getSvgId()%>"/>
+                    <input type="submit" class="btn btn-success" value="<%=uiDanishSubmitButton%>"/>
+                </form>
+                <form action="controllerServlet" method="post">
+                    <input type="hidden" name="action" value="svgRemoveDrawing"/>
+                    <input type="submit" class="btn btn-danger" value="Slet Tegning"/>
+                </form>
+                </div>
+            </div>
         </div>
     </body>
 </html>
