@@ -9,53 +9,18 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <title>Sign up</title>
+     <head>
         <meta charset="UTF-8">
-
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css"> 
         <link rel="stylesheet" href="css/modalcss.css">
-    
-    <style>
-        <%--style for sign up button--%>
-    .sign {
-        background-color: #33e03c;
-        border: none;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-    }
-    
-     <%--style for Nav Bar--%>
-     ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #0013a3;
-}
-
-li {
-    float: right;
-}
-
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-li a:hover {
-    background-color: #0013a3;
-}
-    </style>
-
+        <link rel="stylesheet" href="css/standardcss.css">
+        <link rel="stylesheet" href="css/navbarsetup.css">
+        <link href="https://fonts.googleapis.com/css?family=Droid+Serif|Roboto" rel="stylesheet">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <title>SignUp</title>
     </head>
 
     <body>
