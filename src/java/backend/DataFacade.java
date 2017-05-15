@@ -90,7 +90,7 @@ public class DataFacade {
     
     public Customer validateAdmin(String email, String password)
     {
-        return userMap.validateUser(email, password);
+        return userMap.validateAdmin(email, password);
     }
     
     public void insertUser(Customer customer) throws UserAlreadyExistException

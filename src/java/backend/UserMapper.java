@@ -63,7 +63,7 @@ public class UserMapper {
 
     }
 
-    public Customer validateUser(String email, String pass) {
+    public Customer validateAdmin(String email, String pass) {
         String sql = "select * from FogUser where empEmail = ? && password = ?;";
 
         try {
