@@ -2,12 +2,9 @@ package backend;
 
 import java.sql.Connection;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 import logic.Customer;
 import logic.Part;
-import logic.User;
-import logic.Register;
 import logic.SvgDrawing;
 
 /**

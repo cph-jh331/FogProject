@@ -28,7 +28,6 @@ public class User {
         this.email = email;
         this.userName = userName;
         this.isAdmin = admin;
-
     }
 
     public User(int customerId ,String email, String firsName, String lastName, String address, String city, int zip, int phone, String password) {
@@ -79,33 +78,24 @@ public class User {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+
 
     public String getUserName() {
         return userName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastName = lastname;
-    }
 
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+
 
     public String getCity() {
         return city;

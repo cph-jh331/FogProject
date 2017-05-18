@@ -179,9 +179,9 @@ public class ControllerServlet extends HttpServlet {
         if (action.equals("genDrawing"))
         {
             String length = request.getParameter("length");
-            String width = request.getParameter("width");
+            String width = request.getParameter("width");//skal ikke fjernes.
             String height = request.getParameter("height");
-            String svgInlineTop = lc.createSvgSideView(height, length, width);
+            String svgInlineTop = lc.createSvgSideView(height, length);
             session.setAttribute("topDrawing", svgInlineTop);
             RequestDispatcher rd = request.getRequestDispatcher("drawing.jsp");
             rd.forward(request, response);
