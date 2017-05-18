@@ -18,18 +18,7 @@ public class LogicCtrl {
 
     private int id;
     DataFacade dataCtrl = new DataFacade();
-
-//    public boolean canParseString(String string)
-//    {
-//        try
-//        {
-//            Integer.parseInt(string);
-//        } catch (Exception illegalFormatException)
-//        {
-//            return false;
-//        }
-//        return true;
-//    }
+    
     public void changeStatusOnSvg(int svgId, SvgDrawing.Status status)
     {
         dataCtrl.changeStatusOnSvg(svgId, status);
@@ -57,7 +46,6 @@ public class LogicCtrl {
 
     public Customer checkLogin(String email, String password)
     {
-        //User user = dataCtrl.validateUser(email, password);
         Customer customer = dataCtrl.validateCustomer(email, password);
         return customer;
     }
@@ -110,10 +98,10 @@ public class LogicCtrl {
         return customer;
     }
 
-    public String createSvgSideView(String height, String length, String width)
+    public String createSvgSideView(String height, String length)
     {
         SideDrawing sideDrawing = new SideDrawing();
-        String svgImage = sideDrawing.createSideView(length, width, height);
+        String svgImage = sideDrawing.createSideView(length, height);
         return svgImage;
     }
 

@@ -1,14 +1,12 @@
 package logic;
 
 import backend.DataFacade;
-import backend.PartMapper;
-import fogInterfaces.PieceListInterface;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PieceList implements PieceListInterface {
+public class PieceList {
 
     private HashMap<Integer, Part> woodMap;
     private HashMap<Integer, Part> roofMap;
@@ -88,13 +86,11 @@ public class PieceList implements PieceListInterface {
 //        stolpe.setPacketSize(antalAfStolpe);   
     }
 
-    @Override
     public void generatePieceList(int length, int width, int height)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
     public Map<Integer, Part> getPieceMap()
     {
         return null;

@@ -362,7 +362,7 @@ public class PartCalculatorTest {
                 + "</svg>";
         
         LogicCtrl lc = new LogicCtrl();
-        String result = lc.createSvgSideView(height, length, width);
+        String result = lc.createSvgSideView(height, length);
         assertEquals(expResult, result);
         
     }

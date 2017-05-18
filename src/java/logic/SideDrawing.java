@@ -11,9 +11,7 @@ package logic;
  */
 public class SideDrawing {
 
-    private String SvgInlineSide;
     private int length;
-    private int width;
     private int height;
     private int numberOfPoles;
     private int lengthOfDrawing;
@@ -22,12 +20,11 @@ public class SideDrawing {
     private int lastPolePlacement;
     private int centerPolePlacement;
 
-    public String createSideView(String len, String wid, String hei)
+    public String createSideView(String len, String hei)
     {
 
         PartCalculator pc = new PartCalculator();
         this.length = Integer.parseInt(len);
-        this.width = Integer.parseInt(wid);
         this.height = Integer.parseInt(hei);
         this.numberOfPoles = pc.numbPoles(length);
 
@@ -64,9 +61,6 @@ public class SideDrawing {
                 + "style='fill:black;'>"
                 + "længde: " + length
                 + "</text>\n";
-        //<text x="110" y="<%=pæle.get(0).getLength() + 80%>" style="fill:black;">
-        //Længde: <%=pæle.get(1).getLength()%>cm
-        //</text>
         return textLength;
     }
 
@@ -74,8 +68,6 @@ public class SideDrawing {
     {
         String line = "<line x1='20' y1='" + (heightOfDrawing - 30) + "' x2='" + (length + 20) + "' y2='" + (heightOfDrawing - 30) + "'"
                 + "style='stroke:black;stroke-width:1;'/>";
-        //<line  x1 = "20" y1 = "<%=pæle.get(0).getLength() + 60%>" x2 = "<%=length + 20%>" y2 = "<%=pæle.get(0).getLength() + 60%>" 
-        //style = "stroke:black;stroke-width:1" / >
         return line;
     }
 
@@ -85,9 +77,6 @@ public class SideDrawing {
                 + "Højde:"
                 + height
                 + "</text>\n";
-
-        //<text x="<%=pæle.get(1).getLength() + 50%>" y="40" style="fill:black;">
-        //<%=height%>;
         return textHeight;
     }
 
@@ -103,8 +92,6 @@ public class SideDrawing {
     {
         String roof = "<rect x='20' y='39' width='" + length + "' height='20'\n"
                 + "style='stroke:#000000;fill:white;'/>\n";
-        //<rect x="20" y="39" width="<%=pæle.get(1).getLength()%>" height="20"
-        //1style="stroke: #000000; fill: white;"/>
         return roof;
     }
 
@@ -112,8 +99,6 @@ public class SideDrawing {
     {
         String centerPole = "<rect x='" + centerPolePlacement + "' y='50' width='5' height='" + height + "'\n"
                 + "style='stroke:#000000;fill:none;'/>\n";
-        //<rect x="<%=centerPolePlacement + 20%>" y="50" width="5" height="<%=pæle.get(0).getLength()%>"
-        //style="stroke: #000000; fill: none;"/>
         return centerPole;
     }
 
@@ -131,8 +116,6 @@ public class SideDrawing {
     {
         String ss = "<rect x='1' y='1' width='" + lengthOfDrawing + "' height='" + heightOfDrawing + "' "
                 + "style='stroke:000000;fill:white;'/>\n";
-        //<rect x="1" y="1" width="<%= pæle.get(1).getLength() + 98%>" height="<%=pæle.get(0).getLength() + 98%>"
-        //style="stroke: #000000; fill: none;"/>
         return ss;
     }
 
@@ -140,11 +123,6 @@ public class SideDrawing {
     {
         String lengthAndWidthOfDrawing = "width='100%'"
                 + "viewbox='0,0," + lengthOfDrawing + "," + heightOfDrawing + "' preserveaspectratio='none'>\n";
-
-//                 <svg id="svg1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-//                 width="<%=pæle.get(1).getLength() + 200%>"height="<%=pæle.get(0).getLength() + 200%>"
-//                 viewbox="0, 0, <%=pæle.get(1).getLength() + 200%>, <%=pæle.get(0).getLength() + 200%>"
-//                 preserveaspectratio="none">
         return lengthAndWidthOfDrawing;
     }
 
