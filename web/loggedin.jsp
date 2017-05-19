@@ -249,10 +249,3 @@ Author     : Pva
 
 
 
-<%-- <p> Antal elemneter i listen: <%= svgDrawings.size()%></p>   
-                   <!--
-   <% List<SvgDrawing> svgDrawings = (List<SvgDrawing>) session.getAttribute("svgDrawings");%>  
-   -->
-                   <%
-                             
-%> --%>
