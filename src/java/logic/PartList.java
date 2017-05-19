@@ -1,4 +1,4 @@
-package frontend;
+package logic;
 
 import backend.DataFacade;
 import logic.Part;

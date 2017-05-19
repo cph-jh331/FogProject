@@ -5,6 +5,7 @@
  */
 package frontend;
 
+import logic.PartList;
 import backend.UserAlreadyExistException;
 import logic.Part;
 import logic.Customer;
