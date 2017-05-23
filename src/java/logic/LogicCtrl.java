@@ -7,7 +7,6 @@ package logic;
 
 import backend.DataFacade;
 import backend.UserAlreadyExistException;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -16,9 +15,8 @@ import java.util.List;
  */
 public class LogicCtrl {
 
-    private int id;
-    DataFacade dataCtrl = new DataFacade();
-    
+    private DataFacade dataCtrl = new DataFacade();
+
     public void changeStatusOnSvg(int svgId, SvgDrawing.Status status)
     {
         dataCtrl.changeStatusOnSvg(svgId, status);
@@ -44,22 +42,22 @@ public class LogicCtrl {
         return dataCtrl.getAllSvgWithStatus(status);
     }
 
-    public Customer checkLogin(String email, String password)
+    public User checkLogin(String email, String password)
     {
-        Customer customer = dataCtrl.validateCustomer(email, password);
-        return customer;
+        User user = dataCtrl.validateCustomer(email, password);
+        return user;
     }
 
-    public Customer checkAdminLogin(String email, String password)
+    public User checkAdminLogin(String email, String password)
     {
-        Customer customer = dataCtrl.validateAdmin(email, password);
+        User user = dataCtrl.validateAdmin(email, password);
 
-        return customer;
+        return user;
     }
 
-    public boolean checkAdmin(Customer customer)
+    public boolean checkAdmin(User user)
     {
-        return customer.isAdmin();
+        return user.isAdmin();
     }
 
     public List<Part> addTo(String type, String category, String unitType, String desc, List<Part> catList)
@@ -71,14 +69,14 @@ public class LogicCtrl {
         return catList;
     }
 
-    public void parseId(String removeItem)
+    public int parseId(String removeItem)
     {
-        this.id = Integer.parseInt(removeItem);
+        return Integer.parseInt(removeItem);
     }
 
-    public List<Part> removePart(String type)
+    public List<Part> removePart(String type, int partId)
     {
-        dataCtrl.removePart(id);
+        dataCtrl.removePart(partId);
         List<Part> catList = dataCtrl.getTypeCategory(type);
         return catList;
     }
@@ -89,10 +87,10 @@ public class LogicCtrl {
         return typeCategory;
     }
 
-    public Customer addUser(String email, String firstname, String lastname, String adress, int zip, String city, int phone, String password) throws UserAlreadyExistException
+    public User addUser(String email, String firstname, String lastname, String adress, int zip, String city, int phone, String password) throws UserAlreadyExistException
     {
-        Customer customer = new Customer(email, firstname, lastname, adress, city, zip, phone, password);
-        dataCtrl.insertUser(customer);
+        User customer = new Customer(phone, email, firstname, lastname, adress, city, zip, phone, false);
+        dataCtrl.insertUser(customer, password);
 
         //unit test til user validering i datactrl eller partMapper...
         return customer;
@@ -117,8 +115,9 @@ public class LogicCtrl {
         dataCtrl.insertSvg(svgInline, customerId);
 
     }
-    
-    public boolean removeSvgDrawing(int svgId){
+
+    public boolean removeSvgDrawing(int svgId)
+    {
         return dataCtrl.removeSvgDrawing(svgId);
     }
 

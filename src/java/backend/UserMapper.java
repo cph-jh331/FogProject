@@ -10,10 +10,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import logic.Admin;
+import logic.User;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -25,23 +27,28 @@ public class UserMapper {
     private DBConnector dbc;
     private Connection conn;
 
-    public UserMapper(Connection conn) {
+    public UserMapper(Connection conn)
+    {
         this.conn = conn;
     }
 
-    public UserMapper() {
+    public UserMapper()
+    {
         this.dbc = new DBConnector();
         this.conn = dbc.connectDB();
     }
 
-    public Customer validateCustomer(String email, String pass) {
+    public User validateCustomer(String email, String pass)
+    {
         String sql = "select * from Customer where userEmail = ? && password = ?;";
-        try {
+        try
+        {
             PreparedStatement preStmt = conn.prepareStatement(sql);
             preStmt.setString(1, email);
             preStmt.setString(2, pass);
             ResultSet rs = preStmt.executeQuery();
-            if (rs.next()) {
+            if (rs.next())
+            {
                 int customerId = rs.getInt("customerId");
                 String firstname = rs.getString("userName");
                 String lastname = rs.getString("userLastname");
@@ -51,10 +58,12 @@ public class UserMapper {
                 int phone = rs.getInt("userPhone");
                 email = rs.getString("userEmail");
                 boolean isAdmin = rs.getBoolean("admin");
+                User user = new Customer(customerId, email, firstname, lastname, address, city, zip, phone, isAdmin);
+                return user;
 
-                return new Customer(customerId, email, firstname, lastname, address, city, zip, phone, isAdmin);
             }
-        } catch (SQLException ex) {
+        } catch (SQLException ex)
+        {
             Logger.getLogger(UserMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -62,49 +71,55 @@ public class UserMapper {
 
     }
 
-    public Customer validateAdmin(String email, String pass) {
+
+    public User validateAdmin(String email, String pass)
+    {
+
         String sql = "select * from FogUser where empEmail = ? && password = ?;";
 
-        try {
+        try
+        {
             PreparedStatement preStmt = conn.prepareStatement(sql);
             preStmt.setString(1, email);
             preStmt.setString(2, pass);
             ResultSet rs = preStmt.executeQuery();
-            if (rs.next()) {
+            if (rs.next())
+            {
                 int id = rs.getInt("empId");
                 String mail = rs.getString("empEmail");
                 String name = rs.getString("empName");
                 boolean admin = rs.getBoolean("admin");
-
-                return new Customer(id, mail, name, admin);
+                User user = new Admin(id, mail, name, admin);
+                return user;
             }
-        } catch (SQLException ex) {
+        } catch (SQLException ex)
+        {
             Logger.getLogger(UserMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
-    public void insertUser(Customer customer) {
+    public void insertUser(User customer, String password)
+    {
 
         String sql = "insert into Customer (userName, userLastname, userAddress, userZip, userCity, userPhone, userEmail, password) values (?,?,?,?,?,?,?,?);";
 
-        try {
+        try
+        {
             PreparedStatement preStmt = conn.prepareStatement(sql);
-            preStmt.setString(1, customer.getCusName());
-            preStmt.setString(2, customer.getCusLastname());
-            preStmt.setString(3, customer.getCusAddress());
-            preStmt.setInt(4, customer.getCusZip());
-            preStmt.setString(5, customer.getCusCity());
-            preStmt.setInt(6, customer.getCusPhone());
-            preStmt.setString(7, customer.getCusEmail());
-            preStmt.setString(8, customer.getCusPassword());
+            preStmt.setString(1, customer.getFirstName());
+            preStmt.setString(2, customer.getLastName());
+            preStmt.setString(3, customer.getAddress());
+            preStmt.setInt(4, customer.getZip());
+            preStmt.setString(5, customer.getCity());
+            preStmt.setInt(6, customer.getPhone());
+            preStmt.setString(7, customer.getEmail());
+            preStmt.setString(8, password);
             preStmt.executeUpdate();
 
-        } catch (SQLException ex) {
-
+        } catch (SQLException ex)
+        {
             Logger.getLogger(UserMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
-
-

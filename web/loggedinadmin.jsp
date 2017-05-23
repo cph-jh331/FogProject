@@ -4,11 +4,11 @@
     Author     : Pva
 --%>
 
-<%@page import="logic.Customer"%>
+<%@page import="logic.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <% Customer customer = (Customer) session.getAttribute("user");%>
+    <% User admin = (User) session.getAttribute("user");%>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,17 +47,17 @@
                     </ul>
                     <!-- Setup of the right side of nav-bar 2 different links for now. No href yet missing pages -->
                     <ul class="nav navbar-nav navbar-right">
-                        
+
                         <li id="makeLink" class="list-group-item">
-                        <form action="controllerServlet" method="post">
-                            <input type="hidden" name="action" value="drawlist"/>
-                             <input class="btn btn-success" type="submit"  value="Kundekartotek"/>
-                        </form> 
+                            <form action="controllerServlet" method="post">
+                                <input type="hidden" name="action" value="drawlist"/>
+                                <input class="btn btn-success" type="submit"  value="Kundekartotek"/>
+                            </form> 
                         </li>
-                            
-                       <%-- <li><a href="adminpanel.jsp"><span class="glyphicon glyphicon-check"></span> KundeKartotek</a></li>
-                        <li><a><span class="glyphicon glyphicon-user"></span><%= user.getUserName()%></a></li>
-                        </li> --%>
+
+                        <%-- <li><a href="adminpanel.jsp"><span class="glyphicon glyphicon-check"></span> KundeKartotek</a></li>
+                         <li><a><span class="glyphicon glyphicon-user"></span><%= user.getUserName()%></a></li>
+                         </li> --%>
                         <!--<li><a href="login.jsp"><span class="glyphicon glyphicon-login"></span>Login</a></li>-->
                         <li id="makeLink" class="list-group-item">
                             <div id="makeLink2" class="input-group">
@@ -75,7 +75,7 @@
 
 
         <div class="container">
-            <h1>Hello World!<%= customer.getCusName()%> </h1>
+            <h1>Hello World!<%= admin.getFirstName()%> </h1>
 
             <div class="jumbotron">
                 <form action="controllerServlet" method="post">

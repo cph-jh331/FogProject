@@ -22,7 +22,7 @@
 
         <title>Stykliste</title>
     </head>
-    <% User user = (User) session.getAttribute("user");%>
+    <%User user = (User) session.getAttribute("user");%>
     <%List<Part> woodList = (List<Part>) request.getSession().getAttribute("woodMap");%>
     <%List<Part> roofList = (List<Part>) request.getSession().getAttribute("roofMap");%>
     <%List<Part> miscList = (List<Part>) request.getSession().getAttribute("miscMap");%>
@@ -52,7 +52,7 @@
                     </ul>
                     <!-- Setup of the right side of nav-bar 2 different links for now. No href yet missing pages -->
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><span class="glyphicon glyphicon-user"></span><%= user.getUserName()%></a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span><%= user.getFirstName()%></a></li>
 
 
                         </li>

@@ -3,9 +3,9 @@ package backend;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.List;
-import logic.Customer;
 import logic.Part;
 import logic.SvgDrawing;
+import logic.User;
 
 /**
  *
@@ -80,19 +80,19 @@ public class DataFacade {
         return partMap.getMiscParts();
     }
     
-    public Customer validateCustomer(String email, String password)
+    public User validateCustomer(String email, String password)
     {
         return userMap.validateCustomer(email, password);        
     }
     
-    public Customer validateAdmin(String email, String password)
+    public User validateAdmin(String email, String password)
     {
         return userMap.validateAdmin(email, password);
     }
     
-    public void insertUser(Customer customer) throws UserAlreadyExistException
+    public void insertUser(User customer, String password) throws UserAlreadyExistException
     {
-        userMap.insertUser(customer);
+        userMap.insertUser(customer, password);
     }
     
     public void addPart(Part part)

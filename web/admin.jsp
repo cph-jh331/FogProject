@@ -4,7 +4,7 @@
     Author     : Lasse, Per, Marco, John
 --%>
 
-<%@page import="logic.Customer"%>
+<%@page import="logic.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -63,7 +63,7 @@
                 </div>
             </div>
         </nav>
-        <% Customer customer = (Customer) session.getAttribute("user");%>
+        <% User admin = (User) session.getAttribute("user");%>
         <div class="container">
             <div id="loginbox" class="col-lg-4">
                 <div class="form-group">
