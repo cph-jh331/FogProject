@@ -5,11 +5,11 @@
  */
 package frontend;
 
+import logic.PartList;
 import backend.UserAlreadyExistException;
 import logic.Part;
 import logic.Customer;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import logic.LogicCtrl;
 import logic.SvgDrawing;
+import logic.User;
 
 @WebServlet(name = "ControllerServlet", urlPatterns
         =
@@ -45,11 +46,9 @@ public class ControllerServlet extends HttpServlet {
 
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
-        Customer customer = (Customer) session.getAttribute("user");
+        User user = (User) session.getAttribute("user");
         LogicCtrl lc = new LogicCtrl();
 
-        //TopDrawing topDrawingSvg = new TopDrawing();
-        //topDrawingSvg.createSvg(length, width, height);
         if (action == null)
         {
             RequestDispatcher rd = request.getRequestDispatcher("index.html");
@@ -71,11 +70,11 @@ public class ControllerServlet extends HttpServlet {
             rd.forward(request, response);
             return;
         }
-        if (customer != null && action.equals("admin"))
+        if (user != null && action.equals("admin"))
         {
-            if (lc.checkAdmin(customer) == true)
+            if (lc.checkAdmin(user) == true)
             {
-                RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("loggedinadmin.jsp");
                 rd.forward(request, response);
             } else
             {
@@ -84,11 +83,11 @@ public class ControllerServlet extends HttpServlet {
             }
             return;
         }
-        if (customer != null && action.equals("customer"))
+        if (user != null && action.equals("customer"))
         {
-            if (lc.checkAdmin(customer) == true)
+            if (lc.checkAdmin(user) == true)
             {
-                RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("loggedinadmin.jsp");
                 rd.forward(request, response);
             } else
             {
@@ -114,17 +113,17 @@ public class ControllerServlet extends HttpServlet {
         {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            customer = lc.checkAdminLogin(email, password);
+            user = lc.checkAdminLogin(email, password);
 
-            if (customer == null)
+            if (user == null)
             {
                 session.invalidate();
                 RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
                 rd.forward(request, response);
             } else
             {
-                session.setAttribute("user", customer);
-                if (lc.checkAdmin(customer) == true)
+                session.setAttribute("user", user);
+                if (lc.checkAdmin(user) == true)
                 {
                     List<SvgDrawing> svgsReqApproval = lc.getAllSvgWithStatus(SvgDrawing.Status.reqApproved);
                     List<SvgDrawing> svgsApproved = lc.getAllSvgWithStatus(SvgDrawing.Status.approved);
@@ -146,21 +145,21 @@ public class ControllerServlet extends HttpServlet {
         {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            customer = lc.checkLogin(email, password);
-            if (customer == null)
+            user = lc.checkLogin(email, password);
+            if (user == null)
             {
                 session.invalidate();
                 RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
                 rd.forward(request, response);
             } else
             {
-                session.setAttribute("user", customer);
-                if (lc.checkAdmin(customer) == false)
+                session.setAttribute("user", user);
+                if (lc.checkAdmin(user) == false)
                 {
-                    session.setAttribute("listDrawings", lc.getAllSvgsWithCustomer(customer.getCustomerId()));
-                    List<SvgDrawing> svgsReqApproval = lc.getCustomerSvgWithStatus(SvgDrawing.Status.reqApproved, customer.getCustomerId());
-                    List<SvgDrawing> svgsApproved = lc.getCustomerSvgWithStatus(SvgDrawing.Status.approved, customer.getCustomerId());
-                    List<SvgDrawing> svgsDone = lc.getCustomerSvgWithStatus(SvgDrawing.Status.done, customer.getCustomerId());
+                    session.setAttribute("listDrawings", lc.getAllSvgsWithCustomer(user.getUserId()));
+                    List<SvgDrawing> svgsReqApproval = lc.getCustomerSvgWithStatus(SvgDrawing.Status.reqApproved, user.getUserId());
+                    List<SvgDrawing> svgsApproved = lc.getCustomerSvgWithStatus(SvgDrawing.Status.approved, user.getUserId());
+                    List<SvgDrawing> svgsDone = lc.getCustomerSvgWithStatus(SvgDrawing.Status.done, user.getUserId());
                     session.setAttribute("svgMapReqApproval", svgsReqApproval);
                     session.setAttribute("svgMapApproved", svgsApproved);
                     session.setAttribute("svgMapDone", svgsDone);
@@ -179,10 +178,10 @@ public class ControllerServlet extends HttpServlet {
         if (action.equals("genDrawing"))
         {
             String length = request.getParameter("length");
-            String width = request.getParameter("width");
+            String width = request.getParameter("width");//skal ikke fjernes.
             String height = request.getParameter("height");
-            String svgInlineTop = lc.createSvgSideView(height, length, width);
-            session.setAttribute("topDrawing", svgInlineTop);
+            String svigInlineSide = lc.createSvgSideView(height, length);
+            session.setAttribute("sideDrawing", svigInlineSide);
             RequestDispatcher rd = request.getRequestDispatcher("drawing.jsp");
             rd.forward(request, response);
             return;
@@ -194,12 +193,19 @@ public class ControllerServlet extends HttpServlet {
             session.setAttribute("drawingId", drawingId);
             SvgDrawing svgDrawing = lc.getSvgDrawingWithSvgId(drawingId);
             session.setAttribute("svgDrawing", svgDrawing);
-            String whatToDo = lc.whatToDoWithDrawing(svgDrawing.getStatus(), customer.isAdmin());
-            String uiDanishSubmitButton = lc.uiWhatToDoWithDrawingDanish(svgDrawing.getStatus(), customer.isAdmin());
+            String whatToDo = lc.whatToDoWithDrawing(svgDrawing.getStatus(), user.isAdmin());
+            String uiDanishSubmitButton = lc.uiWhatToDoWithDrawingDanish(svgDrawing.getStatus(), user.isAdmin());
             session.setAttribute("whatToDo", whatToDo);
             session.setAttribute("seeDrawingSubmitButton", uiDanishSubmitButton);
             RequestDispatcher rd = request.getRequestDispatcher("seeDrawing.jsp");
             rd.forward(request, response);
+        }
+
+        if (user == null)
+        {
+            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+            rd.forward(request, response);
+            return;
         }
 
         if (action.equals("signup"))
@@ -218,26 +224,19 @@ public class ControllerServlet extends HttpServlet {
 
             try
             {
-                customer = lc.addUser(email, firstname, lastname, address, zip, city, phone, password);
+                user = lc.addUser(email, firstname, lastname, address, zip, city, phone, password);
             } catch (UserAlreadyExistException ex)
             {
                 request.setAttribute("errorMessage", ex.toString());
                 RequestDispatcher rd = request.getRequestDispatcher("failed.jsp");
                 rd.forward(request, response);
             }
-            customer = lc.checkLogin(email, password);
-            session.setAttribute("user", customer);
+            user = lc.checkLogin(email, password);
+            session.setAttribute("user", user);
             RequestDispatcher rd = request.getRequestDispatcher("loggedin.jsp");
             rd.forward(request, response);
             return;
             //Check Login with parameters before putting parameters into Db.
-        }
-
-        if (customer == null)
-        {
-            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-            rd.forward(request, response);
-            return;
         }
 
         if (action.equals("seelist"))
@@ -285,8 +284,8 @@ public class ControllerServlet extends HttpServlet {
             String removeId = request.getParameter("removeItem");
             String type = (String) session.getAttribute("type");
             session.setAttribute("type", type);
-            lc.parseId(removeId);
-            List<Part> typeCategory = lc.removePart(type);
+            int partId = lc.parseId(removeId);
+            List<Part> typeCategory = lc.removePart(type, partId);
             session.setAttribute("catList", typeCategory);
             RequestDispatcher rd = request.getRequestDispatcher("typeCat.jsp");
             rd.forward(request, response);
@@ -295,8 +294,8 @@ public class ControllerServlet extends HttpServlet {
         if (action.equals("removesvg"))
         {
             String removeImage = (String) session.getAttribute("topDrawing");
-            customer = (Customer) session.getAttribute("user");
-            int customerId = customer.getCustomerId();
+            user = (Customer) session.getAttribute("user");
+            int customerId = user.getUserId();
             lc.remove(removeImage, customerId);
             List<SvgDrawing> liste = lc.svgList(customerId);
             session.setAttribute("listDrawings", liste);
@@ -311,8 +310,8 @@ public class ControllerServlet extends HttpServlet {
             session.setAttribute("drawingId", drawingId);
             SvgDrawing svgDrawing = lc.getSvgDrawingWithSvgId(drawingId);
             session.setAttribute("svgDrawing", svgDrawing);
-            String whatToDo = lc.whatToDoWithDrawing(svgDrawing.getStatus(), customer.isAdmin());
-            String uiDanishSubmitButton = lc.uiWhatToDoWithDrawingDanish(svgDrawing.getStatus(), customer.isAdmin());
+            String whatToDo = lc.whatToDoWithDrawing(svgDrawing.getStatus(), user.isAdmin());
+            String uiDanishSubmitButton = lc.uiWhatToDoWithDrawingDanish(svgDrawing.getStatus(), user.isAdmin());
             session.setAttribute("whatToDo", whatToDo);
             session.setAttribute("seeDrawingSubmitButton", uiDanishSubmitButton);
             RequestDispatcher rd = request.getRequestDispatcher("seeDrawing.jsp");
@@ -324,17 +323,17 @@ public class ControllerServlet extends HttpServlet {
             SvgDrawing svgdrawing = (SvgDrawing) session.getAttribute("svgDrawing");
             lc.removeSvgDrawing(svgdrawing.getSvgId());
             String jsp;
-            if (customer.isAdmin())
+            if (user.isAdmin())
             {
                 jsp = "adminpanel.jsp";
             } else
             {
                 jsp = "loggedin.jsp";
             }
-            session.setAttribute("listDrawings", lc.getAllSvgsWithCustomer(customer.getCustomerId()));
-            List<SvgDrawing> svgsReqApproval = lc.getCustomerSvgWithStatus(SvgDrawing.Status.reqApproved, customer.getCustomerId());
-            List<SvgDrawing> svgsApproved = lc.getCustomerSvgWithStatus(SvgDrawing.Status.approved, customer.getCustomerId());
-            List<SvgDrawing> svgsDone = lc.getCustomerSvgWithStatus(SvgDrawing.Status.done, customer.getCustomerId());
+            session.setAttribute("listDrawings", lc.getAllSvgsWithCustomer(user.getUserId()));
+            List<SvgDrawing> svgsReqApproval = lc.getCustomerSvgWithStatus(SvgDrawing.Status.reqApproved, user.getUserId());
+            List<SvgDrawing> svgsApproved = lc.getCustomerSvgWithStatus(SvgDrawing.Status.approved, user.getUserId());
+            List<SvgDrawing> svgsDone = lc.getCustomerSvgWithStatus(SvgDrawing.Status.done, user.getUserId());
             session.setAttribute("svgMapReqApproval", svgsReqApproval);
             session.setAttribute("svgMapApproved", svgsApproved);
             session.setAttribute("svgMapDone", svgsDone);
@@ -346,10 +345,10 @@ public class ControllerServlet extends HttpServlet {
         {
             int svgId = (Integer) session.getAttribute("drawingId");
             lc.changeStatusOnSvg(svgId, SvgDrawing.Status.reqApproved);
-            session.setAttribute("listDrawings", lc.getAllSvgsWithCustomer(customer.getCustomerId()));
-            List<SvgDrawing> svgsReqApproval = lc.getCustomerSvgWithStatus(SvgDrawing.Status.reqApproved, customer.getCustomerId());
-            List<SvgDrawing> svgsApproved = lc.getCustomerSvgWithStatus(SvgDrawing.Status.approved, customer.getCustomerId());
-            List<SvgDrawing> svgsDone = lc.getCustomerSvgWithStatus(SvgDrawing.Status.done, customer.getCustomerId());
+            session.setAttribute("listDrawings", lc.getAllSvgsWithCustomer(user.getUserId()));
+            List<SvgDrawing> svgsReqApproval = lc.getCustomerSvgWithStatus(SvgDrawing.Status.reqApproved, user.getUserId());
+            List<SvgDrawing> svgsApproved = lc.getCustomerSvgWithStatus(SvgDrawing.Status.approved, user.getUserId());
+            List<SvgDrawing> svgsDone = lc.getCustomerSvgWithStatus(SvgDrawing.Status.done, user.getUserId());
             session.setAttribute("svgMapReqApproval", svgsReqApproval);
             session.setAttribute("svgMapApproved", svgsApproved);
             session.setAttribute("svgMapDone", svgsDone);
@@ -361,9 +360,9 @@ public class ControllerServlet extends HttpServlet {
         {
             int svgId = (Integer) session.getAttribute("drawingId");
             lc.changeStatusOnSvg(svgId, SvgDrawing.Status.approved);
-            List<SvgDrawing> svgsReqApproval = lc.getCustomerSvgWithStatus(SvgDrawing.Status.reqApproved, customer.getCustomerId());
-            List<SvgDrawing> svgsApproved = lc.getCustomerSvgWithStatus(SvgDrawing.Status.approved, customer.getCustomerId());
-            List<SvgDrawing> svgsDone = lc.getCustomerSvgWithStatus(SvgDrawing.Status.done, customer.getCustomerId());
+            List<SvgDrawing> svgsReqApproval = lc.getCustomerSvgWithStatus(SvgDrawing.Status.reqApproved, user.getUserId());
+            List<SvgDrawing> svgsApproved = lc.getCustomerSvgWithStatus(SvgDrawing.Status.approved, user.getUserId());
+            List<SvgDrawing> svgsDone = lc.getCustomerSvgWithStatus(SvgDrawing.Status.done, user.getUserId());
             session.setAttribute("svgMapReqApproval", svgsReqApproval);
             session.setAttribute("svgMapApproved", svgsApproved);
             session.setAttribute("svgMapDone", svgsDone);
@@ -374,8 +373,8 @@ public class ControllerServlet extends HttpServlet {
         if (action.equals("savedrawing"))
         {
             String svgImage = (String) session.getAttribute("topDrawing");
-            customer = (Customer) session.getAttribute("user");
-            int customerId = customer.getCustomerId();
+            user = (Customer) session.getAttribute("user");
+            int customerId = user.getUserId();
             lc.saveSvg(svgImage, customerId);
             List<SvgDrawing> list = lc.svgList(customerId);
             session.setAttribute("listDrawings", list);
@@ -386,7 +385,8 @@ public class ControllerServlet extends HttpServlet {
 
         if (action.equals("refusedrawing"))
         {
-
+            RequestDispatcher rd = request.getRequestDispatcher("loggedin.jsp");
+            rd.forward(request, response);
         }
     }
 

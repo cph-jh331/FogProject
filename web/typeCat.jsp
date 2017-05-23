@@ -4,21 +4,23 @@
     Author     : Lasse Andersen
 --%>
 
+<%@page import="logic.User"%>
 <%@page import="java.util.List"%>
 <%@page import="logic.Part"%>
-<%@page import="logic.Customer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <%String type = (String) session.getAttribute("type");%>
     <%String category = (String) session.getAttribute("category");%>
-    <% Customer customer = (Customer) session.getAttribute("user");%>
+    <% User user = (User) session.getAttribute("user");%>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap-theme.min.css"> 
+        <link rel="stylesheet" href="css/modalcss.css">
         <link rel="stylesheet" href="css/standardcss.css">
+        <link rel="stylesheet" href="css/navbarsetup.css">
         <link href="https://fonts.googleapis.com/css?family=Droid+Serif|Roboto" rel="stylesheet">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -49,7 +51,7 @@
                     </ul>
                     <!-- Setup of the right side of nav-bar 2 different links for now. No href yet missing pages -->
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><span class="glyphicon glyphicon-user"></span><%= customer.getCusName()%></a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span><%= user.getFirstName()%></a></li>
 
 
                         </li>

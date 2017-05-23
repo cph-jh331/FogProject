@@ -4,12 +4,12 @@
     Author     : Lasse Andersen
 --%>
 
+<%@page import="logic.User"%>
 <%@page import="java.util.List"%>
-<%@page import="logic.Customer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <% Customer customer = (Customer) session.getAttribute("user");%>
+    <% User customer = (User) session.getAttribute("user");%>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">

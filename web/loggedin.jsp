@@ -4,13 +4,13 @@ Created on : 31-03-2017, 10:17:34
 Author     : Pva
 --%>
 
+<%@page import="logic.User"%>
 <%@page import="java.util.List"%>
 <%@page import="logic.SvgDrawing"%>
-<%@page import="logic.Customer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <% Customer customer = (Customer) session.getAttribute("user");%>
+    <% User customer = (User) session.getAttribute("user");%>
     <% List<SvgDrawing> svgDrawings = (List<SvgDrawing>) session.getAttribute("listDrawings");%>
     <% List<SvgDrawing> svgMapReqApproval = (List<SvgDrawing>) session.getAttribute("svgMapReqApproval");%>
     <% List<SvgDrawing> svgMapApproved = (List<SvgDrawing>) session.getAttribute("svgMapApproved");%>
@@ -67,7 +67,7 @@ Author     : Pva
         </nav>
 
         <div class="container">
-            <h1>Hello World!<%= customer.getCusName()%> </h1>
+            <h1>Hello World!<%= customer.getFirstName()%> </h1>
 
             <div class="jumbotron">
                 <h2> Lav en tegning</h2>
@@ -181,7 +181,7 @@ Author     : Pva
                     </thead>
                     <tbody class="bg-primary">
 
-                        <tr class="modal">
+                        <tr>
                             <%for (SvgDrawing drawing : svgDrawings)
                                 {
                             %>
@@ -220,6 +220,7 @@ Author     : Pva
     </body>
 </html>
 <script>
+
     // Get the modal
     var modal = document.getElementById('popupWindow');
 
@@ -249,10 +250,3 @@ Author     : Pva
 
 
 
-<%-- <p> Antal elemneter i listen: <%= svgDrawings.size()%></p>   
-                   <!--
-   <% List<SvgDrawing> svgDrawings = (List<SvgDrawing>) session.getAttribute("svgDrawings");%>  
-   -->
-                   <%
-                             
-%> --%>

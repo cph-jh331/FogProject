@@ -11,128 +11,81 @@ package logic;
  */
 public class User {
 
-   
     private String email;
-    private String userName;
+    private String firstName;
     private String lastName;
     private String address;
     private String city;
     private int zip;
     private int phone;
-    private String password;
     private boolean isAdmin = false;
-    private int customerId;
+    private int id;
     
-    public User(int customerId, String email, String userName, boolean admin) {
-        this.customerId = customerId;
+    
+    public User(int adminId, String email, String userName, boolean admin)
+    {
+        this.id = adminId;
         this.email = email;
-        this.userName = userName;
+        this.firstName = userName;
         this.isAdmin = admin;
-
     }
 
-    public User(int customerId ,String email, String firsName, String lastName, String address, String city, int zip, int phone, String password) {
-        this.customerId = customerId;
+    public User(int customerId, String email, String firstName, String lastName, String address, String city, int zip, int phone, boolean isAdmin)
+    {
+        this.id = customerId;
         this.email = email;
-        this.userName = firsName;
-        this.lastName = lastName;
-        this.address = address;
-        this.city = city;
-        this.zip = zip;
-        this.phone = phone;
-        this.password = password;
-    }
-
-    
-    public User(int customerId, String email, String firstName, String lastName, String address, String city, int zip, int phone, boolean isAdmin) {
-        this.customerId = customerId;
-        this.email = email;
-        this.userName = firstName;
+        this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.city = city;
         this.zip = zip;
         this.phone = phone;
         this.isAdmin = isAdmin;
-        
     }
 
-    public User(String email, String userName, String lastName, String address, String city, int zip, int phone, String password) {
-        this.email = email;
-        this.userName = userName;
-        this.lastName = lastName;
-        this.address = address;
-        this.city = city;
-        this.zip = zip;
-        this.phone = phone;
-        this.password = password;
-    }
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
-
-    public String getEmail() {
+    public String getEmail()
+    {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getLastName() {
+    public String getLastName()
+    {
         return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastName = lastname;
-    }
-
-    public String getAddress() {
+    public String getAddress()
+    {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getCity() {
+    public String getCity()
+    {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(String city)
+    {
         this.city = city;
     }
 
-    public int getZip() {
+    public int getZip()
+    {
         return zip;
     }
 
-    public void setZip(int zip) {
+    public void setZip(int zip)
+    {
         this.zip = zip;
     }
 
-    public int getPhone() {
+    public int getPhone()
+    {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(int phone)
+    {
         this.phone = phone;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     /**
@@ -142,6 +95,21 @@ public class User {
     {
         return isAdmin;
     }
-    
+
+    /**
+     * @return the firstName
+     */
+    public String getFirstName()
+    {
+        return firstName;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getUserId()
+    {
+        return id;
+    }
 
 }

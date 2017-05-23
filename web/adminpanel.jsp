@@ -4,13 +4,13 @@
     Author     : Lasse Andersen
 --%>
 
+<%@page import="logic.User"%>
 <%@page import="logic.SvgDrawing"%>
 <%@page import="java.util.List"%>
-<%@page import="logic.Customer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <% Customer customer = (Customer) session.getAttribute("user");%>
+    <% User admin = (User) session.getAttribute("user");%>
     <% List<SvgDrawing> svgMapReqApproval = (List<SvgDrawing>) session.getAttribute("svgMapReqApproval");%>
     <% List<SvgDrawing> svgMapApproved = (List<SvgDrawing>) session.getAttribute("svgMapApproved");%>
     <% List<SvgDrawing> svgMapDone = (List<SvgDrawing>) session.getAttribute("svgMapDone");%>
@@ -74,7 +74,7 @@
         </nav>
         <div class="container">
             <%--Brugers tegninger til godkendelse--%>
-            <h1>Hej <%= customer.getCusName()%> </h1>
+            <h1>Hej <%= admin.getFirstName()%> </h1>
             <div class="jumbotron">
                 <table class="table table-bordered">
 

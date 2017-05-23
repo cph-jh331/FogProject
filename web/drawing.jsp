@@ -23,8 +23,8 @@
     <body>
         <div class="container">
             <div class="jumbotron">
-                <%String topDrawing = (String) request.getSession().getAttribute("topDrawing");%>
-                <%=topDrawing%>
+                <%String sideDrawing = (String) request.getSession().getAttribute("sideDrawing");%>
+                <%=sideDrawing%>
                 <form action="controllerServlet" method="post">
                     <input type="hidden" name="action" value="savedrawing"/>
                     <input type="submit" class="btn-success" value="Gem tegning"/>
