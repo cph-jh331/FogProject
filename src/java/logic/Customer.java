@@ -6,4 +6,5 @@ public class Customer extends User {
     {
         super(customerId, email, firstName, lastName, address, city, zip, phone, isAdmin);
     }
+
 }

@@ -240,35 +240,5 @@ public class SvgMapper {
         return svgList;
     }
 
-    public List<SvgDrawing> getAllDrawings()
-    {
-        List<SvgDrawing> drawList = new ArrayList<>();
-        String sql = "Select * from Svg;";
-        PreparedStatement preStmt;
-        try
-        {
-            preStmt = conn.prepareStatement(sql);
-            ResultSet rs = preStmt.executeQuery();
-
-            while (rs.next())
-            {
-                int svgId = rs.getInt("svgId");
-                String svgInline = rs.getString("svgImage");
-                int customerId = rs.getInt("customerId");
-                String dateCreate = rs.getString("dateCreate");
-                String dateAccepted = rs.getString("dateAccept");
-                String status = rs.getString("status");
-                //udkommenteret indtil det er muligt at hive det ud af databasen
-                //boolean accepted = rs.getBoolean("accepted");
-                SvgDrawing svgDrawing = new SvgDrawing(svgId, svgInline, customerId, dateCreate, dateAccepted, false);
-                svgDrawing.setStatus(SvgDrawing.Status.valueOf(status));
-                drawList.add(svgDrawing);
-            }
-        } catch (SQLException ex)
-        {
-            Logger.getLogger(SvgMapper.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return drawList;
-    }
+   
 }

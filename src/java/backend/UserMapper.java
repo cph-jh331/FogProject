@@ -14,6 +14,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import logic.Admin;
 import logic.User;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -69,8 +71,10 @@ public class UserMapper {
 
     }
 
+
     public User validateAdmin(String email, String pass)
     {
+
         String sql = "select * from FogUser where empEmail = ? && password = ?;";
 
         try

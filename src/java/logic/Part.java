@@ -5,13 +5,11 @@
  */
 package logic;
 
-import fogInterfaces.PartInterface;
-
 /**
  *
  * @author bloch
  */
-public class Part implements PartInterface {
+public class Part {
 
     private String type;
     private Integer length;
@@ -29,11 +27,8 @@ public class Part implements PartInterface {
         this.category = category;
         this.typeCategory = typeCategory;
     }
-    
-    
 
-    public Part(String type, Integer length, int packetSize, String unitName, String desc, int partId, String category, String typeCategory)
-    {
+    public Part(String type, Integer length, int packetSize, String unitName, String desc, int partId, String category, String typeCategory) {
         this.type = type;
         this.length = length;
         this.packetSize = packetSize;
@@ -44,82 +39,62 @@ public class Part implements PartInterface {
         this.typeCategory = typeCategory;
     }
 
-    public String getTypeCategory()
-    {
+    public String getTypeCategory() {
         return typeCategory;
     }
 
-    @Override
-    public String getType()
-    {
+    public String getType() {
         return this.type;
     }
 
-    @Override
-    public Integer getLength()
-    {
+    public Integer getLength() {
         return this.length;
     }
 
-    @Override
-    public int getPacketSize()
-    {
+    public int getPacketSize() {
         return this.packetSize;
     }
 
-    @Override
-    public String getUnitName()
-    {
+    public String getUnitName() {
         return this.unitName;
     }
 
-    @Override
-    public String getDescription()
-    {
+    public String getDescription() {
         return this.desc;
     }
 
-    @Override
-    public int getPartId()
-    {
+    public int getPartId() {
         return this.partId;
     }
 
     /**
      * @param length the length to set
      */
-    @Override
-    public void setLength(Integer length)
-    {
+    public void setLength(Integer length) {
         this.length = length;
     }
 
     /**
      * @param packetSize the packetSize to set
      */
-    @Override
-    public void setPacketSize(int packetSize)
-    {
+    public void setPacketSize(int packetSize) {
         this.packetSize = packetSize;
     }
 
-    public void setLengthAndPacketSize(Integer length, int packetSize)
-    {
+    public void setLengthAndPacketSize(Integer length, int packetSize) {
         this.length = length;
         this.packetSize = packetSize;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Part{" + "type=" + type + ", length=" + length + ", packetSize=" + packetSize + ", unitName=" + unitName + ", desc=" + desc + ", partId=" + partId + '}';
     }
 
     /**
      * @return the category
      */
-    public String getCategory()
-    {
+    public String getCategory() {
         return category;
     }
 

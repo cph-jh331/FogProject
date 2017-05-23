@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class LogicCtrl {
 
-    DataFacade dataCtrl = new DataFacade();
+    private DataFacade dataCtrl = new DataFacade();
 
     public void changeStatusOnSvg(int svgId, SvgDrawing.Status status)
     {
