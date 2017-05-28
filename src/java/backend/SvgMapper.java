@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package backend;
 
 import java.sql.Connection;
@@ -16,18 +11,37 @@ import java.util.logging.Logger;
 import logic.SvgDrawing;
 
 /**
+ * SvgMapper is used for updating and getting data from the Svg table in the
+ * MySQL database.
  *
- * @author bloch
+ * @author Lasse Andersen, Marco Frydshou, John Hansen, Per Andersen
  */
 public class SvgMapper {
 
+    /**
+     * Connection conn used for setting a SQL Connection.
+     */
     private Connection conn;
 
+    /**
+     * Constructor that sets the Connection to the Connection parameter.
+     *
+     * @param conn SQL Connection to set.
+     */
     public SvgMapper(Connection conn)
     {
         this.conn = conn;
     }
 
+    /**
+     * Returns a List with SvgDrawing objects based on the int parameter
+     * customerId. The List can be empty.
+     *
+     * @param customerId int of the customerId you want to get a List of
+     * SvgDrawings from.
+     * @return List with SvgDrawing objects from a specific customer. List will
+     * return empty, if no rows contains the specified customerId.
+     */
     public List<SvgDrawing> getCustomerSvgs(int customerId)
     {
         String sql = "select * from Svg where customerId = ?;";
@@ -44,10 +58,7 @@ public class SvgMapper {
                 customerId = rs.getInt("customerId");
                 String dateCreate = rs.getString("dateCreate");
                 String dateAccepted = rs.getString("dateAccept");
-                String status = rs.getString("status");
-
-                //udkommenteret indtil det er muligt at hive det ud af databasen
-                //boolean accepted = rs.getBoolean("accepted");
+                String status = rs.getString("status").toUpperCase();
                 SvgDrawing svgDrawing = new SvgDrawing(svgId, svgInline, customerId, dateCreate, dateAccepted, false);
                 svgDrawing.setStatus(SvgDrawing.Status.valueOf(status));
                 SvgList.add(svgDrawing);
@@ -59,6 +70,13 @@ public class SvgMapper {
         return SvgList;
     }
 
+    /**
+     * Remove a row from Svg table in the MySQL database based on the svgId.
+     * Returns true if the if succeded.
+     *
+     * @param svgId int value for the SvgDrawing's id you want to remove.
+     * @return true if the svgId existed.
+     */
     public boolean removeSvgDrawing(int svgId)
     {
         String sql = "delete from Svg where svgId = ?;";
@@ -73,11 +91,19 @@ public class SvgMapper {
             Logger.getLogger(SvgMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
-
     }
 
+    /**
+     * Remove an row in the Svg table based ont the int customerId and the
+     * String removeImage. Returns true if it succeded.
+     *
+     * @param removeimage String with Svg in html.
+     * @param customerid int of a customer id.
+     * @return boolean true if no exception happened.
+     */
     public boolean removeDrawing(String removeimage, int customerid)
     {
+        boolean removedDrawing = false;
         String sql = "delete from Svg (customerId, svgImage) values (?, ?);";
         try
         {
@@ -85,13 +111,23 @@ public class SvgMapper {
             preStmt.setInt(1, customerid);
             preStmt.setString(2, removeimage);
             preStmt.executeUpdate();
+            removedDrawing = true;
         } catch (SQLException ex)
         {
             Logger.getLogger(SvgMapper.class.getName()).log(Level.SEVERE, null, ex);
+
         }
-        return true;
+        return removedDrawing;
     }
 
+    /**
+     * Inserts a row in the MySQL database based on the string SvgInline and a
+     * CustomerId. Returns true if succeded.
+     *
+     * @param SvgInLine String with Svg in html.
+     * @param customerId int value of the customerId.
+     * @return returns true if no SQLException has happened.
+     */
     public boolean saveDrawing(String SvgInLine, int customerId)
     {
         String sql = "insert into Svg (customerId, svgImage) values (?, ?);";
@@ -105,18 +141,27 @@ public class SvgMapper {
         } catch (SQLException ex)
         {
             Logger.getLogger(SvgMapper.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
 
         return true;
     }
 
+    /**
+     * Updates the status of a row in the SvgTable based on the svgId and the
+     * Status.
+     *
+     * @param svgId int value of the svgId.
+     * @param status Enum Status to set. Expected values are CREATED,
+     * REQAPPROVED, APPROVED and DONE.
+     */
     public void changeStatusOnSvg(int svgId, SvgDrawing.Status status)
     {
         String sql = "update Svg set status = ? where svgId = ?;";
         try
         {
             PreparedStatement preStmt = conn.prepareStatement(sql);
-            preStmt.setString(1, status.toString());
+            preStmt.setString(1, status.toString().toLowerCase());
             preStmt.setInt(2, svgId);
             preStmt.executeUpdate();
         } catch (SQLException ex)
@@ -125,6 +170,15 @@ public class SvgMapper {
         }
     }
 
+    /**
+     * Returns a List with SvgDrawing objects based on the int parameter
+     * customerId. The List can be empty.
+     *
+     * @param customerId int for the customer you want to get a List of
+     * SvgDrawings from.
+     * @return List with SvgDrawing objects from a specific customer. The List
+     * will return empty if the customerId does not exist in the Svg table.
+     */
     public List<SvgDrawing> getAllSvgsWithCustomer(int customerId)
     {
         List<SvgDrawing> svgList = new ArrayList<>();
@@ -141,7 +195,7 @@ public class SvgMapper {
                 int custId = rs.getInt("customerId");
                 String dateCreate = rs.getString("dateCreate");
                 String dateAccepted = rs.getString("dateAccept");
-                String status = rs.getString("status");
+                String status = rs.getString("status").toUpperCase();
                 SvgDrawing svgDrawing = new SvgDrawing(svgId, svgInline, custId, dateCreate, dateAccepted, false);
                 svgDrawing.setStatus(SvgDrawing.Status.valueOf(status));
                 svgList.add(svgDrawing);
@@ -154,6 +208,14 @@ public class SvgMapper {
 
     }
 
+    /**
+     * Returns a SvgDrawing object with the specified svgId. SvgDrawing CAN BE
+     * NULL.
+     *
+     * @param svgId int value of the svgId.
+     * @return SvgDrawing object. SvgDrawing Object will be null, if the svgId
+     * does not exists in the Svg table in the MySQL database.
+     */
     public SvgDrawing getSvgDrawingWithSvgId(int svgId)
     {
         SvgDrawing svgDrawing = null;
@@ -170,7 +232,7 @@ public class SvgMapper {
                 int custId = rs.getInt("customerId");
                 String dateCreate = rs.getString("dateCreate");
                 String dateAccepted = rs.getString("dateAccept");
-                String status = rs.getString("status");
+                String status = rs.getString("status").toUpperCase();
                 svgDrawing = new SvgDrawing(svgId, svgInline, custId, dateCreate, dateAccepted, false);
                 svgDrawing.setStatus(SvgDrawing.Status.valueOf(status));
             }
@@ -182,6 +244,17 @@ public class SvgMapper {
 
     }
 
+    /**
+     * Returns a List with SvgDrawing objects based on the customerId and
+     * svgStatus. List can be empty.
+     *
+     * @param svgStatus Enum SvgDrawing.Status to set. Expected values are
+     * CREATED, REQAPPROVED, APPROVED and DONE.
+     * @param customerId int value of customerId.
+     * @return List with SvgDrawing objects. The List will return empty if the
+     * customer does not exist in the Svg table or if the status does not exist
+     * with specific customerId.
+     */
     public List<SvgDrawing> getCustomerSvgWithStatus(SvgDrawing.Status svgStatus, int customerId)
     {
         List<SvgDrawing> svgList = new ArrayList<>();
@@ -199,7 +272,7 @@ public class SvgMapper {
                 int custId = rs.getInt("customerId");
                 String dateCreate = rs.getString("dateCreate");
                 String dateAccepted = rs.getString("dateAccept");
-                String status = rs.getString("status");
+                String status = rs.getString("status").toUpperCase();
                 SvgDrawing svgDrawing = new SvgDrawing(svgId, svgInline, custId, dateCreate, dateAccepted, false);
                 svgDrawing.setStatus(SvgDrawing.Status.valueOf(status));
                 svgList.add(svgDrawing);
@@ -211,6 +284,15 @@ public class SvgMapper {
         return svgList;
     }
 
+    /**
+     * Returns a List with SvgDrawing objects based on the SvgDrawing.Status
+     * parameter. The List can be empty.
+     *
+     * @param svgStatus Enum SvgDrawing.Status to set. Expected values are
+     * CREATED, REQAPPROVED, APPROVED and DONE.
+     * @return A List of SvgDrawing objects with a specific Status. The List
+     * will be empty if the specified Status does not exist in the Svg table.
+     */
     public List<SvgDrawing> getAllSvgWithStatus(SvgDrawing.Status svgStatus)
     {
         List<SvgDrawing> svgList = new ArrayList<>();
@@ -228,7 +310,7 @@ public class SvgMapper {
                 int customerId = rs.getInt("customerId");
                 String dateCreate = rs.getString("dateCreate");
                 String dateAccepted = rs.getString("dateAccept");
-                status = rs.getString("status");
+                status = rs.getString("status").toUpperCase();
                 SvgDrawing svgDrawing = new SvgDrawing(svgId, svgInline, customerId, dateCreate, dateAccepted, false);
                 svgDrawing.setStatus(SvgDrawing.Status.valueOf(status));
                 svgList.add(svgDrawing);
@@ -240,5 +322,4 @@ public class SvgMapper {
         return svgList;
     }
 
-   
 }

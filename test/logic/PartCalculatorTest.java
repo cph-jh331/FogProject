@@ -3,17 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities;
+package logic;
 
-import backend.UserMapper;
 import java.util.List;
-import logic.Customer;
-import logic.LogicCtrl;
-import logic.PartCalculator;
-import logic.SvgDrawing;
-import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -23,27 +16,31 @@ import static org.junit.Assert.*;
  * @author Pva
  */
 public class PartCalculatorTest {
-    
-    public PartCalculatorTest() {
+
+    public PartCalculatorTest()
+    {
     }
-    
+
     @BeforeClass
-    public static void setUpClass() {
+    public static void setUpClass()
+    {
     }
-    
+
     @AfterClass
-    public static void tearDownClass() {
+    public static void tearDownClass()
+    {
         LogicCtrl lc = new LogicCtrl();
-        List<SvgDrawing> drawList = lc.getCustomerSvgWithStatus(SvgDrawing.Status.reqApproved, 8);
+        List<SvgDrawing> drawList = lc.getCustomerSvgWithStatus(SvgDrawing.Status.REQAPPROVED, 8);
         SvgDrawing svgDrawing = drawList.get(0);
-        lc.changeStatusOnSvg(svgDrawing.getSvgId(), SvgDrawing.Status.created);        
+        lc.changeStatusOnSvg(svgDrawing.getSvgId(), SvgDrawing.Status.CREATED);
     }
 
     /**
      * Test of numbPoles method, of class PartCalculator.
      */
     @Test
-    public void testNumbPoles() {
+    public void testNumbPoles()
+    {
         System.out.println("numbPoles");
         int lengthOfCarport = 500;
         PartCalculator instance = new PartCalculator();
@@ -56,7 +53,8 @@ public class PartCalculatorTest {
      * Test of numbSideRafter method, of class PartCalculator.
      */
     @Test
-    public void testNumbSideRafter() {
+    public void testNumbSideRafter()
+    {
         System.out.println("numbSideRafter");
         int lengthOfCarport = 500;
         PartCalculator instance = new PartCalculator();
@@ -69,7 +67,8 @@ public class PartCalculatorTest {
      * Test of lengthOfSideRafter method, of class PartCalculator.
      */
     @Test
-    public void testLengthOfSideRafter() {
+    public void testLengthOfSideRafter()
+    {
         System.out.println("lengthOfSideRafter");
         int lengthOfCarport = 500;
         PartCalculator instance = new PartCalculator();
@@ -82,7 +81,8 @@ public class PartCalculatorTest {
      * Test of numbRafters method, of class PartCalculator.
      */
     @Test
-    public void testNumbRafters() {
+    public void testNumbRafters()
+    {
         System.out.println("numbRafters");
         int lengthOfCarport = 500;
         PartCalculator instance = new PartCalculator();
@@ -95,7 +95,8 @@ public class PartCalculatorTest {
      * Test of numbRightMounts method, of class PartCalculator.
      */
     @Test
-    public void testNumbRightMounts() {
+    public void testNumbRightMounts()
+    {
         System.out.println("numbRightMounts");
         int numbRafters = 10;
         PartCalculator instance = new PartCalculator();
@@ -108,7 +109,8 @@ public class PartCalculatorTest {
      * Test of numbLeftMounts method, of class PartCalculator.
      */
     @Test
-    public void testNumbLeftMounts() {
+    public void testNumbLeftMounts()
+    {
         System.out.println("numbLeftMounts");
         int numbRafters = 10;
         PartCalculator instance = new PartCalculator();
@@ -121,7 +123,8 @@ public class PartCalculatorTest {
      * Test of lengthOfPole method, of class PartCalculator.
      */
     @Test
-    public void testLengthOfPole() {
+    public void testLengthOfPole()
+    {
         System.out.println("lengthOfPole");
         int heightOfCarport = 200;
         PartCalculator instance = new PartCalculator();
@@ -134,7 +137,8 @@ public class PartCalculatorTest {
      * Test of lengthOfRafter method, of class PartCalculator.
      */
     @Test
-    public void testLengthOfRafter() {
+    public void testLengthOfRafter()
+    {
         System.out.println("lengthOfRafter");
         int widthOfCarport = 500;
         PartCalculator instance = new PartCalculator();
@@ -147,7 +151,8 @@ public class PartCalculatorTest {
      * Test of numbOfMetalTapes method, of class PartCalculator.
      */
     @Test
-    public void testNumbOfMetalTapes() {
+    public void testNumbOfMetalTapes()
+    {
         System.out.println("numbOfMetalTapes");
         int lengthOfCarport = 500;
         int widthOfCarport = 500;
@@ -161,7 +166,8 @@ public class PartCalculatorTest {
      * Test of lengthUnderStern method, of class PartCalculator.
      */
     @Test
-    public void testLengthUnderStern() {
+    public void testLengthUnderStern()
+    {
         System.out.println("lengthUnderStern");
         int lengthOfCarport = 500;
         PartCalculator instance = new PartCalculator();
@@ -174,7 +180,8 @@ public class PartCalculatorTest {
      * Test of numbOfLengthUnderStern method, of class PartCalculator.
      */
     @Test
-    public void testNumbOfLengthUnderStern() {
+    public void testNumbOfLengthUnderStern()
+    {
         System.out.println("numbOfLengthUnderStern");
         int lengthUnderStern = 500;
         PartCalculator instance = new PartCalculator();
@@ -187,7 +194,8 @@ public class PartCalculatorTest {
      * Test of widthUnderStern method, of class PartCalculator.
      */
     @Test
-    public void testWidthUnderStern() {
+    public void testWidthUnderStern()
+    {
         System.out.println("widthUnderStern");
         int widthOfCarport = 500;
         PartCalculator instance = new PartCalculator();
@@ -200,7 +208,8 @@ public class PartCalculatorTest {
      * Test of numbOfWidthUnderStern method, of class PartCalculator.
      */
     @Test
-    public void testNumbOfWidthUnderStern() {
+    public void testNumbOfWidthUnderStern()
+    {
         System.out.println("numbOfWidthUnderStern");
         int widthUnderStern = 500;
         PartCalculator instance = new PartCalculator();
@@ -213,7 +222,8 @@ public class PartCalculatorTest {
      * Test of lengthOverStern method, of class PartCalculator.
      */
     @Test
-    public void testLengthOverStern() {
+    public void testLengthOverStern()
+    {
         System.out.println("lengthOverStern");
         int lengthOfCarport = 500;
         PartCalculator instance = new PartCalculator();
@@ -226,7 +236,8 @@ public class PartCalculatorTest {
      * Test of numbOfLengthOverStern method, of class PartCalculator.
      */
     @Test
-    public void testNumbOfLengthOverStern() {
+    public void testNumbOfLengthOverStern()
+    {
         System.out.println("numbOfLengthOverStern");
         int lengthOverStern = 500;
         PartCalculator instance = new PartCalculator();
@@ -239,7 +250,8 @@ public class PartCalculatorTest {
      * Test of widthOverStern method, of class PartCalculator.
      */
     @Test
-    public void testWidthOverStern() {
+    public void testWidthOverStern()
+    {
         System.out.println("widthOverStern");
         int widthOfCarport = 500;
         PartCalculator instance = new PartCalculator();
@@ -252,7 +264,8 @@ public class PartCalculatorTest {
      * Test of numbOfWidthOverStern method, of class PartCalculator.
      */
     @Test
-    public void testNumbOfWidthOverStern() {
+    public void testNumbOfWidthOverStern()
+    {
         System.out.println("numbOfWidthOverStern");
         int widthOverStern = 500;
         PartCalculator instance = new PartCalculator();
@@ -265,7 +278,8 @@ public class PartCalculatorTest {
      * Test of widthWaterBoard method, of class PartCalculator.
      */
     @Test
-    public void testWidthWaterBoard() {
+    public void testWidthWaterBoard()
+    {
         System.out.println("widthWaterBoard");
         int widthOfCarport = 500;
         PartCalculator instance = new PartCalculator();
@@ -278,7 +292,8 @@ public class PartCalculatorTest {
      * Test of numbWidthWaterBoard method, of class PartCalculator.
      */
     @Test
-    public void testNumbWidthWaterBoard() {
+    public void testNumbWidthWaterBoard()
+    {
         System.out.println("numbWidthWaterBoard");
         int widthWaterBoard = 500;
         PartCalculator instance = new PartCalculator();
@@ -291,7 +306,8 @@ public class PartCalculatorTest {
      * Test of lengthWaterBoard method, of class PartCalculator.
      */
     @Test
-    public void testLengthWaterBoard() {
+    public void testLengthWaterBoard()
+    {
         System.out.println("lengthWaterBoard");
         int lengthOfCarport = 500;
         PartCalculator instance = new PartCalculator();
@@ -304,7 +320,8 @@ public class PartCalculatorTest {
      * Test of numbLengthWaterBoard method, of class PartCalculator.
      */
     @Test
-    public void testNumbLengthWaterBoard() {
+    public void testNumbLengthWaterBoard()
+    {
         System.out.println("numbLengthWaterBoard");
         int legnthWaterBoard = 500;
         PartCalculator instance = new PartCalculator();
@@ -313,33 +330,10 @@ public class PartCalculatorTest {
         assertEquals(expResult, result);
     }
 
-    //Test userlogin
-    @Test
-    public void testCustomerLogin() {
-        UserMapper um = new UserMapper();
-        String email = "user@test.dk";
-        String password = "123";
-        Customer cust = um.validateCustomer(email, password);
-        int expId = 1;
-        int result = cust.getCustomerId();
-        assertEquals(expId, result);
-    }
-
-    //test admin login
-    @Test
-    public void testAdminLogin() {
-        UserMapper um = new UserMapper();
-        String email = "test@test.dk";
-        String password = "123";
-        Customer cust = um.validateAdmin(email, password);
-        int expId = 1;
-        int result = cust.getCustomerId();
-        assertEquals(expId, result);
-    }
-
     //test user laver tegning
     @Test
-    public void testUserCreateDrawing() {
+    public void testUserCreateDrawing()
+    {
         String height = "200";
         String width = "400";
         String length = "600";
@@ -360,32 +354,113 @@ public class PartCalculatorTest {
                 + "<line x1='20' y1='270' x2='620' y2='270'style='stroke:black;stroke-width:1;'/><text x='650' y='40' style='fill:black'>Højde:200</text>\n"
                 + "\n"
                 + "</svg>";
-        
+
         LogicCtrl lc = new LogicCtrl();
         String result = lc.createSvgSideView(height, length);
         assertEquals(expResult, result);
-        
+
     }
 
     //test user sender tegning til godkendelse.
     @Test
-    public void userDrawToApprove() {
-        
+    public void userDrawToApprove()
+    {
+
         LogicCtrl lc = new LogicCtrl();
-        List<SvgDrawing> drawList = lc.getCustomerSvgWithStatus(SvgDrawing.Status.created, 8);
+        List<SvgDrawing> drawList = lc.getCustomerSvgWithStatus(SvgDrawing.Status.CREATED, 8);
         SvgDrawing svgDrawing = drawList.get(0);
         String firstResult = svgDrawing.getStatus().toString();
-        String expResult = "created";
+        String expResult = "CREATED";
         assertEquals(expResult, firstResult);
-        
-        lc.changeStatusOnSvg(svgDrawing.getSvgId(), SvgDrawing.Status.reqApproved);
-        String expResult2 = "reqApproved";
+
+        lc.changeStatusOnSvg(svgDrawing.getSvgId(), SvgDrawing.Status.REQAPPROVED);
+        drawList = lc.getCustomerSvgWithStatus(SvgDrawing.Status.REQAPPROVED, 8);
+        svgDrawing = drawList.get(0);
+        String expResult2 = "REQAPPROVED";
         String secondResult = svgDrawing.getStatus().toString();
-        assertEquals(expResult, secondResult);
-        
+        assertEquals(expResult2, secondResult);
     }
 
-    //test fog godkender tegning.
-    //test user afslutter tegning.
-    //fjerne sout msg. 
+    /**
+     * Test of numbOfTrapezScrews method, of class PartCalculator.
+     */
+    @Test
+    public void testNumbOfTrapezScrews()
+    {
+        System.out.println("numbOfTrapezScrews");
+        int lengthOfCarport = 0;
+        int widthOfCarport = 0;
+        PartCalculator instance = new PartCalculator();
+        int expResult = 0;
+        int result = instance.numbOfTrapezScrews(lengthOfCarport, widthOfCarport);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of numbOfOverUnderScrews method, of class PartCalculator.
+     */
+    @Test
+    public void testNumbOfOverUnderScrews()
+    {
+        System.out.println("numbOfOverUnderScrews");
+        int lengthOfCarport = 0;
+        int widthOfCarport = 0;
+        PartCalculator instance = new PartCalculator();
+        int expResult = 0;
+        int result = instance.numbOfOverUnderScrews(lengthOfCarport, widthOfCarport);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of numbOfMountsScrews method, of class PartCalculator.
+     */
+    @Test
+    public void testNumbOfMountsScrews()
+    {
+        System.out.println("numbOfMountsScrews");
+        int numbLeftMounts = 0;
+        int numbRafters = 0;
+        PartCalculator instance = new PartCalculator();
+        int expResult = 0;
+        int result = instance.numbOfMountsScrews(numbLeftMounts, numbRafters);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of numbOfRafterBolts method, of class PartCalculator.
+     */
+    @Test
+    public void testNumbOfRafterBolts()
+    {
+        System.out.println("numbOfRafterBolts");
+        int numbPoles = 0;
+        PartCalculator instance = new PartCalculator();
+        int expResult = 0;
+        int result = instance.numbOfRafterBolts(numbPoles);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of rafterBoltsExtra method, of class PartCalculator.
+     */
+    @Test
+    public void testRafterBoltsExtra()
+    {
+        System.out.println("rafterBoltsExtra");
+        int numbPoles = 0;
+        PartCalculator instance = new PartCalculator();
+        int expResult = 0;
+        int result = instance.rafterBoltsExtra(numbPoles);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
 }

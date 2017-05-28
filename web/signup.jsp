@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 
-     <head>
+    <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -25,16 +25,33 @@
 
     <body>
 
-        <ul class="nav navbar-nav">
-                  <a class="navbar-left" href="#">
+        <nav id="navbar-color" class="navbar navbar-default">
+            <div class="container-fluid">
+                <!--Nav bar logo with link to picture. -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavBar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-left" href="#">
                         <img src="img/foglogo2.png" alt="FogHouse" width="110" height="50">
                     </a>
-                        <li class="active"> <a href="index.html">Home</a></li>
+                </div>
+                <!-- Menu Items -- Different boxes in nav-bar. Active beeing the page we are on atm.  No href yet missing pages -->
+                <div class="collapse navbar-collapse" id="mainNavBar">
+                    <ul class="nav navbar-nav">
+                        <li> <a href="index.html">Home</a></li>
                         <li><a href="https://johannesfog.dk/byggecenter/">Byggecenter</a></li>
                         <li><a href="https://johannesfog.dk/designhus/">Designhus</a></li>
                         <li><a href="https://johannesfog.dk/pro/">FogPro</a></li>
                         <li><a href="https://johannesfog.dk/byggecenter/om-fog/">Om Fog</a></li>
                     </ul>
+                </div>
+        </nav>
+        <main>
+            <div class="container">
+
 
                 <h2>Sign up</h2>
 
@@ -44,53 +61,53 @@
                     <span onclick="document.getElementById('id01').style.display = 'none'" class="close" title="Close Modal">×</span>
 
 
-                       
-                    <form class="modal-content " action="controllerServlet" method="post">
-                        <div class="container">
-                                <input type="hidden" name="action" value="signup"> 
-                        
-                                <label><b>Fornavn</b></label>
-                                <input type="text" placeholder="Indtast Navn" name="Fornavn" required>
-                                <label><b>Efternavn</b></label>
-                                <input type="text" placeholder="Indtast Efternavn" name="Efternavn" required>
-                                <label><b>Adresse</b></label>
-                                <input type="text" placeholder="Indtast Adresse" name="Adresse" required>
-                                <label><b>Postnummer</b></label>
-                                <input type="text" placeholder="Indtast Postnummer" name="Postnummer" required>
-                                <label><b>By</b></label>
-                                <input type="text" placeholder="Indtast By" name="By" required>
-                                <label><b>Tlf</b></label>
-                                <input type="text" placeholder="Indtast telefon" name="telefon" required>
 
-                                <label><b>Email</b></label>
-                                <input type="text" placeholder="Indtast Email" name="email" required>
+                    <form class="modal-content" action="controllerServlet" method="post">
+                        <div class="container-fluid">
+                            <input type="hidden" name="action" value="signup"> 
 
-                                <label><b>Password</b></label>
-                                <input type="password" placeholder="Indtast Password" name="psw" required>
+                            <label><b>Fornavn</b></label>
+                            <input class="input-lg" type="text" placeholder="Indtast Navn" name="Fornavn" required>
+                            <label><b>Efternavn</b></label>
+                            <input class="input-lg" type="text" placeholder="Indtast Efternavn" name="Efternavn" required>
+                            <label><b>Adresse</b></label>
+                            <input class="input-lg" type="text" placeholder="Indtast Adresse" name="Adresse" required>
+                            <label><b>Postnummer</b></label>
+                            <input class="input-lg" type="text" placeholder="Indtast Postnummer" name="Postnummer" required>
+                            <label><b>By</b></label>
+                            <input class="input-lg" type="text" placeholder="Indtast By" name="By" required>
+                            <label><b>Tlf</b></label>
+                            <input class="input-lg" type="text" placeholder="Indtast telefon" name="telefon" required>
+                            <label><b>Email</b></label>
+                            <input class="input-lg" type="text" placeholder="Indtast Email" name="email" required>
 
-                                <div class="clearfix">
-                                    <button type="button" onclick="document.getElementById('id01').style.display = 'none'" class="cancelbtn">Cancel</button>
-                                    <button type="submit" class="signupbtn" >Sign Up</button> 
+                            <label><b>Password</b></label>
+                            <input class="input-lg" type="password" placeholder="Indtast Password" name="psw" required>
 
-                                </div>
+                            <div class="clearfix">
+                                <button type="button" onclick="document.getElementById('id01').style.display = 'none'" class="cancelbtn">Cancel</button>
+                                <button type="submit" class="signupbtn" >Sign Up</button> 
+
+                            </div>
                         </div>
                     </form>
                 </div>
             </div>
-        </nav>
-                <script>
-                    // Get the modal
-                    var modal = document.getElementById('id01');
+        </main>
 
-                    // When the user clicks anywhere outside of the modal, close it
-                    window.onclick = function (event) {
-                        if (event.target === modal) {
-                            modal.style.display = "none";
-                        }
-                    };
-                </script>
+        <script>
+            // Get the modal
+            var modal = document.getElementById('id01');
 
-                
-       </body>
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function (event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            };
+        </script>
+
+
+    </body>
 </html>         
 

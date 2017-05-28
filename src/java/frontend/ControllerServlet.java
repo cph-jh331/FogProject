@@ -96,12 +96,14 @@ public class ControllerServlet extends HttpServlet {
             }
             return;
         }
+
         if (action.equals("admin"))
         {
             RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
             rd.forward(request, response);
             return;
         }
+
         if (action.equals("customer"))
         {
             RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
@@ -125,9 +127,9 @@ public class ControllerServlet extends HttpServlet {
                 session.setAttribute("user", user);
                 if (lc.checkAdmin(user) == true)
                 {
-                    List<SvgDrawing> svgsReqApproval = lc.getAllSvgWithStatus(SvgDrawing.Status.reqApproved);
-                    List<SvgDrawing> svgsApproved = lc.getAllSvgWithStatus(SvgDrawing.Status.approved);
-                    List<SvgDrawing> svgsDone = lc.getAllSvgWithStatus(SvgDrawing.Status.done);
+                    List<SvgDrawing> svgsReqApproval = lc.getAllSvgWithStatus(SvgDrawing.Status.REQAPPROVED);
+                    List<SvgDrawing> svgsApproved = lc.getAllSvgWithStatus(SvgDrawing.Status.APPROVED);
+                    List<SvgDrawing> svgsDone = lc.getAllSvgWithStatus(SvgDrawing.Status.DONE);
                     session.setAttribute("svgMapReqApproval", svgsReqApproval);
                     session.setAttribute("svgMapApproved", svgsApproved);
                     session.setAttribute("svgMapDone", svgsDone);
@@ -141,6 +143,7 @@ public class ControllerServlet extends HttpServlet {
             }
             return;
         }
+
         if (action.equals("customerlogin"))
         {
             String email = request.getParameter("email");
@@ -157,9 +160,9 @@ public class ControllerServlet extends HttpServlet {
                 if (lc.checkAdmin(user) == false)
                 {
                     session.setAttribute("listDrawings", lc.getAllSvgsWithCustomer(user.getUserId()));
-                    List<SvgDrawing> svgsReqApproval = lc.getCustomerSvgWithStatus(SvgDrawing.Status.reqApproved, user.getUserId());
-                    List<SvgDrawing> svgsApproved = lc.getCustomerSvgWithStatus(SvgDrawing.Status.approved, user.getUserId());
-                    List<SvgDrawing> svgsDone = lc.getCustomerSvgWithStatus(SvgDrawing.Status.done, user.getUserId());
+                    List<SvgDrawing> svgsReqApproval = lc.getCustomerSvgWithStatus(SvgDrawing.Status.REQAPPROVED, user.getUserId());
+                    List<SvgDrawing> svgsApproved = lc.getCustomerSvgWithStatus(SvgDrawing.Status.APPROVED, user.getUserId());
+                    List<SvgDrawing> svgsDone = lc.getCustomerSvgWithStatus(SvgDrawing.Status.DONE, user.getUserId());
                     session.setAttribute("svgMapReqApproval", svgsReqApproval);
                     session.setAttribute("svgMapApproved", svgsApproved);
                     session.setAttribute("svgMapDone", svgsDone);
@@ -174,11 +177,10 @@ public class ControllerServlet extends HttpServlet {
             return;
         }
 
-        //ikke done.
         if (action.equals("genDrawing"))
         {
             String length = request.getParameter("length");
-            String width = request.getParameter("width");//skal ikke fjernes.
+            String width = request.getParameter("width");
             String height = request.getParameter("height");
             String svigInlineSide = lc.createSvgSideView(height, length);
             session.setAttribute("sideDrawing", svigInlineSide);
@@ -190,7 +192,6 @@ public class ControllerServlet extends HttpServlet {
         if (action.equals("seeDrawing"))
         {
             int drawingId = Integer.parseInt(request.getParameter("drawId"));
-            session.setAttribute("drawingId", drawingId);
             SvgDrawing svgDrawing = lc.getSvgDrawingWithSvgId(drawingId);
             session.setAttribute("svgDrawing", svgDrawing);
             String whatToDo = lc.whatToDoWithDrawing(svgDrawing.getStatus(), user.isAdmin());
@@ -199,6 +200,7 @@ public class ControllerServlet extends HttpServlet {
             session.setAttribute("seeDrawingSubmitButton", uiDanishSubmitButton);
             RequestDispatcher rd = request.getRequestDispatcher("seeDrawing.jsp");
             rd.forward(request, response);
+            return;
         }
 
         if (user == null)
@@ -224,7 +226,7 @@ public class ControllerServlet extends HttpServlet {
 
             try
             {
-                user = lc.addUser(email, firstname, lastname, address, zip, city, phone, password);
+                lc.addUser(email, firstname, lastname, address, zip, city, phone, password);
             } catch (UserAlreadyExistException ex)
             {
                 request.setAttribute("errorMessage", ex.toString());
@@ -279,6 +281,7 @@ public class ControllerServlet extends HttpServlet {
             rd.forward(request, response);
             return;
         }
+
         if (action.equals("removeFromDatabase"))
         {
             String removeId = request.getParameter("removeItem");
@@ -291,6 +294,7 @@ public class ControllerServlet extends HttpServlet {
             rd.forward(request, response);
             return;
         }
+
         if (action.equals("removesvg"))
         {
             String removeImage = (String) session.getAttribute("topDrawing");
@@ -302,20 +306,6 @@ public class ControllerServlet extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("adminpanel.jsp");
             rd.forward(request, response);
             return;
-        }
-
-        if (action.equals("seeDrawing"))
-        {
-            int drawingId = Integer.parseInt(request.getParameter("drawId"));
-            session.setAttribute("drawingId", drawingId);
-            SvgDrawing svgDrawing = lc.getSvgDrawingWithSvgId(drawingId);
-            session.setAttribute("svgDrawing", svgDrawing);
-            String whatToDo = lc.whatToDoWithDrawing(svgDrawing.getStatus(), user.isAdmin());
-            String uiDanishSubmitButton = lc.uiWhatToDoWithDrawingDanish(svgDrawing.getStatus(), user.isAdmin());
-            session.setAttribute("whatToDo", whatToDo);
-            session.setAttribute("seeDrawingSubmitButton", uiDanishSubmitButton);
-            RequestDispatcher rd = request.getRequestDispatcher("seeDrawing.jsp");
-            rd.forward(request, response);
         }
 
         if (action.equals("svgRemoveDrawing"))
@@ -331,9 +321,9 @@ public class ControllerServlet extends HttpServlet {
                 jsp = "loggedin.jsp";
             }
             session.setAttribute("listDrawings", lc.getAllSvgsWithCustomer(user.getUserId()));
-            List<SvgDrawing> svgsReqApproval = lc.getCustomerSvgWithStatus(SvgDrawing.Status.reqApproved, user.getUserId());
-            List<SvgDrawing> svgsApproved = lc.getCustomerSvgWithStatus(SvgDrawing.Status.approved, user.getUserId());
-            List<SvgDrawing> svgsDone = lc.getCustomerSvgWithStatus(SvgDrawing.Status.done, user.getUserId());
+            List<SvgDrawing> svgsReqApproval = lc.getCustomerSvgWithStatus(SvgDrawing.Status.REQAPPROVED, user.getUserId());
+            List<SvgDrawing> svgsApproved = lc.getCustomerSvgWithStatus(SvgDrawing.Status.APPROVED, user.getUserId());
+            List<SvgDrawing> svgsDone = lc.getCustomerSvgWithStatus(SvgDrawing.Status.DONE, user.getUserId());
             session.setAttribute("svgMapReqApproval", svgsReqApproval);
             session.setAttribute("svgMapApproved", svgsApproved);
             session.setAttribute("svgMapDone", svgsDone);
@@ -341,14 +331,25 @@ public class ControllerServlet extends HttpServlet {
             rd.forward(request, response);
         }
 
+        if (action.equals("return"))
+        {
+            String jsp = "loggedin.jsp";
+            if (user.isAdmin())
+            {
+                jsp = "adminpanel.jsp";
+            }
+            RequestDispatcher rd = request.getRequestDispatcher(jsp);
+            rd.forward(request, response);
+        }
+
         if (action.equals("svgreqapproval"))
         {
-            int svgId = (Integer) session.getAttribute("drawingId");
-            lc.changeStatusOnSvg(svgId, SvgDrawing.Status.reqApproved);
+            SvgDrawing svgDrawing = (SvgDrawing) session.getAttribute("svgDrawing");
+            lc.changeStatusOnSvg(svgDrawing.getSvgId(), SvgDrawing.Status.REQAPPROVED);
             session.setAttribute("listDrawings", lc.getAllSvgsWithCustomer(user.getUserId()));
-            List<SvgDrawing> svgsReqApproval = lc.getCustomerSvgWithStatus(SvgDrawing.Status.reqApproved, user.getUserId());
-            List<SvgDrawing> svgsApproved = lc.getCustomerSvgWithStatus(SvgDrawing.Status.approved, user.getUserId());
-            List<SvgDrawing> svgsDone = lc.getCustomerSvgWithStatus(SvgDrawing.Status.done, user.getUserId());
+            List<SvgDrawing> svgsReqApproval = lc.getCustomerSvgWithStatus(SvgDrawing.Status.REQAPPROVED, user.getUserId());
+            List<SvgDrawing> svgsApproved = lc.getCustomerSvgWithStatus(SvgDrawing.Status.APPROVED, user.getUserId());
+            List<SvgDrawing> svgsDone = lc.getCustomerSvgWithStatus(SvgDrawing.Status.DONE, user.getUserId());
             session.setAttribute("svgMapReqApproval", svgsReqApproval);
             session.setAttribute("svgMapApproved", svgsApproved);
             session.setAttribute("svgMapDone", svgsDone);
@@ -358,11 +359,11 @@ public class ControllerServlet extends HttpServlet {
 
         if (action.equals("approvedrawing"))
         {
-            int svgId = (Integer) session.getAttribute("drawingId");
-            lc.changeStatusOnSvg(svgId, SvgDrawing.Status.approved);
-            List<SvgDrawing> svgsReqApproval = lc.getCustomerSvgWithStatus(SvgDrawing.Status.reqApproved, user.getUserId());
-            List<SvgDrawing> svgsApproved = lc.getCustomerSvgWithStatus(SvgDrawing.Status.approved, user.getUserId());
-            List<SvgDrawing> svgsDone = lc.getCustomerSvgWithStatus(SvgDrawing.Status.done, user.getUserId());
+            SvgDrawing svgDrawing = (SvgDrawing) session.getAttribute("svgDrawing");
+            lc.changeStatusOnSvg(svgDrawing.getSvgId(), SvgDrawing.Status.APPROVED);
+            List<SvgDrawing> svgsReqApproval = lc.getAllSvgWithStatus(SvgDrawing.Status.REQAPPROVED);
+            List<SvgDrawing> svgsApproved = lc.getAllSvgWithStatus(SvgDrawing.Status.APPROVED);
+            List<SvgDrawing> svgsDone = lc.getAllSvgWithStatus(SvgDrawing.Status.DONE);
             session.setAttribute("svgMapReqApproval", svgsReqApproval);
             session.setAttribute("svgMapApproved", svgsApproved);
             session.setAttribute("svgMapDone", svgsDone);
@@ -372,7 +373,7 @@ public class ControllerServlet extends HttpServlet {
 
         if (action.equals("savedrawing"))
         {
-            String svgImage = (String) session.getAttribute("topDrawing");
+            String svgImage = (String) session.getAttribute("sideDrawing");
             user = (Customer) session.getAttribute("user");
             int customerId = user.getUserId();
             lc.saveSvg(svgImage, customerId);

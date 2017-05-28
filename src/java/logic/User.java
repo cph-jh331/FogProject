@@ -20,14 +20,18 @@ public class User {
     private int phone;
     private boolean isAdmin = false;
     private int id;
-    
-    
+
     public User(int adminId, String email, String userName, boolean admin)
     {
         this.id = adminId;
         this.email = email;
         this.firstName = userName;
         this.isAdmin = admin;
+    }
+
+    public User()
+    {
+
     }
 
     public User(int customerId, String email, String firstName, String lastName, String address, String city, int zip, int phone, boolean isAdmin)
@@ -47,7 +51,6 @@ public class User {
     {
         return email;
     }
-
 
     public String getLastName()
     {

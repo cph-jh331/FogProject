@@ -70,15 +70,18 @@ Author     : Pva
             <h1>Hello World!<%= customer.getFirstName()%> </h1>
 
             <div class="jumbotron">
+                
                 <h2> Lav en tegning</h2>
                 <form action="controllerServlet" method="post">
                     <input type="hidden" name="action" value="genDrawing">
-                    <input type="number" name="length" value="" placeholder="Længde" required  />
-                    <input type="number" name="width" value="" placeholder="Bredde" required />
-                    <input type="number" name="height" value="" placeholder="Højde" required/>
-                    <input class="btn btn-primary" type="submit" value="Generer tegning">
+                    <input type="number" name="length" value="" placeholder="Længde" min="200" max="800" required/>
+                    <input type="number" name="width" value="" placeholder="Bredde" min="200" max="500" required/>
+                    <input type="number" name="height" value="" placeholder="Højde" min="180" max="400" required/>
+                    <input class="btn btn-primary" type="submit" value="Generer tegning"/>
                 </form>                
-
+                
+                <br>
+                
                 <table class="table table-bordered">
 
                     <p style="color: white"> Godkendte Tegninger: <%=svgMapApproved.size()%> </p>                   
@@ -110,8 +113,6 @@ Author     : Pva
                                         <input type="hidden" name="action" value="seeDrawing">
                                         <input type="hidden" name="drawId" value ="<%=drawing.getSvgId()%>"/>
                                         <input class="btn btn-default" type="submit" value="Se Tegning">
-
-
                                     </form>
                                 </div>     
                             </td>
@@ -219,34 +220,6 @@ Author     : Pva
 
     </body>
 </html>
-<script>
-
-    // Get the modal
-    var modal = document.getElementById('popupWindow');
-
-    // get the button
-    var btn = document.getElementById("ourBtn");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-    btn.onclick = function () {
-        modal.style.display = "block";
-    };
-// When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-        modal.style.display = "none";
-    };
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-        if (event.target === modal) {
-            modal.style.display = "none";
-        }
-    };
-
-
-</script>
 
 
 

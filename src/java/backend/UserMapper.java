@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package backend;
 
 import logic.Customer;
@@ -10,34 +5,41 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import logic.Admin;
 import logic.User;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * UserMapper is used for updating and getting data from the Customer and
+ * FogUser table in the MySQL database.
  *
- * @author bloch
+ * @author Lasse Andersen, Marco Frydshou, John Hansen, Per Andersen
  */
-//So far working as login to Employee at Fog with test@test.dk // 123.. need to split up to make 1 for Fog 1 for customer.
 public class UserMapper {
 
-    private DBConnector dbc;
     private Connection conn;
 
+    /**
+     * Constructor that sets the private attribute Connection to the Connection
+     * parameter.
+     *
+     * @param conn SQL Connection to set.
+     */
     public UserMapper(Connection conn)
     {
         this.conn = conn;
     }
 
-    public UserMapper()
-    {
-        this.dbc = new DBConnector();
-        this.conn = dbc.connectDB();
-    }
-
+    /**
+     * Returns a User object based on the two String parameters email and pass.
+     * User object can be null. Should be used when validating a customer.
+     *
+     * @param email String value of the email.
+     * @param pass String value of the password.
+     * @return User object. Will return NULL if the email or password are not
+     * equal to the ones in the Customer table.
+     */
     public User validateCustomer(String email, String pass)
     {
         String sql = "select * from Customer where userEmail = ? && password = ?;";
@@ -66,12 +68,18 @@ public class UserMapper {
         {
             Logger.getLogger(UserMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return null;
-
     }
 
-
+    /**
+     * Returns a User object based on the two String parameters email and pass.
+     * User object can be null. Should be used when validating a FogUser/admin.
+     *
+     * @param email String value of the email.
+     * @param pass String value of the password.
+     * @return User object. Will return NULL if the email or password are not
+     * equal to the ones in the FogUser table.
+     */
     public User validateAdmin(String email, String pass)
     {
 
@@ -99,7 +107,17 @@ public class UserMapper {
         return null;
     }
 
-    public void insertUser(User customer, String password)
+    /**
+     * Inserts a User object's data into Customer table in the MySQL database.
+     * Throws an UserAlreadyExistException if email is already in the database.
+     *
+     * @param customer User object to be inserted into the Customer table.
+     * @param password String value for password to be inserted into the
+     * Customer table.
+     * @throws UserAlreadyExistException if the email is already in the Customer
+     * table in the MySQL database.
+     */
+    public void insertUser(User customer, String password) throws UserAlreadyExistException
     {
 
         String sql = "insert into Customer (userName, userLastname, userAddress, userZip, userCity, userPhone, userEmail, password) values (?,?,?,?,?,?,?,?);";
@@ -119,7 +137,7 @@ public class UserMapper {
 
         } catch (SQLException ex)
         {
-            Logger.getLogger(UserMapper.class.getName()).log(Level.SEVERE, null, ex);
+            throw new UserAlreadyExistException("user already exists");
         }
     }
 }

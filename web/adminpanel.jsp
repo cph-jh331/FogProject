@@ -29,7 +29,7 @@
         <%--Alt her er også nyt --%>
     </head>
     <body>
-     <!-- Beginning of navbar setup. using default to customize color in css with #id    -->
+        <!-- Beginning of navbar setup. using default to customize color in css with #id    -->
         <nav id="navbar-color" class="navbar navbar-default">
             <div class="container-fluid">
                 <!--Nav bar logo with link to picture. -->
@@ -56,14 +56,16 @@
                     <ul class="nav navbar-nav navbar-right">                      
                         <li id="makeLink" class="list-group-item">
                             <div id="makeLink2" class="input-group">
-                                <li><a href="loggedinadmin.jsp">Back To Admin</a></li>
+                                <li><a href="loggedinadmin.jsp">Back To Admin</a>
+                                </li>
+                                <li id="makeLink" class="list-group-item">
+                                    <form action="controllerServlet" method="post">
+                                        <input type="hidden" name="action" value="logout"/>
+                                        <input class="btn btn-success" type="submit" name="logout" value="Logout"/>
+                                    </form>
+                                </li>
                             </div>
-                            <form action="controllerServlet" method="post">
-                                <input type="hidden" name="action" value="logout"/>
-                                <input class="btn btn-success" type="submit" name="logout" value="Logout"/>
-                            </form>
-                        </li>                        
-                        <!--<li><a href="login.jsp"><span class="glyphicon   fdsafdsf  glyphicon-login"></span>Login</a></li>-->
+                        </li>
                     </ul>
 
 
@@ -81,9 +83,10 @@
                     <p style="color: white"> Tegninger der venter godkendelse: <%= svgMapReqApproval.size()%> </p>                         
                     <thead class="bg-primary">
                     <th> Tegning id: </th>
+                    <th> Kundenr:
                     <th> Dato oprettet: </th>
-                    <th> Status </th>
-                    <th> Se Tegning </th>
+                    <th> Status: </th>
+                    <th> Se Tegning: </th>
 
 
                     </thead>
@@ -97,10 +100,12 @@
                                 <%= drawing.getSvgId()%>
                             </td>
                             <td>
+                                <%= drawing.getCustomerId()%>
+                            </td>
+                            <td>
                                 <%= drawing.getDateCreated()%>
                             </td>
                             <td>
-
                                 <%= drawing.getStatusToString()%>
                             </td>
                             <td>
@@ -118,14 +123,15 @@
                         %>
                     </tbody>
                 </table>
-                                    <table class="table table-bordered">
+                <table class="table table-bordered">
 
                     <p style="color: white"> Godkendte tegninger: <%= svgMapApproved.size()%> </p>                         
                     <thead class="bg-primary">
                     <th> Tegning id: </th>
+                    <th> Kundenr: </th>
                     <th> Dato oprettet: </th>
-                    <th> Status </th>
-                    <th> Se Tegning </th>
+                    <th> Status: </th>
+                    <th> Se Tegning: </th>
 
 
                     </thead>
@@ -139,10 +145,12 @@
                                 <%= drawing.getSvgId()%>
                             </td>
                             <td>
+                                <%= drawing.getCustomerId()%>
+                            </td>
+                            <td>
                                 <%= drawing.getDateCreated()%>
                             </td>
                             <td>
-
                                 <%= drawing.getStatusToString()%>
                             </td>
                             <td>
@@ -165,83 +173,4 @@
             </div>
         </div>
     </body>
-    <script>
-
-        // Get the modal
-        var modal = document.getElementById('myModal');
-
-        // Get the button that opens the modal
-        var btn = document.getElementById("myBtn");
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks the button, open the modal 
-        btn.onclick = function () {
-            modal.style.display = "block";
-        };
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function () {
-            modal.style.display = "none";
-        };
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
-        };
-    </script>
-    <script>
-
-        // Get the modal
-        var modal = document.getElementById('myModal');
-
-        // Get the button that opens the modal
-        var btn = document.getElementById("Btn");
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks the button, open the modal 
-        btn.onclick = function () {
-            modal.style.display = "block";
-        };
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function () {
-            modal.style.display = "none";
-        };
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
-        };
-    </script>
-
-    <script type="text/javascript">
-
-
-        function myFunction()
-        {
-            window.open("tegning.html");
-        }
-        var rates = document.getElementById('rates').value;
-        var rate_value;
-
-        if (rates === 'accept') {
-            rate_value = document.getElementById('r1').value;
-
-        } else if (rates === 'refuse') {
-            rate_value = document.getElementById('r2').value;
-
-        }
-
-        document.getElementById('results').innerHTML = rate_value;
-
-
-    </script>
 </html>

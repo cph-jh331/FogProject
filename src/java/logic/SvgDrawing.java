@@ -14,10 +14,10 @@ public class SvgDrawing implements Serializable {
     private Status status;
 
     public enum Status {
-        created,
-        reqApproved,
-        approved,
-        done,
+        CREATED,
+        REQAPPROVED,
+        APPROVED,
+        DONE,
     };
 
     /**
@@ -32,11 +32,11 @@ public class SvgDrawing implements Serializable {
     {
         switch (status)
         {
-            case reqApproved:
+            case REQAPPROVED:
                 return "Sendt til Godkendelse";
-            case approved:
+            case APPROVED:
                 return "Godkendt";
-            case done:
+            case DONE:
                 return "Afsluttet";
             default:
                 return "Oprettet";
@@ -105,7 +105,7 @@ public class SvgDrawing implements Serializable {
     }
 
     /**
-     * @param userId the userId to set
+     * @param customerId the userId to set
      */
     public void setCustomerId(int customerId)
     {

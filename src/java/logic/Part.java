@@ -20,7 +20,8 @@ public class Part {
     private String category;
     private String typeCategory;
 
-    public Part(String type, String unitName, String desc, String category, String typeCategory) {
+    public Part(String type, String unitName, String desc, String category, String typeCategory)
+    {
         this.type = type;
         this.unitName = unitName;
         this.desc = desc;
@@ -28,7 +29,8 @@ public class Part {
         this.typeCategory = typeCategory;
     }
 
-    public Part(String type, Integer length, int packetSize, String unitName, String desc, int partId, String category, String typeCategory) {
+    public Part(String type, Integer length, int packetSize, String unitName, String desc, int partId, String category, String typeCategory)
+    {
         this.type = type;
         this.length = length;
         this.packetSize = packetSize;
@@ -39,62 +41,74 @@ public class Part {
         this.typeCategory = typeCategory;
     }
 
-    public String getTypeCategory() {
+    public String getTypeCategory()
+    {
         return typeCategory;
     }
 
-    public String getType() {
+    public String getType()
+    {
         return this.type;
     }
 
-    public Integer getLength() {
+    public Integer getLength()
+    {
         return this.length;
     }
 
-    public int getPacketSize() {
+    public int getPacketSize()
+    {
         return this.packetSize;
     }
 
-    public String getUnitName() {
+    public String getUnitName()
+    {
         return this.unitName;
     }
 
-    public String getDescription() {
+    public String getDescription()
+    {
         return this.desc;
     }
 
-    public int getPartId() {
+    public int getPartId()
+    {
         return this.partId;
     }
 
     /**
      * @param length the length to set
      */
-    public void setLength(Integer length) {
+    public void setLength(Integer length)
+    {
         this.length = length;
     }
 
     /**
      * @param packetSize the packetSize to set
      */
-    public void setPacketSize(int packetSize) {
+    public void setPacketSize(int packetSize)
+    {
         this.packetSize = packetSize;
     }
 
-    public void setLengthAndPacketSize(Integer length, int packetSize) {
+    public void setLengthAndPacketSize(Integer length, int packetSize)
+    {
         this.length = length;
         this.packetSize = packetSize;
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "Part{" + "type=" + type + ", length=" + length + ", packetSize=" + packetSize + ", unitName=" + unitName + ", desc=" + desc + ", partId=" + partId + '}';
     }
 
     /**
      * @return the category
      */
-    public String getCategory() {
+    public String getCategory()
+    {
         return category;
     }
 

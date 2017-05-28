@@ -15,42 +15,47 @@ import java.util.List;
  */
 public class LogicCtrl {
 
-    private DataFacade dataCtrl = new DataFacade();
+    private DataFacade dataFacade;
+
+    public LogicCtrl()
+    {
+        dataFacade = new DataFacade();
+    }
 
     public void changeStatusOnSvg(int svgId, SvgDrawing.Status status)
     {
-        dataCtrl.changeStatusOnSvg(svgId, status);
+        dataFacade.changeStatusOnSvg(svgId, status);
     }
 
     public SvgDrawing getSvgDrawingWithSvgId(int svgId)
     {
-        return dataCtrl.getSvgDrawingWithSvgId(svgId);
+        return dataFacade.getSvgDrawingWithSvgId(svgId);
     }
 
     public List<SvgDrawing> getAllSvgsWithCustomer(int customerId)
     {
-        return dataCtrl.getAllSvgsWithCustomer(customerId);
+        return dataFacade.getAllSvgsWithCustomer(customerId);
     }
 
     public List<SvgDrawing> getCustomerSvgWithStatus(SvgDrawing.Status svgStatus, int customerId)
     {
-        return dataCtrl.getCustomerSvgWithStatus(svgStatus, customerId);
+        return dataFacade.getCustomerSvgWithStatus(svgStatus, customerId);
     }
 
     public List<SvgDrawing> getAllSvgWithStatus(SvgDrawing.Status status)
     {
-        return dataCtrl.getAllSvgWithStatus(status);
+        return dataFacade.getAllSvgWithStatus(status);
     }
 
     public User checkLogin(String email, String password)
     {
-        User user = dataCtrl.validateCustomer(email, password);
+        User user = dataFacade.validateCustomer(email, password);
         return user;
     }
 
     public User checkAdminLogin(String email, String password)
     {
-        User user = dataCtrl.validateAdmin(email, password);
+        User user = dataFacade.validateAdmin(email, password);
 
         return user;
     }
@@ -64,8 +69,8 @@ public class LogicCtrl {
     {
         String typeCat = catList.get(0).getTypeCategory();
         Part part = new Part(type, unitType, desc, category, typeCat);
-        dataCtrl.addPart(part);
-        catList = dataCtrl.getTypeCategory(typeCat);
+        dataFacade.addPart(part);
+        catList = dataFacade.getTypeCategory(typeCat);
         return catList;
     }
 
@@ -76,21 +81,21 @@ public class LogicCtrl {
 
     public List<Part> removePart(String type, int partId)
     {
-        dataCtrl.removePart(partId);
-        List<Part> catList = dataCtrl.getTypeCategory(type);
+        dataFacade.removePart(partId);
+        List<Part> catList = dataFacade.getTypeCategory(type);
         return catList;
     }
 
     public List<Part> typeCat(String typecategory)
     {
-        List<Part> typeCategory = dataCtrl.getTypeCategory(typecategory);
+        List<Part> typeCategory = dataFacade.getTypeCategory(typecategory);
         return typeCategory;
     }
 
     public User addUser(String email, String firstname, String lastname, String adress, int zip, String city, int phone, String password) throws UserAlreadyExistException
     {
         User customer = new Customer(phone, email, firstname, lastname, adress, city, zip, phone, false);
-        dataCtrl.insertUser(customer, password);
+        dataFacade.insertUser(customer, password);
 
         //unit test til user validering i datactrl eller partMapper...
         return customer;
@@ -112,23 +117,23 @@ public class LogicCtrl {
 
     public void saveSvg(String svgInline, int customerId)
     {
-        dataCtrl.insertSvg(svgInline, customerId);
+        dataFacade.insertSvg(svgInline, customerId);
 
     }
 
     public boolean removeSvgDrawing(int svgId)
     {
-        return dataCtrl.removeSvgDrawing(svgId);
+        return dataFacade.removeSvgDrawing(svgId);
     }
 
     public void remove(String removeImage, int customerId)
     {
-        dataCtrl.removeS(removeImage, customerId);
+        dataFacade.removeDrawing(removeImage, customerId);
     }
 
     public List<SvgDrawing> svgList(int customerId)
     {
-        return dataCtrl.getDrawings(customerId);
+        return dataFacade.getDrawings(customerId);
 
     }
 
@@ -158,13 +163,13 @@ public class LogicCtrl {
 
     public String whatToDoWithDrawing(SvgDrawing.Status status, Boolean isAdmin)
     {
-        if (status.equals(SvgDrawing.Status.created))
+        if (status.equals(SvgDrawing.Status.CREATED))
         {
             return "svgreqapproval";
-        } else if (status.equals(SvgDrawing.Status.reqApproved) && isAdmin == true)
+        } else if (status.equals(SvgDrawing.Status.REQAPPROVED) && isAdmin == true)
         {
             return "approvedrawing";
-        } else if (status.equals(SvgDrawing.Status.approved))
+        } else if (status.equals(SvgDrawing.Status.APPROVED))
         {
             return "completeDrawing";
         } else
@@ -175,13 +180,13 @@ public class LogicCtrl {
 
     public String uiWhatToDoWithDrawingDanish(SvgDrawing.Status status, Boolean isAdmin)
     {
-        if (status.equals(SvgDrawing.Status.created))
+        if (status.equals(SvgDrawing.Status.CREATED))
         {
             return "Send til fog";
-        } else if (status.equals(SvgDrawing.Status.reqApproved) && isAdmin == true)
+        } else if (status.equals(SvgDrawing.Status.REQAPPROVED) && isAdmin == true)
         {
             return "Godkend tegning";
-        } else if (status.equals(SvgDrawing.Status.approved))
+        } else if (status.equals(SvgDrawing.Status.APPROVED))
         {
             return "Afslut tegning";
         } else

@@ -19,10 +19,20 @@ public class SideDrawing {
     private int firstPolePlacement;
     private int lastPolePlacement;
     private int centerPolePlacement;
+    private int leftSidePadding = 20;
+
+    public SideDrawing()
+    {
+
+    }
+
+    public SideDrawing(int leftSidePadding)
+    {
+        this.leftSidePadding = leftSidePadding;
+    }
 
     public String createSideView(String len, String hei)
     {
-
         PartCalculator pc = new PartCalculator();
         this.length = Integer.parseInt(len);
         this.height = Integer.parseInt(hei);
@@ -30,11 +40,18 @@ public class SideDrawing {
 
         this.lengthOfDrawing = length + 200;
         this.heightOfDrawing = height + 100;
-        this.firstPolePlacement = 45 + 20;
-        this.lastPolePlacement = length - 45 + 20;
-        this.centerPolePlacement = (length / 2) + 20;
+        this.firstPolePlacement = 45 + leftSidePadding;
+        this.lastPolePlacement = length - 45 + leftSidePadding;
+        this.centerPolePlacement = (length / 2) + leftSidePadding;
 
-        String svg1 = "<svg id='svg1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'\n"
+        String svg1 = SvgInlineSide();
+        return svg1;
+    }
+
+    private String SvgInlineSide()
+    {
+        String svg1 = "<svg id='svg1' xmlns='http://www.w3.org/2000/svg' "
+                + "xmlns:xlink='http://www.w3.org/1999/xlink'\n"
                 + lengthAndWidthOfDrawing()
                 + surroundingSquare()
                 + sidePoles()
@@ -45,16 +62,9 @@ public class SideDrawing {
                 + textHeight()
                 + "\n</svg>";
         return svg1;
-    }
 
-    public String createTopView()
-    {
-        String svg2 = "<svg id='svg2' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'\n"
-                + lengthAndWidthOfDrawing()
-                + surroundingSquare();
-        return svg2;
     }
-
+    
     private String textLength()
     {
         String textLength = "<text x='110' y='" + (heightOfDrawing - 10) + "'"
@@ -66,7 +76,7 @@ public class SideDrawing {
 
     private String lengthLine()
     {
-        String line = "<line x1='20' y1='" + (heightOfDrawing - 30) + "' x2='" + (length + 20) + "' y2='" + (heightOfDrawing - 30) + "'"
+        String line = "<line x1='" + leftSidePadding + "' y1='" + (heightOfDrawing - 30) + "' x2='" + (length + leftSidePadding) + "' y2='" + (heightOfDrawing - 30) + "'"
                 + "style='stroke:black;stroke-width:1;'/>";
         return line;
     }
@@ -82,7 +92,7 @@ public class SideDrawing {
 
     private String sideStern()
     {
-        String sideStern = "<rect x='20' y='39' width ='" + length + "' height='15'\n"
+        String sideStern = "<rect x='" + leftSidePadding + "' y='39' width ='" + length + "' height='15'\n"
                 + "style='stroke:#000000;fill:white;'/>\n";
         return sideStern;
 
@@ -90,7 +100,7 @@ public class SideDrawing {
 
     private String roof()
     {
-        String roof = "<rect x='20' y='39' width='" + length + "' height='20'\n"
+        String roof = "<rect x='" + leftSidePadding + "' y='39' width='" + length + "' height='20'\n"
                 + "style='stroke:#000000;fill:white;'/>\n";
         return roof;
     }
