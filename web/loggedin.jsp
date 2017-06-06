@@ -68,6 +68,7 @@ Author     : Pva
 
         <div class="container">
             <h1>Hello World!<%= customer.getFirstName()%> </h1>
+            <h1><a href="https://www.bygogmiljoe.dk/">Link til byggetilladelse.</a></h1>
 
             <div class="jumbotron">
                 

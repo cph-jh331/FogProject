@@ -63,31 +63,31 @@
 
 
                     <form class="modal-content" action="controllerServlet" method="post">
-                        <div class="container-fluid">
+                        <div class="container-fluid">                            
                             <input type="hidden" name="action" value="signup"> 
 
                             <label><b>Fornavn</b></label>
-                            <input class="input-lg" type="text" placeholder="Indtast Navn" name="Fornavn" required>
+                            <input class="input-lg" type="text" placeholder="Indtast Navn" name="Fornavn" required/>
                             <label><b>Efternavn</b></label>
-                            <input class="input-lg" type="text" placeholder="Indtast Efternavn" name="Efternavn" required>
+                            <input class="input-lg" type="text" placeholder="Indtast Efternavn" name="Efternavn" required/>
                             <label><b>Adresse</b></label>
-                            <input class="input-lg" type="text" placeholder="Indtast Adresse" name="Adresse" required>
-                            <label><b>Postnummer</b></label>
-                            <input class="input-lg" type="text" placeholder="Indtast Postnummer" name="Postnummer" required>
+                            <input class="input-lg" type="text" placeholder="Indtast Adresse" name="Adresse" required/>
+                            <label><b>Postnummer</b></label><br>
+                            <input class="input-lg" type="number" placeholder="Indtast Postnummer" name="Postnummer" required/><br>
                             <label><b>By</b></label>
-                            <input class="input-lg" type="text" placeholder="Indtast By" name="By" required>
-                            <label><b>Tlf</b></label>
-                            <input class="input-lg" type="text" placeholder="Indtast telefon" name="telefon" required>
+                            <input class="input-lg" type="text" placeholder="Indtast By" name="By" required/><br>
+                            <label><b>Tlf</b></label><br>
+                            <input class="input-lg" type="number" placeholder="Indtast telefon" name="telefon" required/><br>
                             <label><b>Email</b></label>
-                            <input class="input-lg" type="text" placeholder="Indtast Email" name="email" required>
+                            <input class="input-lg" type="text" placeholder="Indtast Email" name="email" required/>
 
                             <label><b>Password</b></label>
-                            <input class="input-lg" type="password" placeholder="Indtast Password" name="psw" required>
+                            <input class="input-lg" type="password" placeholder="Indtast Password" name="psw" required/>
 
                             <div class="clearfix">
-                                <button type="button" onclick="document.getElementById('id01').style.display = 'none'" class="cancelbtn">Cancel</button>
-                                <button type="submit" class="signupbtn" >Sign Up</button> 
-
+                                <input type="button" value="Cancel "class="btn btn-warning" onclick="document.getElementById('id01').style.display = 'none'" class="cancelbtn"/>                                
+                                <input type="submit" class="btn btn-success"/>
+                                </div>
                             </div>
                         </div>
                     </form>

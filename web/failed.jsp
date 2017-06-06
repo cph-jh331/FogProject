@@ -21,10 +21,9 @@
         <link href="https://fonts.googleapis.com/css?family=Droid+Serif|Roboto" rel="stylesheet">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <title>Admin Panel</title>
-        <%--Alt her er også nyt --%>
+        <title>User already exists</title>        
     </head>
     <body>
-        <h1>Wrong Login</h1>
+        <h1></h1>
     </body>
 </html>

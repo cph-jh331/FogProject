@@ -55,6 +55,43 @@ public class ControllerServlet extends HttpServlet {
             rd.forward(request, response);
             return;
         }
+        if (action.equals("signup"))
+        {
+
+            String email = request.getParameter("email");
+            String firstname = request.getParameter("Fornavn");
+            String lastname = request.getParameter("Efternavn");
+            String address = request.getParameter("Adresse");
+            String zipStr = request.getParameter("Postnummer");
+            String city = request.getParameter("By");
+            String phoneStr = request.getParameter("telefon");
+            String password = request.getParameter("psw");
+            int zip = Integer.parseInt(zipStr);
+            int phone = Integer.parseInt(phoneStr);
+
+            try
+            {
+                lc.addUser(email, firstname, lastname, address, zip, city, phone, password);
+            } catch (UserAlreadyExistException ex)
+            {
+                request.setAttribute("errorMessage", ex.toString());
+                RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+                rd.forward(request, response);
+            }
+            user = lc.checkLogin(email, password);
+            session.setAttribute("listDrawings", lc.getAllSvgsWithCustomer(user.getUserId()));
+            List<SvgDrawing> svgsReqApproval = lc.getCustomerSvgWithStatus(SvgDrawing.Status.REQAPPROVED, user.getUserId());
+            List<SvgDrawing> svgsApproved = lc.getCustomerSvgWithStatus(SvgDrawing.Status.APPROVED, user.getUserId());
+            List<SvgDrawing> svgsDone = lc.getCustomerSvgWithStatus(SvgDrawing.Status.DONE, user.getUserId());
+            session.setAttribute("svgMapReqApproval", svgsReqApproval);
+            session.setAttribute("svgMapApproved", svgsApproved);
+            session.setAttribute("svgMapDone", svgsDone);
+            session.setAttribute("user", user);
+            RequestDispatcher rd = request.getRequestDispatcher("loggedin.jsp");
+            rd.forward(request, response);
+            return;
+
+        }
         if (action.equals("drawlist"))
         {
             RequestDispatcher rd = request.getRequestDispatcher("adminpanel.jsp");
@@ -210,40 +247,9 @@ public class ControllerServlet extends HttpServlet {
             return;
         }
 
-        if (action.equals("signup"))
-        {
-
-            String email = request.getParameter("email");
-            String firstname = request.getParameter("Fornavn");
-            String lastname = request.getParameter("Efternavn");
-            String address = request.getParameter("Adresse");
-            String zipStr = request.getParameter("Postnummer");
-            String city = request.getParameter("By");
-            String phoneStr = request.getParameter("telefon");
-            String password = request.getParameter("psw");
-            int zip = Integer.parseInt(zipStr);
-            int phone = Integer.parseInt(phoneStr);
-
-            try
-            {
-                lc.addUser(email, firstname, lastname, address, zip, city, phone, password);
-            } catch (UserAlreadyExistException ex)
-            {
-                request.setAttribute("errorMessage", ex.toString());
-                RequestDispatcher rd = request.getRequestDispatcher("failed.jsp");
-                rd.forward(request, response);
-            }
-            user = lc.checkLogin(email, password);
-            session.setAttribute("user", user);
-            RequestDispatcher rd = request.getRequestDispatcher("loggedin.jsp");
-            rd.forward(request, response);
-            return;
-            //Check Login with parameters before putting parameters into Db.
-        }
-
         if (action.equals("seelist"))
         {
-            PartList partList = new PartList();
+            PartList partList = new PartList();//burde være i logicCtrl
             String length = request.getParameter("length");
             String width = request.getParameter("width");
             String height = request.getParameter("height");
@@ -420,7 +426,7 @@ public class ControllerServlet extends HttpServlet {
             throws ServletException, IOException
     {
         processRequest(request, response);
-    }
+        }
 
     /**
      * Returns a short description of the servlet.

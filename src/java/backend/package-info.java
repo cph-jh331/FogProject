@@ -1,4 +1,4 @@
 /**
- * backend is our Data Source Layer and contains all the Mappers classes and a Facade class.
+ * backend is our Data Access Layer and contains all the Mappers classes and a Facade class.
  */
 package backend;

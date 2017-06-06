@@ -92,12 +92,11 @@ public class LogicCtrl {
         return typeCategory;
     }
 
-    public User addUser(String email, String firstname, String lastname, String adress, int zip, String city, int phone, String password) throws UserAlreadyExistException
+    public User addUser(String email, String firstname, String lastname, String address, int zip, String city, int phone, String password) throws UserAlreadyExistException
     {
-        User customer = new Customer(phone, email, firstname, lastname, adress, city, zip, phone, false);
+        User customer = new Customer(9999, email, firstname, lastname, address, city, zip, phone, false);
         dataFacade.insertUser(customer, password);
-
-        //unit test til user validering i datactrl eller partMapper...
+        
         return customer;
     }
 

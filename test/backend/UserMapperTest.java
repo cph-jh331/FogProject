@@ -129,7 +129,7 @@ public class UserMapperTest {
         String pass = "test";
         User expResult = null;
         User result = um.validateCustomer(email, pass);
-        assertEquals(expResult, result);
+        assertEquals(expResult, result);        
 
     }
 
@@ -197,40 +197,6 @@ public class UserMapperTest {
         {
             assertThat(ex.getMessage(), is("user already exists"));
         }
-    }
-
-    /**
-     * Test of validateCustomer method, of class UserMapper.
-     */
-    @Test
-    public void testValidateCustomer()
-    {
-        System.out.println("validateCustomer");
-        String email = "";
-        String pass = "";
-        UserMapper instance = null;
-        User expResult = null;
-        User result = instance.validateCustomer(email, pass);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of validateAdmin method, of class UserMapper.
-     */
-    @Test
-    public void testValidateAdmin()
-    {
-        System.out.println("validateAdmin");
-        String email = "";
-        String pass = "";
-        UserMapper instance = null;
-        User expResult = null;
-        User result = instance.validateAdmin(email, pass);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
 }

@@ -61,7 +61,7 @@ public class PartMapper {
      */
     public void addPart(Part part)
     {
-        String sql = "insert into Part (type, category, unitname, descript, typeCategory) values (?,?,?,?,?);";
+        String sql = "insert into Part (ptype, category, unitName, pdesc, typeCategory) values (?,?,?,?,?);";
 
         try
         {
@@ -99,12 +99,12 @@ public class PartMapper {
             while (rs.next())
             {
                 int partId = rs.getInt("partId");
-                String type = rs.getString("type");
+                String type = rs.getString("ptype");
                 String category = rs.getString("category");
                 int length = rs.getInt("length");
                 int packetSize = 0;
                 String unitName = rs.getString("unitName");
-                String desc = rs.getString("desc");
+                String desc = rs.getString("pdesc");
                 String typeCat = rs.getString("typeCategory");
                 typeCatMap.add(new Part(type, length, packetSize, unitName, desc, partId, category, typeCat));
             }
